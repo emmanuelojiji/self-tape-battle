@@ -9,7 +9,7 @@ import AppHomepage from "./pages/AppHomepage";
 import RedirectToLogin from "./components/RedirectToLogin";
 
 function App() {
-  const signedIn = false;
+  const signedIn = true;
 
   return (
     <BrowserRouter>

@@ -1,0 +1,47 @@
+.app-homepage{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+header{
+    border-bottom: 1px solid rgb(230, 230, 230);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding-left: 7%;
+    padding-right: 7%;
+    position: fixed;
+    width: 100%;
+    background: white;
+}
+
+main{
+    height: 100%;
+    flex: 1;
+    background: brown;
+    display: flex;
+    padding-top: 70px;
+}
+
+aside{
+    height: 100%;
+    width: 200px;
+    background: pink;
+    display: flex;
+    align-items: flex-end;
+}
+
+.app-homepage-content{
+    background: grey;
+    flex: 1;
+    overflow: scroll;
+}
+
+.block{
+    height: 800px;
+    width: 500px;
+    background: green;
+    margin-bottom: 50px;
+}

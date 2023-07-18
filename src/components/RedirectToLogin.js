@@ -7,12 +7,6 @@ const RedirectToLogin = () => {
   useEffect(() => {
     navigate("/login");
   });
-
-  return (
-    <>
-      <h1>hey</h1>
-    </>
-  );
 };
 
 export default RedirectToLogin;
