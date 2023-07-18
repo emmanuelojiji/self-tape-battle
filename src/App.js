@@ -15,13 +15,13 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/login" Component={LogIn}></Route>
-          <Route path="/signup" Component={SignUp}></Route>
-          <Route path="/onboarding" Component={Onboarding}></Route>
-          <Route path="*" Component={SignUp} />
+          <Route path="/login" element={<LogIn />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/onboarding" element={<Onboarding />}></Route>
+          <Route path="*" element={<SignUp />} />
           <Route
-            path="/battles"
-            Component={signedIn ? AppHomepage : RedirectToLogin}
+            path="/home"
+            element={signedIn ? <AppHomepage /> : <RedirectToLogin />}
           />
         </Routes>
       </div>

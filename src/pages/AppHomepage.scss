@@ -1,47 +1,87 @@
-.app-homepage{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+.app-homepage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  border-bottom: 1px solid rgb(230, 230, 230);
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2%;
+  padding-right: 7%;
+  position: fixed;
+  width: 100%;
+  background: white;
+}
+
+.header-right {
+  display: flex;
+  gap: 30px;
+}
+
+main {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  padding-top: 70px;
+}
+
+aside {
+  height: 100%;
+  width: 200px;
+  border-right: 1px solid rgb(230, 230, 230);
+  display: flex;
+  flex-direction: column;
+  padding-left: 2%;
+  padding-top: 50px;
+  gap: 20px;
 
 }
 
-header{
-    border-bottom: 1px solid rgb(230, 230, 230);
-    height: 70px;
-    display: flex;
-    align-items: center;
-    padding-left: 7%;
-    padding-right: 7%;
-    position: fixed;
-    width: 100%;
-    background: white;
+.app-homepage-content {
+  flex: 1;
+  overflow: scroll;
+  padding-top: 50px;
+  padding-left: 5%;
+  //background: rgb(247, 247, 247);
 }
 
-main{
-    height: 100%;
-    flex: 1;
-    background: brown;
-    display: flex;
-    padding-top: 70px;
-}
-
-aside{
-    height: 100%;
-    width: 200px;
-    background: pink;
-    display: flex;
-    align-items: flex-end;
-}
-
-.app-homepage-content{
-    background: grey;
-    flex: 1;
-    overflow: scroll;
-}
-
-.block{
-    height: 800px;
-    width: 500px;
-    background: green;
+.greeting{
+    font-size: 30px;
     margin-bottom: 50px;
+}
+
+ 
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.block {
+  height: 300px;
+  width: 300px;
+  background: #EE073E;
+  border-radius: 10px;
+  color: white;
+  padding: 40px;
+  font-size: 20px;
+  transition: 0.25s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  &:hover{
+    transform: translateY(-3%);
+  }
+
+  p{
+    font-size: 16px;
+    margin-top: 30px;
+  }
 }
