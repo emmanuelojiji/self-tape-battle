@@ -5,6 +5,8 @@ import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import { useNavigate } from "react-router-dom";
 import Onboarding from "./pages/Onboarding";
+import AppHomepage from "./pages/AppHomepage";
+import RedirectToLogin from "./components/RedirectToLogin";
 
 function App() {
   const signedIn = false;
@@ -17,6 +19,10 @@ function App() {
           <Route path="/signup" Component={SignUp}></Route>
           <Route path="/onboarding" Component={Onboarding}></Route>
           <Route path="*" Component={SignUp} />
+          <Route
+            path="/battles"
+            Component={signedIn ? AppHomepage : RedirectToLogin}
+          />
         </Routes>
       </div>
     </BrowserRouter>
