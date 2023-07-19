@@ -7,21 +7,21 @@ export const battlesObject = [
   },
   {
     id: 2,
-    title: "Macbeth",
+    title: "Battle 2",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in quam et massa feugiat auctor quis sed dolor.",
   },
 
   {
     id: 3,
-    title: "Death of a salesman",
+    title: "Battle 3",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in quam et massa feugiat auctor quis sed dolor.",
   },
 
   {
     id: 4,
-    title: "Euphoria",
+    title: "Battle 4",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in quam et massa feugiat auctor quis sed dolor.",
   },

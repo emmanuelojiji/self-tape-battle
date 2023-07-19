@@ -4,10 +4,14 @@ import { battlesObject } from "../battlesObject";
 const Battles = () => {
   return (
     <div className="battles">
-      <h2 className="greeting">Welcome Back, Emmanuel</h2>
+      <h2 className="greeting">Welcome back Charlotte!</h2>
       <div className="card-container">
         {battlesObject.map((battle) => (
-          <BattleCard id={battle.id} title={battle.title} description={battle.description} />
+          <BattleCard
+            id={battle.id}
+            title={battle.title}
+            description={battle.description}
+          />
         ))}
       </div>
     </div>

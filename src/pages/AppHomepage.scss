@@ -11,7 +11,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding-left: 2%;
-  padding-right: 7%;
+  padding-right: 2%;
   position: fixed;
   width: 100%;
   background: white;
@@ -36,7 +36,9 @@ main {
   overflow: scroll;
   padding-top: 50px;
   padding-left: 5%;
+  padding-right: 5%;
   //background: rgb(247, 247, 247);
+  background: rgb(243, 243, 243);
 }
 
 .greeting{
@@ -51,35 +53,12 @@ main {
     gap: 20px;
 }
 
-.block {
-  height: 300px;
-  width: 300px;
-  background: #EE073E;
-  border-radius: 10px;
-  color: white;
-  padding: 40px;
-  font-size: 20px;
-  transition: 0.25s ease-in-out;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
 
-  justify-content: center;
-
-  &:hover{
-    transform: translateY(-3%);
-  }
-
-  p{
-    font-size: 16px;
-    margin-top: 30px;
-  }
-}
 
 .search{
     width: 500px;
     border-radius: 2em;
-    background: rgb(231, 231, 231);
+    background: rgb(243, 243, 243);
     height: 35px;
     border: 0;
 }

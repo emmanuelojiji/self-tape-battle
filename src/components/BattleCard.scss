@@ -1,0 +1,30 @@
+.battle-card{
+    height: 300px;
+    width: 300px;
+    //background: #EE073E;
+    background: white;
+    border-radius: 10px;
+    color: black;
+    padding: 40px;
+    font-size: 20px;
+    transition: 0.25s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  
+    justify-content: center;
+  
+    &:hover{
+      transform: translateY(-3%);
+    }
+  
+    p{
+      font-size: 16px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      color: rgb(144, 144, 144);
+    }
+  }
