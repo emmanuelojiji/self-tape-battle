@@ -5,6 +5,7 @@ import Battles from "./Battles";
 import Coins from "./Coins";
 import { Routes, Route, Outlet } from "react-router-dom";
 import Leaderboard from "./Leaderboard";
+import Aside from "../components/Aside";
 
 const AppHomepage = () => {
   return (
@@ -19,12 +20,7 @@ const AppHomepage = () => {
       </header>
 
       <main>
-        <aside>
-          <Link to="/home/battles">Battles</Link>
-          <Link to="/home/leaderboard">Leaderboard</Link>
-          <Link>Shop</Link>
-          <Link>Green Room</Link>
-        </aside>
+        <Aside/>
 
         <div className="app-homepage-content">
           <Outlet />

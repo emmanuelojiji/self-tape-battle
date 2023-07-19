@@ -9,6 +9,9 @@ import AppHomepage from "./pages/AppHomepage";
 import RedirectToLogin from "./components/RedirectToLogin";
 import Leaderboard from "./pages/Leaderboard";
 import Battles from "./pages/Battles";
+import Battle from "./pages/Battle";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function App() {
   const signedIn = true;
@@ -27,6 +30,8 @@ function App() {
           >
             <Route path="leaderboard" element={<Leaderboard />}></Route>
             <Route path="battles" element={<Battles />}></Route>
+            <Route path="/home/battle/:id" element={<Battle />}></Route>
+            <Route path="/home" element={<Battles />}></Route>
           </Route>
 
           <Route path="*" element={<SignUp />} />
