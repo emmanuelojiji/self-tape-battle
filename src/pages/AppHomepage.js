@@ -12,6 +12,7 @@ const AppHomepage = () => {
       <header>
         <h3>Self Tape Battle</h3>
         <div className="header-right">
+          <input type="text" className="search"></input>
           <Coins />
           <Avatar size="30" />
         </div>
@@ -19,18 +20,14 @@ const AppHomepage = () => {
 
       <main>
         <aside>
-          <Link to="/battles">Battles</Link>
-          <Link>Leaderboard</Link>
+          <Link to="/home/battles">Battles</Link>
+          <Link to="/home/leaderboard">Leaderboard</Link>
           <Link>Shop</Link>
           <Link>Green Room</Link>
         </aside>
 
         <div className="app-homepage-content">
-          <Routes>
-            <Route path="/" element={<Battles />} />
-            <Route path="/leaderboard" element={<Leaderboard />}></Route>
-            <Route path="/battles" element={<Battles />}></Route>
-          </Routes>
+          <Outlet />
         </div>
       </main>
     </div>
