@@ -8,6 +8,7 @@ import { useEffect } from "react";
 const Onboarding = ({ onboardingComplete }) => {
   const type = "performer";
 
+  
  
 
   return (
