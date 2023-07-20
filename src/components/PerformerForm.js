@@ -26,9 +26,10 @@ const PerformerForm = () => {
         city: city,
         bio: bio,
         link: link,
+        onboarding_complete: true,
       });
 
-      setStep(step + 1);
+      navigate("/home/battles");
     } catch {
       console.log("Couldn't add details, sorry!");
     }
@@ -77,9 +78,7 @@ const PerformerForm = () => {
         <div className="step-3 step">
           <h2>Upload your headshot</h2>
           <button>Complete profile</button>
-          <button onClick={() => navigate("/home/battles")}>
-            Skip for now
-          </button>
+          <button onClick={() => handleInfo()}>Skip for now</button>
         </div>
       )}
     </div>

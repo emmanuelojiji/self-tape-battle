@@ -2,7 +2,11 @@ import InputText from "../components/InputText";
 import { Link } from "react-router-dom";
 import "./SignUp.scss";
 import { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
@@ -10,8 +14,8 @@ import { doc, setDoc } from "firebase/firestore";
 const SignUp = () => {
   const [role, setRole] = useState("performer");
 
-  const [email, setEmail] = useState("emmanuel@hotmail.com");
-  const [password, setPassword] = useState("password123456");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -19,14 +23,15 @@ const SignUp = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-      console.log(auth.currentUser)
+      console.log(auth.currentUser);
       await setDoc(doc(db, "users", auth.currentUser.uid), {
         email: email,
-        role: role
-      })
+        role: role,
+      });
 
-      navigate("/onboarding")
-     
+      await signInWithEmailAndPassword(auth, email, password);
+
+      navigate("/onboarding");
     } catch {
       console.log("Couldn't create user, sorry.");
     }
