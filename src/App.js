@@ -11,6 +11,8 @@ import Battles from "./pages/Battles";
 import Battle from "./pages/Battle";
 import { auth, db } from "./firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
+import { getDoc, doc } from "firebase/firestore";
+import Profile from "./pages/Profile";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -34,13 +36,22 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  /*onboardingCheck = () => {
-    try{
+  const [onboardingComplete, setOnboardingComplete] = useState();
 
-    }
-  }*/
+  useEffect(() => {
+    const onboardingCheck = async () => {
+      try {
+        const docSnapshot = await getDoc(doc(db, "users", user.uid));
 
-  const [testState, setTestState] = useState(false);
+        if (docSnapshot.data().onboarding_complete) {
+          setOnboardingComplete(true);
+        }
+      } catch {
+        console.log("couldn't get document");
+      }
+    };
+    onboardingCheck();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -48,11 +59,9 @@ function App() {
         <Routes>
           <Route path="/login" element={<LogIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
-          {testState && (
-            <Route
-              path="/onboarding"
-              element={user ? <Onboarding /> : <RedirectToLogin />}
-            ></Route>
+
+          {!onboardingComplete && (
+            <Route path="/onboarding" element={<Onboarding />}></Route>
           )}
 
           <Route
@@ -61,8 +70,10 @@ function App() {
           >
             <Route path="leaderboard" element={<Leaderboard />}></Route>
             <Route path="battles" element={<Battles />}></Route>
-            <Route path="/home/battle/:id" element={<Battle />}></Route>
+            <Route path="profile" element={<Profile />}></Route>
+            <Route path="battle/:id" element={<Battle />}></Route>
             <Route path="/home" element={<Battles />}></Route>
+           
           </Route>
 
           <Route path="*" element={<SignUp />} />

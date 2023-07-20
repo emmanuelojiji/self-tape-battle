@@ -25,6 +25,7 @@ const SignUp = () => {
 
       console.log(auth.currentUser);
       await setDoc(doc(db, "users", auth.currentUser.uid), {
+        uid: auth.currentUser.uid,
         email: email,
         role: role,
       });
