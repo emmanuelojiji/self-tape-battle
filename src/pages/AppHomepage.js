@@ -11,10 +11,11 @@ import Header from "../components/Header";
 const AppHomepage = () => {
   return (
     <div className="app-homepage">
-      <Header/>
+        <Aside/>
+      
 
       <main>
-        <Aside/>
+      <Header/>
 
         <div className="app-homepage-content">
           <Outlet />

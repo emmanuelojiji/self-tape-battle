@@ -1,7 +1,14 @@
 import "./InputText.scss";
 
-const InputText = ({placeholder}) => {
-  return <input type="text" className="input-text" placeholder={placeholder} />;
+const InputText = ({ type, placeholder, onChange }) => {
+  return (
+    <input
+      type={type}
+      className="input-text"
+      placeholder={placeholder}
+      onChange={onChange}
+    />
+  );
 };
 
 export default InputText;

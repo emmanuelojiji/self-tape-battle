@@ -1,11 +1,26 @@
 aside {
-    height: 100%;
-    width: 200px;
-    border-right: 1px solid rgb(230, 230, 230);
+  height: 100%;
+  width: 300px;
+
+  display: flex;
+  flex-direction: column;
+  padding-left: 2%;
+  padding-top: 35px;
+  gap: 20px;
+
+  nav{
     display: flex;
     flex-direction: column;
-    padding-left: 2%;
-    padding-top: 50px;
-    gap: 20px;
-  
+    padding-top: 30px;
   }
+
+  a{
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #191919;
+  }
+}
+
+.logo{
+  width: 100px;
+}

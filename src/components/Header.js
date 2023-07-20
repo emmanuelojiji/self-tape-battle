@@ -2,17 +2,18 @@ import React from "react";
 import "./Header.scss";
 import Coins from "./Coins";
 import Avatar from "./Avatar";
-
-
+import Headshot from "../media/headshot.jpeg";
+import { auth } from "../firebaseConfig";
 
 const Header = () => {
   return (
     <header>
-      <h3>Self Tape Battle</h3>
+  
       <div className="header-right">
-        <input type="text" className="search"></input>
-       <Coins/>
-       <Avatar size="30"/>
+        <h3 onClick={() => auth.signOut()}>Sign out</h3>
+        <input type="text" className="search" placeholder="Search for user"></input>
+        <Coins />
+        <Avatar size="35" image={Headshot} />
       </div>
     </header>
   );

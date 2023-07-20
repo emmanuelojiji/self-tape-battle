@@ -1,12 +1,21 @@
-button{
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 2em;
-    border: 0;
-    font-size: 18px;
+button {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 2em;
+  border: 0;
+  font-size: 14px;
+
+  cursor: pointer;
+
+  &.filled {
+    background: #ee073e;
     color: white;
-    background: #EE073E;
-    cursor: pointer;
+  }
+
+  &.white {
+    background: white;
+    color: black;
+  }
 }
