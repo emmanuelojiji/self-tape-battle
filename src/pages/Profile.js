@@ -3,6 +3,7 @@ import "./Profile.scss";
 import { auth, db } from "../firebaseConfig";
 import { getDoc, doc } from "firebase/firestore";
 import { useState } from "react";
+import Headshot from "../media/headshot.jpeg";
 
 const Profile = () => {
   const user = auth.currentUser;
@@ -34,11 +35,21 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>{firstName}</h1>
-      <h1>{lastName}</h1>
-      <h1>{city}</h1>
-      <h1>{bio}</h1>
-      <h1>{link}</h1>
+      <div className="profile-container">
+        <div
+          className="profile-picture"
+          style={{ backgroundImage: `url(${Headshot})` }}
+        ></div>
+        <div className="profile-info">
+          <h2 className="profile-name">
+            {firstName} {lastName}
+          </h2>
+          <p>{bio}</p>
+          <p>{city}</p>
+
+          <p>{link}</p>
+        </div>
+      </div>
     </div>
   );
 };

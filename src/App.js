@@ -1,5 +1,11 @@
 import "./App.scss";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import { useEffect, useState } from "react";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
@@ -11,8 +17,9 @@ import Battles from "./pages/Battles";
 import Battle from "./pages/Battle";
 import { auth, db } from "./firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, collection } from "firebase/firestore";
 import Profile from "./pages/Profile";
+import Admin from "./pages/Admin";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -59,6 +66,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<LogIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/admin" element={<Admin />}></Route>
 
           {!onboardingComplete && (
             <Route path="/onboarding" element={<Onboarding />}></Route>
@@ -66,17 +74,20 @@ function App() {
 
           <Route
             path="/home"
-            element={user ? <AppHomepage /> : <RedirectToLogin />}
+            element={user ? <AppHomepage /> : <Navigate to="/login" />}
           >
             <Route path="leaderboard" element={<Leaderboard />}></Route>
             <Route path="battles" element={<Battles />}></Route>
             <Route path="profile" element={<Profile />}></Route>
             <Route path="battle/:id" element={<Battle />}></Route>
             <Route path="/home" element={<Battles />}></Route>
-           
           </Route>
 
           <Route path="*" element={<SignUp />} />
+          <Route
+            path="/"
+            element={user ? <Navigate to="/home/battles" /> : <LogIn />}
+          ></Route>
         </Routes>
       </div>
     </BrowserRouter>

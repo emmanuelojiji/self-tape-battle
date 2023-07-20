@@ -30,7 +30,7 @@ const SignUp = () => {
         role: role,
       });
 
-      await signInWithEmailAndPassword(auth, email, password);
+      //await signInWithEmailAndPassword(auth, email, password);
 
       navigate("/onboarding");
     } catch {
