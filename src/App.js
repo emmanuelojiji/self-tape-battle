@@ -43,22 +43,20 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  const [onboardingComplete, setOnboardingComplete] = useState();
+  /*const [onboardingComplete, setOnboardingComplete] = useState();
 
-  useEffect(() => {
-    const onboardingCheck = async () => {
-      try {
-        const docSnapshot = await getDoc(doc(db, "users", user.uid));
+  const onboardingCheck = async () => {
+    try {
+      const docSnapshot = await getDoc(doc(db, "users", user.uid));
 
-        if (docSnapshot.data().onboarding_complete) {
-          setOnboardingComplete(true);
-        }
-      } catch {
-        console.log("couldn't get document");
+      if (docSnapshot.data().onboarding_complete) {
+        setOnboardingComplete(true);
       }
-    };
-    onboardingCheck();
-  }, []);
+    } catch {
+      console.log("couldn't get document");
+    }
+  };
+  onboardingCheck();*/
 
   return (
     <BrowserRouter>
@@ -68,13 +66,16 @@ function App() {
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
 
-          {!onboardingComplete && (
-            <Route path="/onboarding" element={<Onboarding />}></Route>
-          )}
+          <Route
+            path="/onboarding"
+            element={user ? <Onboarding /> : <Navigate to="/login" />}
+          ></Route>
 
           <Route
             path="/home"
-            element={user ? <AppHomepage /> : <Navigate to="/login" />}
+            element={
+              user ? <AppHomepage /> : <Navigate to="/login" />
+            }
           >
             <Route path="leaderboard" element={<Leaderboard />}></Route>
             <Route path="battles" element={<Battles />}></Route>
