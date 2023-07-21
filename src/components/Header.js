@@ -10,6 +10,11 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <header>
+      <input
+          type="text"
+          className="search"
+          placeholder="Search for user"
+        ></input>
       <div className="header-right">
         <h3
           onClick={() => {
@@ -19,11 +24,7 @@ const Header = () => {
         >
           Sign out
         </h3>
-        <input
-          type="text"
-          className="search"
-          placeholder="Search for user"
-        ></input>
+        
         <Coins />
         <Link to="/home/profile">
           {" "}

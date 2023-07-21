@@ -3,7 +3,7 @@ header {
   padding-top: 20px;
   padding-bottom: 20px;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   padding-left: 5%;
   padding-right: 5%;
@@ -21,7 +21,7 @@ header {
 
 .search{
     width: 500px;
-    border-radius: 2em;
+    border-radius: 10px;
     background: rgb(243, 243, 243);
     height: 50px;
     border: 0;

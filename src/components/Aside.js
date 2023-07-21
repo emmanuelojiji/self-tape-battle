@@ -14,6 +14,13 @@ const Aside = () => {
     <aside>
       <img src={Logo} className="logo" />
       <nav>
+      <Link
+          to="/home/profile"
+          className={currentPage === "profile" && "active"}
+          onClick={() => setCurrentPage("profile")}
+        >
+          Profile
+        </Link>
         <Link
           to="/home/battles"
           className={currentPage === "arena" && "active"}
