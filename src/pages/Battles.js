@@ -12,9 +12,11 @@ const Battles = () => {
 
   console.log(activeBattle);
 
+  
+
   return (
     <div className="battles">
-      <h2 className="greeting">Arena</h2>
+      <h2 className="greeting">Happening now</h2>
       
 
       <div className="row-container">
