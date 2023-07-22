@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import InputText from "./InputText";
 import "./OnboardingForm.scss";
 import { auth, db } from "../firebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateCurrentUser,
+  updateProfile,
+} from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 
 const PerformerForm = () => {
@@ -27,6 +31,10 @@ const PerformerForm = () => {
         bio: bio,
         link: link,
         onboarding_complete: true,
+      });
+
+      await updateProfile(auth.currentUser, {
+        displayName: `${firstName} ${lastName}`,
       });
 
       navigate("/home/battles");

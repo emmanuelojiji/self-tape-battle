@@ -26,7 +26,7 @@ const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
       const entriesCollection = collection(db, "battles", id, "entries");
 
       await setDoc(doc(entriesCollection, user.uid), {
-        name: "",
+        name: user.displayName,
         uid: user.uid,
       });
 
@@ -36,6 +36,8 @@ const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
       console.log(error);
     }
   };
+
+
 
   return (
     <div

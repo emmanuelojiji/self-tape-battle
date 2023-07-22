@@ -6,6 +6,7 @@ import { auth, db } from "../firebaseConfig";
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   setDoc,
   Timestamp,
@@ -19,6 +20,7 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
   const id = parts.pop();
 
   const [votes, setVotes] = useState();
+  const [name, setName] = useState();
 
   useEffect(() => {
     const votesCollection = collection(
@@ -33,13 +35,26 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
     const getVotes = async () => {
       try {
         const votesDocs = await getDocs(votesCollection);
-        setVotes(votesDocs.docs.length)
+        setVotes(votesDocs.docs.length);
       } catch {
         console.log("error");
       }
     };
 
     getVotes();
+
+    const getUser = async () => {
+      const docSnapshot = doc(db, "battles", id, "entries", selectedVideo);
+
+      try {
+        const entryDocs = await getDoc(docSnapshot);
+        setName(entryDocs.data().name);
+      } catch {
+        console.log("Couldn't get name");
+      }
+    };
+
+    getUser();
   });
 
   const handleVote = async () => {
@@ -72,7 +87,7 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
         <div className="modal-header">
           <div className="left">
             <Avatar size="35" />
-            <h3>Sasha Coleman</h3>
+            <h3>{name}</h3>
           </div>
           <div className="right">
             <div className="num-of-votes">{votes}</div>
