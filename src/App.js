@@ -20,6 +20,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { getDoc, doc, collection } from "firebase/firestore";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
+import UploadModal from "./components/UploadModal";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -58,8 +59,11 @@ function App() {
   };
   onboardingCheck();*/
 
+  const [uploadModalVisible, setUploadModalVisible] = useState(false);
+
   return (
     <BrowserRouter>
+      <UploadModal uploadModalVisible={uploadModalVisible} setUploadModalVisible={setUploadModalVisible} />
       <div className="App">
         <Routes>
           <Route path="/login" element={<LogIn />}></Route>
@@ -73,14 +77,20 @@ function App() {
 
           <Route
             path="/home"
-            element={
-              user ? <AppHomepage /> : <Navigate to="/login" />
-            }
+            element={user ? <AppHomepage /> : <Navigate to="/login" />}
           >
             <Route path="leaderboard" element={<Leaderboard />}></Route>
             <Route path="battles" element={<Battles />}></Route>
             <Route path="profile" element={<Profile />}></Route>
-            <Route path="battle/:id" element={<Battle />}></Route>
+            <Route
+              path="battle/:id"
+              element={
+                <Battle
+                  uploadModalVisible={uploadModalVisible}
+                  setUploadModalVisible={setUploadModalVisible}
+                />
+              }
+            ></Route>
             <Route path="/home" element={<Battles />}></Route>
           </Route>
 

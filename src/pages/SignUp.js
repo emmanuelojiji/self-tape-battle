@@ -28,6 +28,7 @@ const SignUp = () => {
         uid: auth.currentUser.uid,
         email: email,
         role: role,
+        coins: 0,
       });
 
       //await signInWithEmailAndPassword(auth, email, password);

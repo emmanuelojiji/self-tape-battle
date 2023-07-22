@@ -7,8 +7,15 @@
   height: 300px;
   width: 300px;
   border-radius: 10px;
-  background: rgb(211, 211, 211);
+  background: rgb(237, 237, 237);
+  background: rgb(35, 35, 35);
   transition: 0.2s ease-in-out;
+  color: white;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+
 
   &:hover {
     scale: 1.05;

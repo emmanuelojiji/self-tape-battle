@@ -5,6 +5,7 @@ import { getDoc, doc } from "firebase/firestore";
 import { useState } from "react";
 import Headshot from "../media/headshot.jpeg";
 import VideoCard from "../components/VideoCard";
+import ProfileInfoSkeleton from "../components/ProfileInfoSkeleton";
 
 const Profile = () => {
   const user = auth.currentUser;
@@ -17,7 +18,7 @@ const Profile = () => {
   const [bio, setBio] = useState("");
   const [link, setLink] = useState();
 
-  useEffect(() => {
+  /*useEffect(() => {
     const getUserInfo = async () => {
       try {
         const docSnapshot = await getDoc(doc(db, "users", user.uid));
@@ -29,14 +30,14 @@ const Profile = () => {
         setBio(userData.bio);
         setLink(userData.link);
 
-        setLoading(false)
+        setLoading(false);
       } catch {
         console.log("sorry didn't work");
       }
     };
 
     getUserInfo();
-  });
+  });*/
 
   const entries = [
     { name: "Macbeth", time: "3 days ago" },
@@ -53,15 +54,7 @@ const Profile = () => {
           style={{ backgroundImage: `url(${Headshot})` }}
         ></div>
         {loading ? (
-          <div className="profile-info">
-            <div class="name-skeleton skeleton"></div>
-
-            <div class="city-bio-wrap skeleton">
-              <div class="city-skeleton skeleton"></div>
-              <div class="bio-skeleton skeleton"></div>
-            </div>
-            <div class="link-skeleton skeleton"></div>
-          </div>
+          <ProfileInfoSkeleton />
         ) : (
           <div className="profile-info">
             <h2 className="profile-name">

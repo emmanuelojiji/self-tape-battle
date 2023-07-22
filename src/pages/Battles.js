@@ -2,37 +2,40 @@ import BattleCard from "../components/BattleCard";
 import { battlesObject } from "../battlesObject";
 import "./Battles.scss";
 import { authContext } from "../context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import { useState } from "react";
 
 const Battles = () => {
-  const activeBattle = battlesObject.filter((battle) => battle.active === true);
+  const [battles, setBattles] = useState([]);
+  useEffect(() => {
+    const getActiveBattle = async () => {
+      try {
+        const battlesCollectionRef = collection(db, "battles");
+        const battlesDocs = await getDocs(battlesCollectionRef);
+
+        const battlesDocsData = battlesDocs.docs.map((doc) => doc.data());
+
+        setBattles(battlesDocsData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getActiveBattle();
+  }, []);
 
   const user = useContext(authContext);
 
-
-  console.log(activeBattle);
-
-  
-
+  const [activeBattle, setActiveBattle] = useState();
   return (
     <div className="battles">
-      <h2 className="greeting">Happening now</h2>
-      
+      <h2 className="greeting">Battles</h2>
 
-      <div className="row-container">
-        <div className="left">
-          {activeBattle.map((battle) => (
-            <BattleCard
-              id={battle.id}
-              title={battle.title}
-              description={battle.description}
-            />
-          ))}
-
-          <div className="log"></div>
-        </div>
-
-        <div className="right"></div>
+      <div className="card-container">
+        {battles.map((battle) => (
+          <BattleCard title={battle.name} id={battle.id} />
+        ))}
       </div>
     </div>
   );

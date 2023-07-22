@@ -4,34 +4,12 @@
     margin-bottom: 50px;
   }
 
-  .leaderboard {
-    flex: 1;
-    background: #494cb0;
-    border-radius: 1rem;
-  }
-
-  .left {
-    flex: 1;
-    overflow: scroll;
-  }
-
-  .log {
-    height: 100%;
-    background: rgb(241, 241, 241);
-    margin-top: 30px;
-    border-radius: 20px;
-  }
-
-  .right {
-    height: 500px;
-    width: 300px;
-    background: #494cb0;
-    border-radius: 1rem;
-  }
-
-  .row-container {
-    height: 100%;
+ 
+  .card-container{
     display: flex;
+    width: 100%;
     gap: 30px;
   }
+
+ 
 }

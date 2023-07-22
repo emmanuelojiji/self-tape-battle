@@ -1,12 +1,47 @@
 import React from "react";
+import "./Admin.scss";
 import InputText from "../components/InputText";
-const Admin = () => {
-  return <div>
-    <h1>Admin</h1>
+import { db } from "../firebaseConfig";
+import { useState } from "react";
+import { collection, doc, setDoc, addDoc } from "firebase/firestore";
 
-    <h1>Create Battle</h1>
-    <InputText/>
-  </div>;
+const Admin = () => {
+  const [battleName, setBattleName] = useState("");
+
+  let battle_id = battleName.replace(/\s/g, "-");
+
+  const createBattle = async () => {
+    try {
+      const battleDocRef = doc(db, "battles", battle_id);
+
+      // Create a new document in the `battles` collection with the data provided
+      await setDoc(battleDocRef, {
+        name: battleName,
+        id: battle_id,
+        active: true,
+      });
+    } catch (error) {
+      console.log("Error creating battle:", error);
+    }
+  };
+
+  console.log(battle_id);
+
+  return (
+    <div className="admin">
+      <div className="content">
+        <h1>Create Battle</h1>
+        <InputText
+          placeholder="Battle Name"
+          onChange={(e) => {
+            setBattleName(e.target.value);
+            console.log(battleName);
+          }}
+        />
+        <button onClick={() => createBattle()}>Create</button>
+      </div>
+    </div>
+  );
 };
 
 export default Admin;

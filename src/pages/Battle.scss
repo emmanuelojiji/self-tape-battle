@@ -1,25 +1,19 @@
-.battles{
-    height: 100%;
-    overflow: hidden;
-    animation: 0.7s fade-in forwards;
-    
+.battles {
+  height: 100%;
+  overflow: hidden;
 }
 
-.battle-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.battle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+  text-transform: capitalize;
 }
 
-@keyframes fade-in{
-    0%{
-        opacity: 0;
-    }
-
-    100%{
-        opacity: 1;
-    }
+.entry-card-container {
+  display: flex;
+  gap: 30px;
 }
-
 
 

@@ -7,18 +7,20 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import Leaderboard from "./Leaderboard";
 import Aside from "../components/Aside";
 import Header from "../components/Header";
+import UploadModal from "../components/UploadModal";
+import { useState } from "react";
 
 const AppHomepage = () => {
   return (
     <div className="app-homepage">
-        <Aside/>
       
+      <Aside />
 
       <main>
-      <Header/>
+        <Header />
 
         <div className="app-homepage-content">
-          <Outlet />
+          <Outlet  />
         </div>
       </main>
     </div>

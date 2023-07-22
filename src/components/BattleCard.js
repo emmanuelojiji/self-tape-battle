@@ -3,14 +3,13 @@ import { Link } from "react-router-dom";
 import "./BattleCard.scss";
 import Button from "./Button";
 
-const BattleCard = ({ title, description, id }) => {
+const BattleCard = ({ title, id }) => {
   return (
-    <Link to={`/home/battle/${id}`}>
-      <div className={`battle-card`}>
+    <Link to={`/home/battle/${id}`} className={`battle-card`}>
+      <div>
         <h3>{title}</h3>
         <Button text="Join battle" type="white" />
       </div>
-    
     </Link>
   );
 };
