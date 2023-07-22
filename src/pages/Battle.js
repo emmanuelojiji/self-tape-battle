@@ -60,7 +60,7 @@ const Battle = ({ uploadModalVisible, setUploadModalVisible }) => {
 
   return (
     <div>
-      {modalVisible && <VideoModal selectedVideo={selectedVideo} />}
+      {modalVisible && <VideoModal selectedVideo={selectedVideo} setModalVisible={setModalVisible} />}
       <div className="battle-header">
         <div>{/*<h1>{battle.name}</h1>*/}</div>
 
