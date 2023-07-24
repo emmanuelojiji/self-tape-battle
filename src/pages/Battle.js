@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Battle.scss";
-import { battlesObject } from "../battlesObject";
+
 import Button from "../components/Button";
-import UploadModal from "../components/UploadModal";
-import {
-  collection,
-  getDoc,
-  doc,
-  connectFirestoreEmulator,
-  getDocs,
-  getCountFromServer,
-  setDoc,
-  Timestamp,
-} from "firebase/firestore";
+
+import { collection, getDoc, doc, getDocs } from "firebase/firestore";
 import { auth, db } from "../firebaseConfig";
 import VideoCard from "../components/VideoCard";
 import VideoModal from "../components/VideoModal";
 
-const Battle = ({ uploadModalVisible, setUploadModalVisible }) => {
+const Battle = ({ setUploadModalVisible }) => {
   const { id } = useParams();
 
   const user = auth.currentUser;
@@ -57,10 +48,14 @@ const Battle = ({ uploadModalVisible, setUploadModalVisible }) => {
     getBattle();
   }, []);
 
-
   return (
     <div>
-      {modalVisible && <VideoModal selectedVideo={selectedVideo} setModalVisible={setModalVisible} />}
+      {modalVisible && (
+        <VideoModal
+          selectedVideo={selectedVideo}
+          setModalVisible={setModalVisible}
+        />
+      )}
       <div className="battle-header">
         <div>{/*<h1>{battle.name}</h1>*/}</div>
 
@@ -77,7 +72,7 @@ const Battle = ({ uploadModalVisible, setUploadModalVisible }) => {
           <VideoCard
             onClick={() => {
               setSelectedVideo(entry.uid);
-              setModalVisible(true)
+              setModalVisible(true);
               console.log(selectedVideo);
             }}
           />

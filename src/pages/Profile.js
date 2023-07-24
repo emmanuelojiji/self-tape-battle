@@ -1,7 +1,14 @@
 import React, { useEffect } from "react";
 import "./Profile.scss";
 import { auth, db } from "../firebaseConfig";
-import { getDoc, doc } from "firebase/firestore";
+import {
+  getDoc,
+  doc,
+  collection,
+  getDocs,
+  query,
+  collectionGroup,
+} from "firebase/firestore";
 import { useState } from "react";
 import Headshot from "../media/headshot.jpeg";
 import VideoCard from "../components/VideoCard";
@@ -18,7 +25,13 @@ const Profile = () => {
   const [bio, setBio] = useState("");
   const [link, setLink] = useState();
 
-  /*useEffect(() => {
+  const currentURL = window.location.href;
+  const parts = currentURL.split("/");
+  const id = parts.pop();
+
+  const [entries, setEntries] = useState([]);
+
+  useEffect(() => {
     const getUserInfo = async () => {
       try {
         const docSnapshot = await getDoc(doc(db, "users", user.uid));
@@ -36,15 +49,23 @@ const Profile = () => {
       }
     };
 
-    getUserInfo();
-  });*/
+    const getUserEntries = async () => {
+      try {
+        const entriesRef = collectionGroup(db, "entries");
+        const entriesDocs = await getDocs(entriesRef);
 
-  const entries = [
-    { name: "Macbeth", time: "3 days ago" },
-    { name: "Macbeth", time: "3 days ago" },
-    { name: "Macbeth", time: "3 days ago" },
-    { name: "Macbeth", time: "3 days ago" },
-  ];
+        console.log(entriesDocs);
+
+        const data = entriesDocs.docs.map((doc) => doc.data());
+        setEntries(data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    getUserInfo();
+    getUserEntries();
+  }, []);
 
   return (
     <div>
@@ -74,7 +95,7 @@ const Profile = () => {
       <h2 className="profile-heading">Entries</h2>
       <div className="video-card-container">
         {entries.map((entry) => (
-          <VideoCard />
+          <VideoCard title={entry.battleName} />
         ))}
       </div>
     </div>

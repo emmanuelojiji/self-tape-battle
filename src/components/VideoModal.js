@@ -39,7 +39,7 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
       } catch {
         console.log("error");
       }
-    };
+    }; 
 
     getVotes();
 

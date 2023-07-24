@@ -2,17 +2,7 @@ import React, { useReducer } from "react";
 import Button from "./Button";
 import "./UploadModal.scss";
 import { auth, db } from "../firebaseConfig";
-import { useParams } from "react-router-dom";
-import {
-  collection,
-  doc,
-  getDoc,
-  setDoc,
-  addDoc,
-  Timestamp,
-} from "firebase/firestore";
-
-
+import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 
 const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
   const currentURL = window.location.href;
@@ -25,19 +15,23 @@ const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
     try {
       const entriesCollection = collection(db, "battles", id, "entries");
 
+      const battlesCollection = collection(db, "battles");
+      const battlesDoc = await getDoc(doc(battlesCollection, id));
+
+      const name = battlesDoc.data().name;
+
       await setDoc(doc(entriesCollection, user.uid), {
         name: user.displayName,
         uid: user.uid,
+        battleName: name,
+        battleId: id,
       });
 
-     
       setUploadModalVisible(false);
     } catch (error) {
       console.log(error);
     }
   };
-
-
 
   return (
     <div
