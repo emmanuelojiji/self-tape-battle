@@ -57,7 +57,7 @@ const Battle = ({ setUploadModalVisible }) => {
         />
       )}
       <div className="battle-header">
-        <div>{/*<h1>{battle.name}</h1>*/}</div>
+        <div>{<h1>{battle.name}</h1>}</div>
 
         <Button
           text="Upload tape"

@@ -28,6 +28,8 @@ function App() {
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
+  
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {

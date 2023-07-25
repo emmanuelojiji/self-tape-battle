@@ -8,6 +8,7 @@ import {
   getDocs,
   query,
   collectionGroup,
+  where,
 } from "firebase/firestore";
 import { useState } from "react";
 import Headshot from "../media/headshot.jpeg";
@@ -52,12 +53,14 @@ const Profile = () => {
     const getUserEntries = async () => {
       try {
         const entriesRef = collectionGroup(db, "entries");
-        const entriesDocs = await getDocs(entriesRef);
+        const q = query(entriesRef, where("uid", "==", user.uid));
+        const entriesDocs = await getDocs(q);
 
         console.log(entriesDocs);
 
         const data = entriesDocs.docs.map((doc) => doc.data());
         setEntries(data);
+        console.log(data);
       } catch (error) {
         console.log(error.message);
       }
@@ -65,7 +68,9 @@ const Profile = () => {
 
     getUserInfo();
     getUserEntries();
-  }, []);
+
+    console.log(user);
+  });
 
   return (
     <div>

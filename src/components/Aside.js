@@ -35,8 +35,9 @@ const Aside = () => {
         >
           Leaderboard
         </Link>
-        <Link>Shop</Link>
-        <Link>Green Room</Link>
+        <Link>Directory</Link>
+        <Link className="disabled">Shop</Link>
+        <Link className="disabled">Green Room</Link>
       </nav>
     </aside>
   );
