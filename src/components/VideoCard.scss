@@ -23,7 +23,21 @@
 
   &:hover {
     scale: 1.05;
+    cursor: pointer;
   }
+
+  .num-of-votes{
+    height: 30px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px grey;
+    border-radius: 2em;
+    margin-top: 10px;
+    color: white;
+  }
+
 
 
 }

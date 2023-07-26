@@ -22,8 +22,6 @@ const Battle = ({ setUploadModalVisible }) => {
 
   const [selectedVideo, setSelectedVideo] = useState();
 
-  const [votes, setVotes] = useState();
-
   useEffect(() => {
     const getBattle = async () => {
       try {
@@ -31,7 +29,13 @@ const Battle = ({ setUploadModalVisible }) => {
         const battleDoc = await getDoc(doc(battlesCollectionRef, id));
 
         setBattle(battleDoc.data());
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
+    const getEntries = async () => {
+      try {
         const entriesCollectionRef = collection(db, "battles", id, "entries");
 
         const entriesDocs = await getDocs(entriesCollectionRef);
@@ -41,11 +45,19 @@ const Battle = ({ setUploadModalVisible }) => {
         console.log(entry.length);
 
         setEntries(entry);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        console.log("sorry");
       }
     };
+
+    const getVotes = async () => {
+      try {
+        const votesCollection = collection(db, "battles", id);
+      } catch {}
+    };
+
     getBattle();
+    getEntries();
   }, []);
 
   return (
@@ -67,9 +79,16 @@ const Battle = ({ setUploadModalVisible }) => {
         />
       </div>
 
+      <div className="winner-contaner">
+        <h3>Current Winner:</h3>
+      </div>
+
       <div className="entry-card-container">
         {entries.map((entry) => (
           <VideoCard
+            title={entry.name}
+            selectedVideo={selectedVideo}
+            uid={entry.uid}
             onClick={() => {
               setSelectedVideo(entry.uid);
               setModalVisible(true);
