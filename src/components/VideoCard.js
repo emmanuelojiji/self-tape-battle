@@ -4,7 +4,7 @@ import { db } from "../firebaseConfig";
 import "./VideoCard.scss";
 
 const VideoCard = ({ onClick, title, uid }) => {
-  const [votes, setVotes] = useState();
+  const [votes, setVotes] = useState(null);
 
   useEffect(() => {
     const currentURL = window.location.href;

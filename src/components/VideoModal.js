@@ -13,7 +13,7 @@ import {
 } from "firebase/firestore";
 
 const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
-  const user = auth.currentUser;
+  const user = localStorage.getItem("currentUser");
 
   const currentURL = window.location.href;
   const parts = currentURL.split("/");
@@ -39,7 +39,7 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
       } catch {
         console.log("error");
       }
-    }; 
+    };
 
     getVotes();
 

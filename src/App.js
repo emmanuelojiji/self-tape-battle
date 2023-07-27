@@ -23,12 +23,11 @@ import Admin from "./pages/Admin";
 import UploadModal from "./components/UploadModal";
 
 function App() {
-  const [user, setUser] = useState(() => {
+  const user = localStorage.getItem("currentUser");
+  /*const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
-
-  
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -44,7 +43,7 @@ function App() {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, []);*/
 
   /*const [onboardingComplete, setOnboardingComplete] = useState();
 
@@ -65,7 +64,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <UploadModal uploadModalVisible={uploadModalVisible} setUploadModalVisible={setUploadModalVisible} />
+      <UploadModal
+        uploadModalVisible={uploadModalVisible}
+        setUploadModalVisible={setUploadModalVisible}
+      />
       <div className="App">
         <Routes>
           <Route path="/login" element={<LogIn />}></Route>

@@ -16,7 +16,7 @@ import VideoCard from "../components/VideoCard";
 import ProfileInfoSkeleton from "../components/ProfileInfoSkeleton";
 
 const Profile = () => {
-  const user = auth.currentUser;
+  const [user, setUser] = useState(null);
 
   const [loading, setLoading] = useState(true);
 
@@ -33,6 +33,14 @@ const Profile = () => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
     const getUserInfo = async () => {
       try {
         const docSnapshot = await getDoc(doc(db, "users", user.uid));
@@ -87,7 +95,7 @@ const Profile = () => {
               {firstName} {lastName}
             </h2>
 
-            <div class="city-bio-wrap">
+            <div className="city-bio-wrap">
               <p className="city">{city}</p>
               <p className="bio">{bio}</p>
             </div>

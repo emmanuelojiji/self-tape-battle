@@ -12,8 +12,6 @@ import VideoModal from "../components/VideoModal";
 const Battle = ({ setUploadModalVisible }) => {
   const { id } = useParams();
 
-  const user = auth.currentUser;
-
   const [modalVisible, setModalVisible] = useState(false);
 
   const [battle, setBattle] = useState("");
@@ -22,43 +20,54 @@ const Battle = ({ setUploadModalVisible }) => {
 
   const [selectedVideo, setSelectedVideo] = useState();
 
+  const [currentUserEntry, setCurrentUserEntry] = useState();
+
   useEffect(() => {
-    const getBattle = async () => {
-      try {
-        const battlesCollectionRef = collection(db, "battles");
-        const battleDoc = await getDoc(doc(battlesCollectionRef, id));
-
-        setBattle(battleDoc.data());
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    const getEntries = async () => {
-      try {
-        const entriesCollectionRef = collection(db, "battles", id, "entries");
-
-        const entriesDocs = await getDocs(entriesCollectionRef);
-
-        const entry = entriesDocs.docs.map((doc) => doc.data());
-
-        console.log(entry.length);
-
-        setEntries(entry);
-      } catch {
-        console.log("sorry");
-      }
-    };
-
-    const getVotes = async () => {
-      try {
-        const votesCollection = collection(db, "battles", id);
-      } catch {}
-    };
-
     getBattle();
     getEntries();
+    getCurrentUserEntry();
   }, []);
+
+  const getBattle = async () => {
+    try {
+      const battlesCollectionRef = collection(db, "battles");
+      const battleDoc = await getDoc(doc(battlesCollectionRef, id));
+
+      setBattle(battleDoc.data());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getEntries = async () => {
+    try {
+      const entriesCollectionRef = collection(db, "battles", id, "entries");
+
+      const entriesDocs = await getDocs(entriesCollectionRef);
+
+      const entry = entriesDocs.docs.map((doc) => doc.data());
+
+      setEntries(entry);
+    } catch (error) {
+      console.log("Sorry:" + error.message);
+    }
+  };
+
+  const getCurrentUserEntry = async () => {
+    try {
+      const currentUserEntry = doc(
+        db,
+        "battles",
+        id,
+        "entries",
+        localStorage.getItem("currentUser")
+      );
+      const docSnapshot = await getDoc(currentUserEntry);
+      setCurrentUserEntry(docSnapshot.data());
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div>
@@ -79,13 +88,19 @@ const Battle = ({ setUploadModalVisible }) => {
         />
       </div>
 
-      <div className="winner-contaner">
-        <h3>Current Winner:</h3>
-      </div>
-
       <div className="entry-card-container">
+        <VideoCard
+          title={currentUserEntry.name}
+          uid={currentUserEntry.uid}
+          onClick={() => {
+            setSelectedVideo(currentUserEntry.uid);
+            setModalVisible(true);
+            console.log(selectedVideo);
+          }}
+        />
         {entries.map((entry) => (
           <VideoCard
+            key={entry.name}
             title={entry.name}
             selectedVideo={selectedVideo}
             uid={entry.uid}

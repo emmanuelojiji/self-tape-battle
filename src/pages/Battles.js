@@ -25,7 +25,7 @@ const Battles = () => {
     getActiveBattle();
   }, []);
 
-  const user = useContext(authContext);
+
 
   const [activeBattle, setActiveBattle] = useState();
   return (
@@ -34,7 +34,7 @@ const Battles = () => {
 
       <div className="card-container">
         {battles.map((battle) => (
-          <BattleCard title={battle.name} id={battle.id} />
+          <BattleCard key={battle.id} title={battle.name} id={battle.id} />
         ))}
       </div>
     </div>

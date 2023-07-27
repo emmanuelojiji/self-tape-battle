@@ -11,20 +11,21 @@ const Header = () => {
   return (
     <header>
       <input
-          type="text"
-          className="search"
-          placeholder="Search for user"
-        ></input>
+        type="text"
+        className="search"
+        placeholder="Search for user"
+      ></input>
       <div className="header-right">
         <h3
           onClick={() => {
             auth.signOut();
+            localStorage.removeItem("user");
             navigate("/login");
           }}
         >
           Sign out
         </h3>
-        
+
         <Coins />
         <Link to="/home/profile">
           {" "}

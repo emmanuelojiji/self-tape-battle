@@ -16,21 +16,21 @@ const Aside = () => {
       <nav>
       <Link
           to="/home/profile"
-          className={currentPage === "profile" && "active"}
+          className={currentPage === "profile" ? "active" : null}
           onClick={() => setCurrentPage("profile")}
         >
           Profile
         </Link>
         <Link
           to="/home/battles"
-          className={currentPage === "arena" && "active"}
+          className={currentPage === "arena" ? "active" : null}
           onClick={() => setCurrentPage("arena")}
         >
           Arena
         </Link>
         <Link
           to="/home/leaderboard"
-          className={currentPage === "leaderboard" && "active"}
+          className={currentPage === "leaderboard" ? "active" : null}
           onClick={() => setCurrentPage("leaderboard")}
         >
           Leaderboard

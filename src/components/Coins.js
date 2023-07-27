@@ -4,21 +4,31 @@ import { useEffect, useState } from "react";
 import { getDoc, doc } from "firebase/firestore";
 
 const Coins = () => {
-  const user = auth.currentUser;
+  const [user, setUser] = useState();
   const [coins, setCoins] = useState();
   useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+        getCoins();
+      } else {
+        setUser(null);
+      }
+    });
+
     const getCoins = async () => {
       try {
-        const userDocumentRef = doc(db, "users", user.uid);
-        const userDocument = await getDoc(userDocumentRef);
-        setCoins(userDocument.data().coins);
-       
+        if (user) {
+          const userDocumentRef = doc(db, "users", user.uid);
+          const userDocument = await getDoc(userDocumentRef);
+          setCoins(userDocument.data().coins);
+        }
       } catch (error) {
         console.log(error.message);
       }
     };
-    getCoins();
   });
+
   return (
     <div className="coins-container">
       <div className="coin"></div>

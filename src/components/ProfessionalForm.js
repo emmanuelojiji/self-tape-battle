@@ -5,7 +5,7 @@ import "./OnboardingForm.scss";
 const ProfessionalForm = () => {
   const [step, setStep] = useState(1);
   return (
-    <div class="performer-form">
+    <div className="performer-form">
       <h1>Professional</h1>
 
       {step === 1 && (

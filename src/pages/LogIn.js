@@ -2,7 +2,7 @@ import InputText from "../components/InputText";
 import { Link, useNavigate } from "react-router-dom";
 import "./LogIn.scss";
 import { auth, db } from "../firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 
 const LogIn = () => {
@@ -11,12 +11,22 @@ const LogIn = () => {
 
   const navigate = useNavigate();
 
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      localStorage.setItem("currentUser", user.uid);
+      const currentUser = localStorage.getItem("currentUser");
+      console.log(currentUser + " is signed in");
+    } else {
+      console.log("signed out");
+    }
+  });
+
   const handleLogIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/home");
-    } catch {
-      console.log("couldn't log in sorry");
+    } catch (error) {
+      console.log(error.message);
     }
   };
 

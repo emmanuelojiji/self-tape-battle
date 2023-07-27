@@ -44,7 +44,7 @@ const PerformerForm = () => {
   };
 
   return (
-    <div class="performer-form">
+    <div className="performer-form">
       <h1>Performer</h1>
 
       {step === 1 && (
