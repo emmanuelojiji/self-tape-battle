@@ -4,7 +4,14 @@ import "./Battle.scss";
 
 import Button from "../components/Button";
 
-import { collection, getDoc, doc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDoc,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { auth, db } from "../firebaseConfig";
 import VideoCard from "../components/VideoCard";
 import VideoModal from "../components/VideoModal";
@@ -43,7 +50,8 @@ const Battle = ({ setUploadModalVisible }) => {
     try {
       const entriesCollectionRef = collection(db, "battles", id, "entries");
 
-      const entriesDocs = await getDocs(entriesCollectionRef);
+      const entriesQuery = query(entriesCollectionRef, orderBy("time", "asc"));
+      const entriesDocs = await getDocs(entriesQuery);
 
       const entry = entriesDocs.docs.map((doc) => doc.data());
 
@@ -89,15 +97,17 @@ const Battle = ({ setUploadModalVisible }) => {
       </div>
 
       <div className="entry-card-container">
-        <VideoCard
-          title={currentUserEntry.name}
-          uid={currentUserEntry.uid}
-          onClick={() => {
-            setSelectedVideo(currentUserEntry.uid);
-            setModalVisible(true);
-            console.log(selectedVideo);
-          }}
-        />
+        {currentUserEntry && (
+          <VideoCard
+            title={currentUserEntry.name}
+            uid={currentUserEntry.uid}
+            onClick={() => {
+              setSelectedVideo(currentUserEntry.uid);
+              setModalVisible(true);
+              console.log(selectedVideo);
+            }}
+          />
+        )}
         {entries.map((entry) => (
           <VideoCard
             key={entry.name}

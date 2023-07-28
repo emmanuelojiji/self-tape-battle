@@ -25,10 +25,13 @@ h2{
 }
 
 .upload-area{
-    height: 200px;
+    height: 100px;
     width: 100%;
     border: dashed 1px rgb(187, 187, 187);
     margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-open {

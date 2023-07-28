@@ -21,6 +21,7 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
 
   const [votes, setVotes] = useState();
   const [name, setName] = useState();
+  const [url, setUrl] = useState();
 
   useEffect(() => {
     const votesCollection = collection(
@@ -41,8 +42,6 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
       }
     };
 
-    getVotes();
-
     const getUser = async () => {
       const docSnapshot = doc(db, "battles", id, "entries", selectedVideo);
 
@@ -54,8 +53,21 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
       }
     };
 
+    const getVideo = async () => {
+      try {
+        const videoLocation = doc(db, "battles", id, "entries", selectedVideo);
+        const videoDoc = await getDoc(videoLocation);
+
+        setUrl(videoDoc.data().url);
+      } catch {
+        console.log("couldn't get video");
+      }
+    };
+
+    getVotes();
     getUser();
-  });
+    getVideo();
+  }, [id, selectedVideo]); // Add id and selectedVideo as dependencies to avoid infinite loop.
 
   const handleVote = async () => {
     try {
@@ -67,13 +79,13 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
         selectedVideo,
         "votes"
       );
-      await setDoc(doc(votesCollection, user.uid), {
+      await setDoc(doc(votesCollection, user), {
         name: "Sasha",
-        uid: user.uid,
+        uid: user,
         time: Timestamp.now(),
       });
 
-      setVotes(votesCollection.length);
+      setVotes(votesCollection.length); // Increment the vote count locally.
 
       console.log(votes);
     } catch {
@@ -95,7 +107,13 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
           </div>
         </div>
 
-        <div className="video"></div>
+        <div className="video">
+          {url && (
+            <video controls width="100%" height="100%">
+              <source src={url}></source>
+            </video>
+          )}
+        </div>
       </div>
     </div>
   );

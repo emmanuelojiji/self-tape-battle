@@ -16,6 +16,8 @@ const LogIn = () => {
       localStorage.setItem("currentUser", user.uid);
       const currentUser = localStorage.getItem("currentUser");
       console.log(currentUser + " is signed in");
+
+      console.log(currentUser);
     } else {
       console.log("signed out");
     }
@@ -24,7 +26,7 @@ const LogIn = () => {
   const handleLogIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/home");
+      //navigate("/home");
     } catch (error) {
       console.log(error.message);
     }

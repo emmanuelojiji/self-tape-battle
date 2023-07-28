@@ -16,7 +16,8 @@ import VideoCard from "../components/VideoCard";
 import ProfileInfoSkeleton from "../components/ProfileInfoSkeleton";
 
 const Profile = () => {
-  const [user, setUser] = useState(null);
+  const user = localStorage.getItem("currentUser");
+  console.log("Logged in is:" + user);
 
   const [loading, setLoading] = useState(true);
 
@@ -33,17 +34,9 @@ const Profile = () => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-    });
-
     const getUserInfo = async () => {
       try {
-        const docSnapshot = await getDoc(doc(db, "users", user.uid));
+        const docSnapshot = await getDoc(doc(db, "users", user));
         const userData = docSnapshot.data();
 
         setFirstName(userData.first_name);
@@ -61,7 +54,7 @@ const Profile = () => {
     const getUserEntries = async () => {
       try {
         const entriesRef = collectionGroup(db, "entries");
-        const q = query(entriesRef, where("uid", "==", user.uid));
+        const q = query(entriesRef, where("uid", "==", user));
         const entriesDocs = await getDocs(q);
 
         console.log(entriesDocs);
@@ -78,7 +71,7 @@ const Profile = () => {
     getUserEntries();
 
     console.log(user);
-  });
+  }, []);
 
   return (
     <div>
@@ -108,7 +101,7 @@ const Profile = () => {
       <h2 className="profile-heading">Entries</h2>
       <div className="video-card-container">
         {entries.map((entry) => (
-          <VideoCard title={entry.battleName} />
+          <VideoCard title={entry.battleName} uid={entry.uid} />
         ))}
       </div>
     </div>
