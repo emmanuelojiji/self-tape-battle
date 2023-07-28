@@ -95,7 +95,7 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
 
   return (
     <div className="video-modal" onClick={() => setModalVisible(false)}>
-      <div className="modal">
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <div className="left">
             <Avatar size="35" />
@@ -103,13 +103,21 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
           </div>
           <div className="right">
             <div className="num-of-votes">{votes}</div>
-            <Button text="Vote" onClick={() => handleVote()} />
+            {selectedVideo != user && (
+              <Button text="Vote" onClick={() => handleVote()} />
+            )}
           </div>
         </div>
 
         <div className="video">
           {url && (
-            <video controls width="100%" height="100%">
+            <video
+              controls
+              width="100%"
+              height="100%"
+              disablePictureInPicture
+              controlsList="nodownload"
+            >
               <source src={url}></source>
             </video>
           )}
