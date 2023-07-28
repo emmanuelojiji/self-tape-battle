@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import Button from "./Button";
 import "./UploadModal.scss";
 import { auth, db, storage } from "../firebaseConfig";
@@ -12,7 +12,7 @@ const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
 
   const user = localStorage.getItem("currentUser");
 
-  const uploadToFirestore = async () => {
+  const uploadToFirestore = async (url) => {
     try {
       const entriesCollection = collection(db, "battles", id, "entries");
 
@@ -27,7 +27,7 @@ const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
         battleName: name,
         battleId: id,
         time: Timestamp.now(),
-        url: `${gsRef}`,
+        url: url,
       });
 
       setUploadModalVisible(false);
@@ -38,7 +38,6 @@ const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
 
   const [file, setFile] = useState();
   const fileInputRef = useRef(null);
-  const [gsRef, setGsRef] = useState();
 
   const uploadToStorage = () => {
     const fileName = `${user}-${file.name}`;
@@ -46,9 +45,10 @@ const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
 
     uploadBytes(entryFileRef, file).then((snapshot) => {
       console.log("uploaded!");
+
       getDownloadURL(entryFileRef).then((url) => {
-        setGsRef(url);
-        uploadToFirestore();
+        console.log("Link is" + url);
+        uploadToFirestore(url);
       });
     });
   };
