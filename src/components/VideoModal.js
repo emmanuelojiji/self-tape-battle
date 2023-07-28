@@ -42,7 +42,6 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
       }
     };
 
-
     //Not necessary anymore as I'm using "You" instead
     const getUser = async () => {
       const docSnapshot = doc(db, "battles", id, "entries", selectedVideo);
@@ -101,7 +100,7 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
         <div className="modal-header">
           <div className="left">
             <Avatar size="35" />
-            <h3>You</h3>
+            <h3>{selectedVideo === user ? "You" : name}</h3>
           </div>
           <div className="right">
             <div className="num-of-votes">{votes}</div>
