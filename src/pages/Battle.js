@@ -11,10 +11,12 @@ import {
   getDocs,
   orderBy,
   query,
+  onSnapshot,
 } from "firebase/firestore";
 import { auth, db } from "../firebaseConfig";
 import VideoCard from "../components/VideoCard";
 import VideoModal from "../components/VideoModal";
+import { async } from "@firebase/util";
 
 const Battle = ({ setUploadModalVisible }) => {
   const { id } = useParams();
@@ -55,7 +57,14 @@ const Battle = ({ setUploadModalVisible }) => {
 
       const entry = entriesDocs.docs.map((doc) => doc.data());
 
-      setEntries(entry);
+      onSnapshot(entriesQuery, (snapshot) => {
+        if (snapshot.empty) {
+          setEntries(entry);
+        } else {
+          const updatedEntry = snapshot.docs.map((doc) => doc.data());
+          setEntries(updatedEntry);
+        }
+      });
     } catch (error) {
       console.log("Sorry:" + error.message);
     }
@@ -71,7 +80,15 @@ const Battle = ({ setUploadModalVisible }) => {
         localStorage.getItem("currentUser")
       );
       const docSnapshot = await getDoc(currentUserEntry);
-      setCurrentUserEntry(docSnapshot.data());
+
+      onSnapshot(currentUserEntry, async (snapshot) => {
+        if (snapshot) {
+          const newDocSnapshot = await getDoc(currentUserEntry);
+          setCurrentUserEntry(newDocSnapshot.data());
+        } else {
+          setCurrentUserEntry(docSnapshot.data());
+        }
+      });
     } catch (error) {
       console.log(error.message);
     }
@@ -88,12 +105,14 @@ const Battle = ({ setUploadModalVisible }) => {
       <div className="battle-header">
         <div>{<h1>{battle.name}</h1>}</div>
 
-        <Button
-          text="Upload tape"
-          onClick={() => {
-            setUploadModalVisible(true);
-          }}
-        />
+        {!currentUserEntry && (
+          <Button
+            text="Upload tape"
+            onClick={() => {
+              setUploadModalVisible(true);
+            }}
+          />
+        )}
       </div>
 
       <div className="entry-card-container">

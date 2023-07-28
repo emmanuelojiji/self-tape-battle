@@ -10,6 +10,9 @@ import {
   getDocs,
   setDoc,
   Timestamp,
+  query,
+  where,
+  onSnapshot,
 } from "firebase/firestore";
 
 const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
@@ -42,7 +45,6 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
       }
     };
 
-    //Not necessary anymore as I'm using "You" instead
     const getUser = async () => {
       const docSnapshot = doc(db, "battles", id, "entries", selectedVideo);
 
@@ -68,6 +70,7 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
     getVotes();
     getUser();
     getVideo();
+    voteCheck();
   }, [id, selectedVideo]); // Add id and selectedVideo as dependencies to avoid infinite loop.
 
   const handleVote = async () => {
@@ -86,13 +89,41 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
         time: Timestamp.now(),
       });
 
-      setVotes(votesCollection.length); // Increment the vote count locally.
+      setVotes(votesCollection.length);
 
       console.log(votes);
     } catch {
       console.log("error");
     }
   };
+
+  const voteCheck = async () => {
+    const votesCollection = collection(
+      db,
+      "battles",
+      id,
+      "entries",
+      selectedVideo,
+      "votes"
+    );
+    const votesQuery = query(votesCollection, where("uid", "==", user));
+
+    try {
+      onSnapshot(votesQuery, (snapshot) => {
+        // This callback will be triggered whenever the document changes
+        // Check if the document still exists in the snapshot
+        if (!snapshot.empty) {
+          setAlreadyVoted(true);
+        } else {
+          setAlreadyVoted(false);
+        }
+      });
+    } catch {
+      console.log("couldn't do vote check");
+    }
+  };
+
+  const [alreadyVoted, setAlreadyVoted] = useState(null);
 
   return (
     <div className="video-modal" onClick={() => setModalVisible(false)}>
@@ -105,7 +136,11 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
           <div className="right">
             <div className="num-of-votes">{votes}</div>
             {selectedVideo != user && (
-              <Button text="Vote" onClick={() => handleVote()} />
+              <Button
+                text={alreadyVoted ? "Voted!" : "Vote"}
+                disabled={alreadyVoted && true}
+                onClick={() => handleVote()}
+              />
             )}
           </div>
         </div>
