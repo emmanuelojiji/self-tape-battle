@@ -15,7 +15,13 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
-const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
+const VideoModal = ({
+  voteCount,
+  selectedVideo,
+  setModalVisible,
+  setPraiseModalVisible,
+  setPraiseModalType,
+}) => {
   const user = localStorage.getItem("currentUser");
 
   const currentURL = window.location.href;
@@ -90,6 +96,10 @@ const VideoModal = ({ voteCount, selectedVideo, setModalVisible }) => {
       });
 
       setVotes(votesCollection.length);
+
+      setModalVisible(false);
+      setPraiseModalVisible(true);
+      setPraiseModalType("vote");
 
       console.log(votes);
     } catch {

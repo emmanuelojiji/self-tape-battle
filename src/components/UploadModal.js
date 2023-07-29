@@ -4,13 +4,20 @@ import "./UploadModal.scss";
 import { auth, db, storage } from "../firebaseConfig";
 import { collection, doc, setDoc, getDoc, Timestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import PraiseModal from "./PraiseModal";
 
-const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
+const UploadModal = ({
+  setUploadModalVisible,
+  setPraiseModalVisible,
+  setPraiseModalType,
+}) => {
   const currentURL = window.location.href;
   const parts = currentURL.split("/");
   const id = parts.pop();
 
   const user = localStorage.getItem("currentUser");
+
+  const [loading, setLoading] = useState(false);
 
   const uploadToFirestore = async (url) => {
     try {
@@ -31,6 +38,9 @@ const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
       });
 
       setUploadModalVisible(false);
+      setFile(null);
+      setPraiseModalType("upload");
+      setPraiseModalVisible(true);
     } catch (error) {
       console.log(error);
     }
@@ -54,10 +64,7 @@ const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
   };
 
   return (
-    <div
-      className={`upload-modal ${uploadModalVisible && "modal-open"}`}
-      onClick={() => setUploadModalVisible(false)}
-    >
+    <div className="upload-modal" onClick={() => setUploadModalVisible(false)}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h2>Upload Tape</h2>
         <input
@@ -69,17 +76,26 @@ const UploadModal = ({ uploadModalVisible, setUploadModalVisible }) => {
             console.log(file);
           }}
         ></input>
-        <div className="upload-area">
-          {file ? (
-            <p>{file.name}</p>
-          ) : (
-            <p onClick={() => fileInputRef.current.click()}>Click to upload</p>
-          )}
-        </div>
+        {loading ? (
+          <h3>Uploading..</h3>
+        ) : (
+          <div className="upload-area">
+            {file ? (
+              <p>{file.name}</p>
+            ) : (
+              <p onClick={() => fileInputRef.current.click()}>
+                Click to upload
+              </p>
+            )}
+          </div>
+        )}
 
         <Button
           text="Upload"
-          onClick={() => uploadToStorage()}
+          onClick={() => {
+            setLoading(true);
+            uploadToStorage();
+          }}
           disabled={!file}
         />
       </div>

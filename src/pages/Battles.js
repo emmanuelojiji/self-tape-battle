@@ -34,7 +34,7 @@ const Battles = () => {
 
       <div className="card-container">
         {battles.map((battle) => (
-          <BattleCard key={battle.id} title={battle.name} id={battle.id} />
+          <BattleCard key={battle.id} title={battle.name} id={battle.id} background="#E23E19" />
         ))}
       </div>
     </div>

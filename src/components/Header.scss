@@ -10,7 +10,6 @@ header {
   width: 100%;
   //background: rgb(243, 243, 243);
   
-  z-index: 1;
 }
 
 .header-right {
@@ -21,7 +20,7 @@ header {
 
 .search{
     width: 500px;
-    border-radius: 10px;
+    border-radius: 2em;
     background: rgb(243, 243, 243);
     height: 50px;
     border: 0;

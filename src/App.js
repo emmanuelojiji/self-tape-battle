@@ -64,10 +64,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <UploadModal
-        uploadModalVisible={uploadModalVisible}
-        setUploadModalVisible={setUploadModalVisible}
-      />
       <div className="App">
         <Routes>
           <Route path="/login" element={<LogIn />}></Route>

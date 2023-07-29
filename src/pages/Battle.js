@@ -17,11 +17,18 @@ import { auth, db } from "../firebaseConfig";
 import VideoCard from "../components/VideoCard";
 import VideoModal from "../components/VideoModal";
 import { async } from "@firebase/util";
+import PraiseModal from "../components/PraiseModal";
+import UploadModal from "../components/UploadModal";
 
-const Battle = ({ setUploadModalVisible }) => {
+const Battle = () => {
   const { id } = useParams();
 
   const [modalVisible, setModalVisible] = useState(false);
+
+  const [uploadModalVisible, setUploadModalVisible] = useState(false);
+
+  const [praiseModalVisible, setPraiseModalVisible] = useState(false);
+  const [praiseModalType, setPraiseModalType] = useState("");
 
   const [battle, setBattle] = useState("");
 
@@ -96,10 +103,29 @@ const Battle = ({ setUploadModalVisible }) => {
 
   return (
     <div>
+      {uploadModalVisible && (
+        <UploadModal
+          setUploadModalVisible={setUploadModalVisible}
+          setPraiseModalVisible={setPraiseModalVisible}
+          setPraiseModalType={setPraiseModalType}
+        />
+      )}
+      {praiseModalVisible && (
+        <PraiseModal
+          setPraiseModalVisible={setPraiseModalVisible}
+          title={
+            praiseModalType === "vote"
+              ? "Thanks for voting!"
+              : "You've uploaded your video!"
+          }
+        />
+      )}
       {modalVisible && (
         <VideoModal
           selectedVideo={selectedVideo}
           setModalVisible={setModalVisible}
+          setPraiseModalVisible={setPraiseModalVisible}
+          setPraiseModalType={setPraiseModalType}
         />
       )}
       <div className="battle-header">
