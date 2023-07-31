@@ -14,11 +14,18 @@ const Admin = () => {
     try {
       const battleDocRef = doc(db, "battles", battle_id);
 
-      // Create a new document in the `battles` collection with the data provided
+      const dateToday = new Date();
+
+      const oneWeekLater = new Date(dateToday);
+
+      oneWeekLater.setDate(dateToday.getUTCDate() + 7);
+
       await setDoc(battleDocRef, {
         name: battleName,
         id: battle_id,
         active: true,
+        date: dateToday,
+        deadline: oneWeekLater,
       });
     } catch (error) {
       console.log("Error creating battle:", error);

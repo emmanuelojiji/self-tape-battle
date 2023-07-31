@@ -131,7 +131,7 @@ const Battle = () => {
       <div className="battle-header">
         <div>{<h1>{battle.name}</h1>}</div>
 
-        {!currentUserEntry && (
+        {battle.active && !currentUserEntry && (
           <Button
             text="Upload tape"
             onClick={() => {

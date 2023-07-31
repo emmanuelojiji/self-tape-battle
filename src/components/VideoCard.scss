@@ -4,9 +4,10 @@
 }
 
 .video-card {
+  width: 100%;
   height: 300px;
-  width: 300px;
-  border-radius: 10px;
+  max-width: 300px;
+  border-radius: 1rem;
   background: rgb(237, 237, 237);
   background: rgb(35, 35, 35);
   transition: 0.2s ease-in-out;
@@ -16,17 +17,16 @@
   flex-direction: column;
   justify-content: end;
 
-  h1{
+  h1 {
     font-size: 25px;
   }
-
 
   &:hover {
     scale: 1.05;
     cursor: pointer;
   }
 
-  .num-of-votes{
+  .num-of-votes {
     height: 30px;
     width: 70px;
     display: flex;
@@ -37,7 +37,4 @@
     margin-top: 10px;
     color: white;
   }
-
-
-
 }

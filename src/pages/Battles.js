@@ -25,8 +25,6 @@ const Battles = () => {
     getActiveBattle();
   }, []);
 
-
-
   const [activeBattle, setActiveBattle] = useState();
   return (
     <div className="battles">
@@ -34,7 +32,13 @@ const Battles = () => {
 
       <div className="card-container">
         {battles.map((battle) => (
-          <BattleCard key={battle.id} title={battle.name} id={battle.id} background="#E23E19" />
+          <BattleCard
+            key={battle.id}
+            title={battle.name}
+            id={battle.id}
+            background="#E23E19"
+            opacity={!battle.active && "0.5"}
+          />
         ))}
       </div>
     </div>

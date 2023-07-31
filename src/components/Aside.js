@@ -29,7 +29,7 @@ const Aside = () => {
           Arena
         </Link>
         
-        <Link>Directory</Link>
+        <Link to="/home/directory">Directory</Link>
         <Link>Wallet</Link>
         <Link className="disabled">Leaderboard</Link>
 

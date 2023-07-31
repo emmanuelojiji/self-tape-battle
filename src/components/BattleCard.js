@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import "./BattleCard.scss";
 import Button from "./Button";
 
-const BattleCard = ({ title, id, background }) => {
+const BattleCard = ({ title, id, background, opacity }) => {
   return (
     <Link
       to={`/home/battle/${id}`}
       className={`battle-card`}
-      style={{ background: background }}
+      style={{ background: background, opacity: opacity }}
     >
       <h3>{title}</h3>
       <p>
