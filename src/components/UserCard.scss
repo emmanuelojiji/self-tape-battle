@@ -1,12 +1,17 @@
-.user-card{
-    margin-bottom: 30px;
-    display: flex;
-    gap: 10px;
+.user-card {
+  margin-bottom: 50px;
+  display: flex;
+  gap: 10px;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    background: grey;
+  }
 }
 
-.avatar{
-    height: 30px;
-    width: 30px;
-    background: grey;
-    border-radius: 100%;
+.avatar {
+  height: 30px;
+  width: 30px;
+  background: grey;
+  border-radius: 100%;
 }

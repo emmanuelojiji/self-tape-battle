@@ -22,6 +22,7 @@ import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
 import UploadModal from "./components/UploadModal";
 import Directory from "./pages/Directory";
+import Wallet from "./pages/Wallet";
 
 function App() {
   const user = localStorage.getItem("currentUser");
@@ -84,6 +85,8 @@ function App() {
             <Route path="battles" element={<Battles />}></Route>
             <Route path="profile" element={<Profile />}></Route>
             <Route path="directory" element={<Directory />}></Route>
+            <Route path="wallet" element={<Wallet />}></Route>
+            <Route path="/home/profile/:id" element={<Profile />}></Route>
             <Route
               path="battle/:id"
               element={

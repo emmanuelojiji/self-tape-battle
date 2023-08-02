@@ -16,7 +16,6 @@ import {
 import { auth, db } from "../firebaseConfig";
 import VideoCard from "../components/VideoCard";
 import VideoModal from "../components/VideoModal";
-import { async } from "@firebase/util";
 import PraiseModal from "../components/PraiseModal";
 import UploadModal from "../components/UploadModal";
 
@@ -33,8 +32,6 @@ const Battle = () => {
   const [battle, setBattle] = useState("");
 
   const [entries, setEntries] = useState([]);
-
-  const [selectedVideoId, setSelectedVideoId] = useState();
 
   const [selectedVideo, setSelectedVideo] = useState();
 

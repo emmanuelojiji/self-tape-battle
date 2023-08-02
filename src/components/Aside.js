@@ -10,12 +10,14 @@ const Aside = () => {
     setCurrentPage(page);
   };
 
+  const user = localStorage.getItem("currentUser");
+
   return (
     <aside>
       <img src={Logo} className="logo" />
       <nav>
         <Link
-          to="/home/profile"
+          to={`/home/profile/${user}`}
           className={currentPage === "profile" ? "active" : null}
           onClick={() => setCurrentPage("profile")}
         >
@@ -28,9 +30,9 @@ const Aside = () => {
         >
           Arena
         </Link>
-        
+
         <Link to="/home/directory">Directory</Link>
-        <Link>Wallet</Link>
+        <Link className="disabled">Wallet</Link>
         <Link className="disabled">Leaderboard</Link>
 
         <Link className="disabled">Shop</Link>

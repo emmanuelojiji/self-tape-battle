@@ -15,6 +15,7 @@ import Headshot from "../media/headshot.jpeg";
 import VideoCard from "../components/VideoCard";
 import ProfileInfoSkeleton from "../components/ProfileInfoSkeleton";
 import VideoModal from "../components/VideoModal";
+import { useParams } from "react-router-dom";
 
 const Profile = () => {
   const user = localStorage.getItem("currentUser");
@@ -28,9 +29,13 @@ const Profile = () => {
   const [bio, setBio] = useState("");
   const [link, setLink] = useState();
 
-  const currentURL = window.location.href;
+  /*const currentURL = window.location.href;
   const parts = currentURL.split("/");
-  const id = parts.pop();
+  const id = parts.pop();*/
+
+  const { id } = useParams();
+
+  console.log("params:", id);
 
   const [entries, setEntries] = useState([]);
 
@@ -43,7 +48,7 @@ const Profile = () => {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const docSnapshot = await getDoc(doc(db, "users", user));
+        const docSnapshot = await getDoc(doc(db, "users", id));
         const userData = docSnapshot.data();
 
         setFirstName(userData.first_name);
@@ -61,7 +66,7 @@ const Profile = () => {
     const getUserEntries = async () => {
       try {
         const entriesRef = collectionGroup(db, "entries");
-        const q = query(entriesRef, where("uid", "==", user));
+        const q = query(entriesRef, where("uid", "==", id));
         const entriesDocs = await getDocs(q);
 
         console.log(entriesDocs);
@@ -76,14 +81,16 @@ const Profile = () => {
 
     getUserInfo();
     getUserEntries();
-
-    console.log(user);
   }, []);
 
   return (
     <>
       {modalVisible && (
-        <VideoModal selectedVideo={selectedVideo} battleId={battleId} setModalVisible={setModalVisible} />
+        <VideoModal
+          selectedVideo={selectedVideo}
+          battleId={battleId}
+          setModalVisible={setModalVisible}
+        />
       )}
       <div>
         <div className="profile-container">
