@@ -26,7 +26,7 @@ const LogIn = () => {
   const handleLogIn = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      //navigate("/home");
+      navigate("/home/battles");
     } catch (error) {
       console.log(error.message);
     }
