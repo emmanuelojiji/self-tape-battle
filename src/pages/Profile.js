@@ -38,8 +38,7 @@ const Profile = () => {
 
   const [selectedVideo, setSelectedVideo] = useState();
 
-  const [battleId, setBattleId] = useState()
-
+  const [battleId, setBattleId] = useState();
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -83,7 +82,9 @@ const Profile = () => {
 
   return (
     <>
-      {modalVisible && <VideoModal selectedVideo={selectedVideo} battleId={battleId} />}
+      {modalVisible && (
+        <VideoModal selectedVideo={selectedVideo} battleId={battleId} setModalVisible={setModalVisible} />
+      )}
       <div>
         <div className="profile-container">
           <div
@@ -117,7 +118,7 @@ const Profile = () => {
               onClick={() => {
                 setModalVisible(true);
                 setSelectedVideo(entry.uid);
-                setBattleId((entry.battleId))
+                setBattleId(entry.battleId);
               }}
             />
           ))}

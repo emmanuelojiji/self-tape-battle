@@ -153,6 +153,7 @@ const Battle = () => {
             uid={currentUserEntry.uid}
             onClick={() => {
               setSelectedVideo(currentUserEntry.uid);
+              setBattleId(currentUserEntry.battleId);
               setModalVisible(true);
               console.log(selectedVideo);
             }}
