@@ -8,9 +8,7 @@ const UserCard = ({ firstName, lastName, role, userId }) => {
       <div className="user-card">
         <div class="avatar"></div>
         <div>
-          <h3>
-            {firstName} {lastName}
-          </h3>
+          <h3>{`${firstName + " " + lastName}`}</h3>
           <p>{role}</p>
         </div>
       </div>
