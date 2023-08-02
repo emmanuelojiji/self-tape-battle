@@ -14,6 +14,7 @@ import { useState } from "react";
 import Headshot from "../media/headshot.jpeg";
 import VideoCard from "../components/VideoCard";
 import ProfileInfoSkeleton from "../components/ProfileInfoSkeleton";
+import VideoModal from "../components/VideoModal";
 
 const Profile = () => {
   const user = localStorage.getItem("currentUser");
@@ -32,6 +33,10 @@ const Profile = () => {
   const id = parts.pop();
 
   const [entries, setEntries] = useState([]);
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const [selectedVideo, setSelectedVideo] = useState();
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -74,37 +79,47 @@ const Profile = () => {
   }, []);
 
   return (
-    <div>
-      <div className="profile-container">
-        <div
-          className="profile-picture"
-          style={{ backgroundImage: `url(${Headshot})` }}
-        ></div>
-        {loading ? (
-          <ProfileInfoSkeleton />
-        ) : (
-          <div className="profile-info">
-            <h2 className="profile-name">
-              {firstName} {lastName}
-            </h2>
+    <>
+      {modalVisible && <VideoModal selectedVideo={selectedVideo} />}
+      <div>
+        <div className="profile-container">
+          <div
+            className="profile-picture"
+            style={{ backgroundImage: `url(${Headshot})` }}
+          ></div>
+          {loading ? (
+            <ProfileInfoSkeleton />
+          ) : (
+            <div className="profile-info">
+              <h2 className="profile-name">
+                {firstName} {lastName}
+              </h2>
 
-            <div className="city-bio-wrap">
-              <p className="city">{city}</p>
-              <p className="bio">{bio}</p>
+              <div className="city-bio-wrap">
+                <p className="city">{city}</p>
+                <p className="bio">{bio}</p>
+              </div>
+              <a href={link} className="link">
+                {link}
+              </a>
             </div>
-            <a href={link} className="link">
-              {link}
-            </a>
-          </div>
-        )}
+          )}
+        </div>
+        <h2 className="profile-heading">Entries</h2>
+        <div className="video-card-container">
+          {entries.map((entry) => (
+            <VideoCard
+              title={entry.battleName}
+              uid={entry.uid}
+              onClick={() => {
+                setModalVisible(true);
+                setSelectedVideo(entry.uid);
+              }}
+            />
+          ))}
+        </div>
       </div>
-      <h2 className="profile-heading">Entries</h2>
-      <div className="video-card-container">
-        {entries.map((entry) => (
-          <VideoCard title={entry.battleName} uid={entry.uid} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 

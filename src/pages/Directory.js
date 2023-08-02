@@ -22,6 +22,20 @@ const Directory = () => {
   useEffect(() => {
     getUsers();
   }, []);
+
+  const [userInput, setUserInput] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState([]);
+
+  const handleUserSearch = () => {
+    const filteredUsers = users.filter(
+      (user) =>
+        user.first_name.toLowerCase().includes(userInput.toLowerCase()) ||
+        user.last_name.toLowerCase().includes(userInput.toLowerCase())
+    );
+    return filteredUsers;
+  };
+
+  const displayedUsers = userInput ? handleUserSearch() : users;
   return (
     <div>
       <h1 className="page-title">Directory</h1>
@@ -29,10 +43,18 @@ const Directory = () => {
         type="text"
         className="search directory-search"
         placeholder="Search for user"
+        onChange={(e) => {
+          setUserInput(e.target.value);
+          handleUserSearch();
+        }}
       ></input>
 
-      {users.map((user) => (
-        <UserCard firstName={user.first_name} lastName={user.last_name} role={user.role} />
+      {displayedUsers.map((user) => (
+        <UserCard
+          firstName={user.first_name}
+          lastName={user.last_name}
+          role={user.role}
+        />
       ))}
     </div>
   );

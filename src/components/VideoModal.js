@@ -42,6 +42,8 @@ const VideoModal = ({
       "votes"
     );
 
+    console.log("selected:", selectedVideo)
+
     const getVotes = async () => {
       try {
         const votesDocs = await getDocs(votesCollection);
