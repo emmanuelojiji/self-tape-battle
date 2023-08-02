@@ -21,12 +21,11 @@ const VideoModal = ({
   setModalVisible,
   setPraiseModalVisible,
   setPraiseModalType,
+  battleId
 }) => {
   const user = localStorage.getItem("currentUser");
 
-  const currentURL = window.location.href;
-  const parts = currentURL.split("/");
-  const id = parts.pop();
+  
 
   const [votes, setVotes] = useState();
   const [name, setName] = useState();
@@ -36,7 +35,7 @@ const VideoModal = ({
     const votesCollection = collection(
       db,
       "battles",
-      id,
+      battleId,
       "entries",
       selectedVideo,
       "votes"
@@ -54,7 +53,7 @@ const VideoModal = ({
     };
 
     const getUser = async () => {
-      const docSnapshot = doc(db, "battles", id, "entries", selectedVideo);
+      const docSnapshot = doc(db, "battles", battleId, "entries", selectedVideo);
 
       try {
         const entryDocs = await getDoc(docSnapshot);
@@ -66,7 +65,7 @@ const VideoModal = ({
 
     const getVideo = async () => {
       try {
-        const videoLocation = doc(db, "battles", id, "entries", selectedVideo);
+        const videoLocation = doc(db, "battles", battleId, "entries", selectedVideo);
         const videoDoc = await getDoc(videoLocation);
 
         setUrl(videoDoc.data().url);
@@ -79,14 +78,14 @@ const VideoModal = ({
     getUser();
     getVideo();
     voteCheck();
-  }, [id, selectedVideo]); // Add id and selectedVideo as dependencies to avoid infinite loop.
+  }, [battleId, selectedVideo]); // Add battleId and selectedVideo as dependencies to avoid infinite loop.
 
   const handleVote = async () => {
     try {
       const votesCollection = collection(
         db,
         "battles",
-        id,
+        battleId,
         "entries",
         selectedVideo,
         "votes"
@@ -113,7 +112,7 @@ const VideoModal = ({
     const votesCollection = collection(
       db,
       "battles",
-      id,
+      battleId,
       "entries",
       selectedVideo,
       "votes"

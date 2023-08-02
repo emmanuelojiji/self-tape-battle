@@ -34,7 +34,11 @@ const Battle = () => {
 
   const [entries, setEntries] = useState([]);
 
+  const [selectedVideoId, setSelectedVideoId] = useState();
+
   const [selectedVideo, setSelectedVideo] = useState();
+
+  const [battleId, setBattleId] = useState();
 
   const [currentUserEntry, setCurrentUserEntry] = useState();
 
@@ -126,6 +130,7 @@ const Battle = () => {
           setModalVisible={setModalVisible}
           setPraiseModalVisible={setPraiseModalVisible}
           setPraiseModalType={setPraiseModalType}
+          battleId={battleId}
         />
       )}
       <div className="battle-header">
@@ -161,9 +166,11 @@ const Battle = () => {
             uid={entry.uid}
             onClick={() => {
               setSelectedVideo(entry.uid);
+              setBattleId(entry.battleId);
               setModalVisible(true);
               console.log(selectedVideo);
             }}
+            battleId={battleId}
           />
         ))}
       </div>
