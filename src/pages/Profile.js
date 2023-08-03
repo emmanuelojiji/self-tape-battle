@@ -135,6 +135,8 @@ const Profile = () => {
               }}
             />
           ))}
+          <VideoCard uid="1"/>
+          <VideoCard uid="1"/>
         </div>
       </div>
     </>
