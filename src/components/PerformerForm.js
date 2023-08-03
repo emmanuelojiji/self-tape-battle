@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputText from "./InputText";
+import "./PerformerForm.scss";
 import "./OnboardingForm.scss";
-import { auth, db } from "../firebaseConfig";
+import { auth, db, storage } from "../firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   updateCurrentUser,
   updateProfile,
 } from "firebase/auth";
-import { doc, updateDoc } from "firebase/firestore";
+import { collection, doc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const PerformerForm = () => {
+  const user = localStorage.getItem("currentUser");
+
   const [step, setStep] = useState(1);
 
   const [firstName, setFirstName] = useState();
@@ -21,6 +25,11 @@ const PerformerForm = () => {
   const [link, setLink] = useState();
 
   const navigate = useNavigate();
+
+  const fileInputRef = useRef();
+
+  const [userFile, setUserFile] = useState();
+  const imagePreview = userFile && URL.createObjectURL(userFile);
 
   const handleInfo = async () => {
     try {
@@ -37,11 +46,39 @@ const PerformerForm = () => {
         displayName: `${firstName} ${lastName}`,
       });
 
+      const uploadToStorage = () => {
+        const fileName = user;
+        const headshotFileRef = ref(storage, `headshots/${fileName}`);
+
+        uploadBytes(headshotFileRef, userFile).then((snapshot) => {
+          console.log("uploaded!");
+
+          getDownloadURL(headshotFileRef).then((url) => {
+            uploadToFirestore(url);
+          });
+        });
+      };
+
+      const uploadToFirestore = async (url) => {
+        const usersCollection = doc(db, "users", user);
+        try {
+          await updateDoc(usersCollection, {
+            headshot: url,
+          });
+        } catch {}
+      };
+
+      uploadToStorage();
+
       navigate("/home/battles");
     } catch {
       console.log("Couldn't add details, sorry!");
     }
   };
+
+  useEffect(() => {
+    console.log(userFile);
+  });
 
   return (
     <div className="performer-form">
@@ -79,13 +116,26 @@ const PerformerForm = () => {
             onChange={(e) => setLink(e.target.value)}
           />
 
-          <button onClick={() => handleInfo()}>Next</button>
+          <button onClick={() => setStep(3)}>Next</button>
         </div>
       )}
       {step === 3 && (
         <div className="step-3 step">
           <h2>Upload your headshot</h2>
-          <button>Complete profile</button>
+          <div
+            className="upload-image-circle"
+            onClick={() => fileInputRef.current.click()}
+            style={{ backgroundImage: `url(${imagePreview})` }}
+          ></div>
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={(e) => {
+              setUserFile(e.target.files[0]);
+            }}
+          ></input>
+          <button onClick={() => handleInfo()}>Complete profile</button>
           <button onClick={() => handleInfo()}>Skip for now</button>
         </div>
       )}

@@ -16,6 +16,7 @@ import VideoCard from "../components/VideoCard";
 import ProfileInfoSkeleton from "../components/ProfileInfoSkeleton";
 import VideoModal from "../components/VideoModal";
 import { useParams } from "react-router-dom";
+import Avatar from "../components/Avatar";
 
 const Profile = () => {
   const user = localStorage.getItem("currentUser");
@@ -45,6 +46,8 @@ const Profile = () => {
 
   const [battleId, setBattleId] = useState();
 
+  const [headshotURL, setHeadshotURL] = useState();
+
   useEffect(() => {
     const getUserInfo = async () => {
       try {
@@ -56,6 +59,7 @@ const Profile = () => {
         setCity(userData.city);
         setBio(userData.bio);
         setLink(userData.link);
+        setHeadshotURL(userData.headshot);
 
         setLoading(false);
       } catch {
@@ -94,10 +98,9 @@ const Profile = () => {
       )}
       <div>
         <div className="profile-container">
-          <div
-            className="profile-picture"
-            style={{ backgroundImage: `url(${Headshot})` }}
-          ></div>
+          <div className="profile-picture">
+            <Avatar image={headshotURL} size="200" />
+          </div>
           {loading ? (
             <ProfileInfoSkeleton />
           ) : (

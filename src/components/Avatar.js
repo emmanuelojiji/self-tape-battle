@@ -1,5 +1,4 @@
 import "./Avatar.scss";
-import Headshot from "../media/headshot.jpeg";
 
 const Avatar = ({ size, image }) => {
   return (
@@ -8,7 +7,7 @@ const Avatar = ({ size, image }) => {
       style={{
         width: `${size}px`,
         height: `${size}px`,
-        backgroundImage: `url(${Headshot})`,
+        backgroundImage: `url(${image})`,
       }}
     ></div>
   );
