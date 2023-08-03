@@ -9,6 +9,10 @@ aside {
   padding-top: 20px;
   gap: 20px;
 
+  @media only screen and (max-width: 900px) {
+    display: none;
+  }
+
   nav {
     display: flex;
     flex-direction: column;
@@ -30,7 +34,7 @@ aside {
 
     &.active {
       background: rgb(215, 238, 247);
-      color: rgb(6, 145, 200);;
+      color: rgb(6, 145, 200);
     }
   }
 }
@@ -40,6 +44,6 @@ aside {
   margin-left: 15px;
 }
 
-.disabled{
+.disabled {
   opacity: 0.3;
 }

@@ -98,8 +98,9 @@ const Profile = () => {
       )}
       <div>
         <div className="profile-container">
-          <div className="profile-picture">
+          <div className="profile-picture-wrap">
             <Avatar image={headshotURL} size="200" />
+            <div className="badge">Guest Star</div>
           </div>
           {loading ? (
             <ProfileInfoSkeleton />
@@ -108,10 +109,12 @@ const Profile = () => {
               <h2 className="profile-name">
                 {firstName} {lastName}
               </h2>
-
+              <p className="bio">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+                ante nulla, feugiat quis sapien vitae
+              </p>
               <div className="city-bio-wrap">
                 <p className="city">{city}</p>
-                <p className="bio">{bio}</p>
               </div>
               <a href={link} className="link">
                 {link}
@@ -119,7 +122,7 @@ const Profile = () => {
             </div>
           )}
         </div>
-        <h2 className="profile-heading">Entries</h2>
+        <h3 className="profile-heading">Entries</h3>
         <div className="video-card-container">
           {entries.map((entry) => (
             <VideoCard

@@ -37,6 +37,7 @@ const Aside = () => {
 
         <Link className="disabled">Shop</Link>
         <Link className="disabled">Green Room</Link>
+        <Link className="disabled">Casting Calls</Link>
       </nav>
     </aside>
   );
