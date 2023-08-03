@@ -8,6 +8,7 @@
   color: white;
   padding: 0px 50px;
   text-align: center;
+  overflow: hidden;
 
   .logo {
     width: 200px;
@@ -22,6 +23,6 @@
 
   .company {
    position: absolute;
-   bottom: calc(env(safe-area-inset-bottom) + 70px);
+   bottom: calc(env(safe-area-inset-bottom) + 50px);
   }
 }
