@@ -9,20 +9,21 @@ import Aside from "../components/Aside";
 import Header from "../components/Header";
 import UploadModal from "../components/UploadModal";
 import { useState } from "react";
+import MobileNav from "../components/MobileNav";
 
 const AppHomepage = () => {
   return (
     <div className="app-homepage">
-      
       <Aside />
 
       <main>
         <Header />
 
         <div className="app-homepage-content">
-          <Outlet  />
+          <Outlet />
         </div>
       </main>
+      <MobileNav/>
     </div>
   );
 };

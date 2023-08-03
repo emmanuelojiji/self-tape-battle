@@ -9,6 +9,10 @@ header {
   padding-right: 5%;
   width: 100%;
   //background: rgb(243, 243, 243);
+
+  @media only screen and (max-width: 900px) {
+    display: none;
+  }
   
 }
 
