@@ -22,5 +22,6 @@
 
   .company {
     margin-top: auto;
+    margin-bottom: calc(env(safe-area-inset-bottom) + 50px);
   }
 }
