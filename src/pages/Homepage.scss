@@ -12,7 +12,7 @@
   .logo {
     width: 200px;
     margin-bottom: 30px;
-    margin-top: auto;
+   
   }
 
   p {
@@ -21,7 +21,7 @@
   }
 
   .company {
-    margin-top: auto;
-    margin-bottom: calc(env(safe-area-inset-bottom) + 50px);
+   position: absolute;
+   bottom: calc(env(safe-area-inset-bottom) + 70px);
   }
 }
