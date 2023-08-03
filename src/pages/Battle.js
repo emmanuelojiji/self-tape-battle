@@ -156,21 +156,24 @@ const Battle = () => {
             }}
           />
         )}
-        {entries.map((entry) => (
-          <VideoCard
-            key={entry.name}
-            title={entry.name}
-            selectedVideo={selectedVideo}
-            uid={entry.uid}
-            onClick={() => {
-              setSelectedVideo(entry.uid);
-              setBattleId(entry.battleId);
-              setModalVisible(true);
-              console.log(selectedVideo);
-            }}
-            battleId={battleId}
-          />
-        ))}
+        {entries.map((entry) => {
+          return (
+            <VideoCard
+              key={entry.name}
+              title={entry.name}
+              selectedVideo={selectedVideo}
+              uid={entry.uid}
+              onClick={() => {
+                setSelectedVideo(entry.uid);
+                setBattleId(entry.battleId);
+                setModalVisible(true);
+                console.log(selectedVideo);
+              }}
+              battleId={battleId}
+            
+            />
+          );
+        })}
       </div>
     </div>
   );

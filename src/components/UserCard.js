@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Avatar from "./Avatar";
 import "./UserCard.scss";
 
-const UserCard = ({ firstName, lastName, role, userId }) => {
+const UserCard = ({ firstName, lastName, role, userId, image}) => {
   return (
     <Link to={`/home/profile/${userId}`}>
       <div className="user-card">
-        <div class="avatar"></div>
+        <Avatar image={image} size="30"/>
         <div>
           <h3>{`${firstName + " " + lastName}`}</h3>
           <p>{role}</p>

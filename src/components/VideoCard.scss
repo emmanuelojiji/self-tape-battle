@@ -16,6 +16,8 @@
   display: flex;
   flex-direction: column;
   justify-content: end;
+  background-size: cover !important;
+  background-position: center !important;
 
   h1 {
     font-size: 25px;

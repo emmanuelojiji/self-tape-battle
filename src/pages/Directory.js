@@ -55,6 +55,7 @@ const Directory = () => {
           lastName={user.last_name}
           role={user.role}
           userId={user.uid}
+          image={user.headshot}
         />
       ))}
     </div>
