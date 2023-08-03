@@ -10,6 +10,7 @@ import {
 import { auth, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
+import logo from "../media/logo.svg";
 
 const SignUp = () => {
   const [role, setRole] = useState("performer");
@@ -29,6 +30,7 @@ const SignUp = () => {
         email: email,
         role: role,
         coins: 0,
+        ranking: "Cameo Star",
       });
 
       //await signInWithEmailAndPassword(auth, email, password);
@@ -43,17 +45,24 @@ const SignUp = () => {
     <main className="sign-up">
       <div className="left">
         <div className="form-container">
+          <img src={logo} />
           <h2>Sign up as a {role}</h2>
-          <InputText
-            type="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <InputText
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
+         
+          {role != "professional" && (
+            <>
+              <InputText
+                type="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <InputText
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </>
+          )}
+
           <Link to="/login">
             <span>Log in instead</span>
           </Link>
@@ -69,15 +78,19 @@ const SignUp = () => {
               : "Sign up as a performer"}
           </span>
 
-          <button
-            onClick={() =>
-              role === "performer"
-                ? performerSignUp()
-                : console.log("professional signup")
-            }
-          >
-            Sign up
-          </button>
+       
+
+          {role != "professional" && (
+            <button
+              onClick={() =>
+                role === "performer"
+                  ? performerSignUp()
+                  : console.log("professional signup")
+              }
+            >
+              Sign up
+            </button>
+          )}
         </div>
       </div>
       <div className="right"></div>

@@ -135,8 +135,8 @@ const Profile = () => {
               }}
             />
           ))}
-          <VideoCard uid="1"/>
-          <VideoCard uid="1"/>
+
+          {entries.length === 0 && <p>No entries</p>}
         </div>
       </div>
     </>

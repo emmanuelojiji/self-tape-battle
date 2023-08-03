@@ -1,10 +1,13 @@
 import "./Aside.scss";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Logo from "../media/logo.svg";
 import { useEffect, useState } from "react";
+import { auth } from "../firebaseConfig";
 
 const Aside = () => {
   const [currentPage, setCurrentPage] = useState("");
+
+  const navigate = useNavigate();
 
   const changePage = (page) => {
     setCurrentPage(page);
@@ -39,6 +42,15 @@ const Aside = () => {
         <Link className="disabled">Green Room</Link>
         <Link className="disabled">Casting Calls</Link>
       </nav>
+      <h3
+        onClick={() => {
+          auth.signOut();
+          localStorage.removeItem("user");
+          navigate("/login");
+        }}
+      >
+        Sign out
+      </h3>
     </aside>
   );
 };

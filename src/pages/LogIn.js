@@ -4,6 +4,7 @@ import "./LogIn.scss";
 import { auth, db } from "../firebaseConfig";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import logo from "../media/logo.svg"
 
 const LogIn = () => {
   const [email, setEmail] = useState();
@@ -35,7 +36,9 @@ const LogIn = () => {
   return (
     <main className="log-in">
       <div className="left">
+       
         <div className="form-container">
+        <img src={logo} className="logo"/>
           <h2>Log in</h2>
           <InputText
             placeholder="Email"

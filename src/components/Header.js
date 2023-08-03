@@ -10,14 +10,13 @@ const Header = () => {
   const currentUser = localStorage.getItem("currentUser");
   const userDocRef = doc(db, "users", currentUser);
 
-  const [headshotURL, setHeadshotURL] = useState()
+  const [headshotURL, setHeadshotURL] = useState();
 
   useEffect(() => {
     const getUserHeadshot = async () => {
       try {
         const userDoc = await getDoc(userDocRef);
-        setHeadshotURL(userDoc.data().headshot)
-
+        setHeadshotURL(userDoc.data().headshot);
       } catch {
         console.log("Couldn't get user doc!");
       }
@@ -35,16 +34,6 @@ const Header = () => {
         placeholder="Search for user"
       ></input>
       <div className="header-right">
-        <h3
-          onClick={() => {
-            auth.signOut();
-            localStorage.removeItem("user");
-            navigate("/login");
-          }}
-        >
-          Sign out
-        </h3>
-
         <Coins />
         <Link to="/home/profile">
           {" "}

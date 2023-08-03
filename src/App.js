@@ -23,6 +23,7 @@ import Admin from "./pages/Admin";
 import UploadModal from "./components/UploadModal";
 import Directory from "./pages/Directory";
 import Wallet from "./pages/Wallet";
+import Homepage from "./pages/Homepage";
 
 function App() {
   const user = localStorage.getItem("currentUser");
@@ -68,6 +69,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
+        <Route path="/" element={<Homepage />}></Route>
           <Route path="/login" element={<LogIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
