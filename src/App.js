@@ -68,8 +68,11 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <div className="notice">
+          <Homepage />
+        </div>
         <Routes>
-        <Route path="/" element={<Homepage />}></Route>
+          <Route path="/" element={<Homepage />}></Route>
           <Route path="/login" element={<LogIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/admin" element={<Admin />}></Route>

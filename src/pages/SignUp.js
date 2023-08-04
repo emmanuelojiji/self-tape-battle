@@ -45,7 +45,7 @@ const SignUp = () => {
     <main className="sign-up">
       <div className="left">
         <div className="form-container">
-          <img src={logo} />
+          <img src={logo} className="logo" />
           <h2>Sign up as a {role}</h2>
          
           {role != "professional" && (
@@ -93,7 +93,7 @@ const SignUp = () => {
           )}
         </div>
       </div>
-      <div className="right"></div>
+     
     </main>
   );
 };

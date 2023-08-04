@@ -10,19 +10,54 @@
   text-align: center;
   overflow: hidden;
 
+  .homepage-banner {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: rgb(96, 96, 96);
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
   .logo {
     width: 200px;
     margin-bottom: 30px;
-   
   }
 
   p {
     margin-bottom: 25px;
     font-size: 16px;
+    max-width: 800px;
+
+    @media only screen and (min-width: 900px) {
+      display: none;
+    }
   }
 
   .company {
-   position: absolute;
-   bottom: 0;
+    position: absolute;
+    bottom: 0;
+  }
+
+  button {
+    @media only screen and (max-width: 900px) {
+      display: none;
+    }
+  }
+}
+
+.notice {
+  position: fixed;
+  width: 100%;
+
+  @media only screen and (min-width: 900px) {
+    display: none;
   }
 }

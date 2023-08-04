@@ -54,7 +54,7 @@ const LogIn = () => {
           </Link>
         </div>
       </div>
-      <div className="right"></div>
+
     </main>
   );
 };
