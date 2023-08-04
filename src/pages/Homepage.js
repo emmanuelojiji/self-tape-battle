@@ -11,7 +11,7 @@ const Homepage = () => {
       </div>
       <img src={logo} className="logo" />
 
-      <p>Please switch to a desktop. We're not quite ready for mobile yet.</p>
+      <p>Please switch to a desktop, we're currently building the mobile Arena.</p>
       <Link to="/signup">
         <button>Let's go</button>
       </Link>
