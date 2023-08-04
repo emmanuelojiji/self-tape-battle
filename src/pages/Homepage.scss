@@ -11,6 +11,7 @@
   overflow: hidden;
   position: fixed;
   width: 100%;
+  z-index: 1;
 
   .homepage-banner {
     padding-top: 25px;
@@ -59,6 +60,7 @@
   position: fixed;
   width: 100%;
   overflow: hidden;
+  z-index: 1;
 
   @media only screen and (min-width: 900px) {
     display: none;

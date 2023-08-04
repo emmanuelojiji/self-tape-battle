@@ -6,7 +6,7 @@ const Homepage = () => {
   return (
     <div className="homepage">
       <div className="homepage-banner">
-        Smile! 📸 You're in the test version of Self Tape Battle. If you have a
+        Smile! 🎥 You're in the test version of Self Tape Battle. If you have a
         referral code, you can begin testing out our features before the app is launched.
       </div>
       <img src={logo} className="logo" />
