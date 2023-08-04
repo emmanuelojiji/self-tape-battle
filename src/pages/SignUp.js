@@ -17,29 +17,35 @@ const SignUp = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [codeInput, setCodeInput] = useState("");
 
-  const [code, setCode] = useState()
+  const [code, setCode] = useState("1234");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   const performerSignUp = async () => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
+    if (code === codeInput) {
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
 
-      console.log(auth.currentUser);
-      await setDoc(doc(db, "users", auth.currentUser.uid), {
-        uid: auth.currentUser.uid,
-        email: email,
-        role: role,
-        coins: 0,
-        ranking: "Cameo Star",
-      });
+        console.log(auth.currentUser);
+        await setDoc(doc(db, "users", auth.currentUser.uid), {
+          uid: auth.currentUser.uid,
+          email: email,
+          role: role,
+          coins: 0,
+          ranking: "Cameo Star",
+        });
 
-      //await signInWithEmailAndPassword(auth, email, password);
+        //await signInWithEmailAndPassword(auth, email, password);
 
-      navigate("/onboarding");
-    } catch {
-      console.log("Couldn't create user, sorry.");
+        navigate("/onboarding");
+      } catch {
+        console.log("Couldn't create user, sorry.");
+      }
+    } else {
+      setError("Invalid referral code");
     }
   };
 
@@ -49,9 +55,15 @@ const SignUp = () => {
         <div className="form-container">
           <img src={logo} className="logo" />
           <h2>Sign up as a {role}</h2>
-         
+
           {role != "professional" && (
             <>
+              <p>{error}</p>
+              <InputText
+                type="text"
+                placeholder="Referral code"
+                onChange={(e) => setCodeInput(e.target.value)}
+              />
               <InputText
                 type="email"
                 placeholder="Email"
@@ -80,8 +92,6 @@ const SignUp = () => {
               : "Sign up as a performer"}
           </span>
 
-       
-
           {role != "professional" && (
             <button
               onClick={() =>
@@ -95,7 +105,6 @@ const SignUp = () => {
           )}
         </div>
       </div>
-     
     </main>
   );
 };
