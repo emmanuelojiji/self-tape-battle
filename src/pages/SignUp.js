@@ -18,6 +18,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [code, setCode] = useState()
+
   const navigate = useNavigate();
 
   const performerSignUp = async () => {
