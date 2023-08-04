@@ -110,8 +110,7 @@ const Profile = () => {
                 {firstName} {lastName}
               </h2>
               <p className="bio">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                ante nulla, feugiat quis sapien vitae
+               {bio}
               </p>
               <div className="city-bio-wrap">
                 <p className="city">{city}</p>

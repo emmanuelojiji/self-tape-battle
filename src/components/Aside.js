@@ -42,15 +42,16 @@ const Aside = () => {
         <Link className="disabled">Green Room</Link>
         <Link className="disabled">Casting Calls</Link>
       </nav>
-      <h3
+      <p
         onClick={() => {
           auth.signOut();
           localStorage.removeItem("user");
           navigate("/login");
         }}
+        className="sign-out"
       >
         Sign out
-      </h3>
+      </p>
     </aside>
   );
 };
