@@ -79,21 +79,6 @@ const SignUp = () => {
             </>
           )}
 
-          <Link to="/login">
-            <span>Log in instead</span>
-          </Link>
-          <span
-            onClick={() =>
-              role === "performer"
-                ? setRole("professional")
-                : setRole("performer")
-            }
-          >
-            {role === "performer"
-              ? "Sign up as professional"
-              : "Sign up as a performer"}
-          </span>
-
           {role != "professional" && (
             <button
               onClick={() =>
@@ -105,6 +90,21 @@ const SignUp = () => {
               Sign up
             </button>
           )}
+
+          <Link to="/login">
+            <span>Log in instead</span>
+          </Link>
+          {/*<span
+            onClick={() =>
+              role === "performer"
+                ? setRole("professional")
+                : setRole("performer")
+            }
+          >
+            {role === "performer"
+              ? "Sign up as professional"
+              : "Sign up as a performer"}
+          </span>*/}
         </div>
       </div>
     </main>
