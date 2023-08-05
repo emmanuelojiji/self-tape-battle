@@ -18,6 +18,7 @@ const LogIn = () => {
     } catch (error) {
       console.log(error.message);
     }
+
     navigate("/home/battles");
   };
 

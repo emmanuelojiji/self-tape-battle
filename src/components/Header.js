@@ -8,13 +8,14 @@ import { doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../AuthContext";
 
 const Header = () => {
-  const user = useAuth();
+  const {user, storedUserId} = useAuth();
+  
 
   const [headshotURL, setHeadshotURL] = useState();
 
   useEffect(() => {
     if (user) {
-      const userDocRef = doc(db, "users", user.uid);
+      const userDocRef = doc(db, "users", storedUserId);
       const getUserHeadshot = async () => {
         try {
           const userDoc = await getDoc(userDocRef);
@@ -38,7 +39,7 @@ const Header = () => {
       ></input>
       <div className="header-right">
         <Coins />
-        <Link to="/home/profile">
+        <Link to={`/home/profile/${storedUserId}`}>
           {" "}
           <Avatar size="35" image={headshotURL} />
         </Link>

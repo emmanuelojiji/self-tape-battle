@@ -14,14 +14,14 @@ const Aside = () => {
     setCurrentPage(page);
   };
 
-  const user = useAuth();
+  const { user, storedUserId } = useAuth();
 
   return (
     <aside>
       <img src={Logo} className="logo" />
       <nav>
         <Link
-          to={`/home/profile/${user && user.uid}`}
+          to={`/home/profile/${storedUserId}`}
           className={currentPage === "profile" ? "active" : null}
           onClick={() => setCurrentPage("profile")}
         >

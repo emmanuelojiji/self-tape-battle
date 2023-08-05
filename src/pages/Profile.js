@@ -22,7 +22,7 @@ import { useAuth } from "../AuthContext";
 const Profile = () => {
   const [loading, setLoading] = useState(true);
 
-  const user = useAuth();
+  const { auth, storedUserId } = useAuth();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -50,22 +50,20 @@ const Profile = () => {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      if (user) {
-        try {
-          const docSnapshot = await getDoc(doc(db, "users", user.uid));
-          const userData = docSnapshot.data();
+      try {
+        const docSnapshot = await getDoc(doc(db, "users", storedUserId));
+        const userData = docSnapshot.data();
 
-          setFirstName(userData.first_name);
-          setLastName(userData.last_name);
-          setCity(userData.city);
-          setBio(userData.bio);
-          setLink(userData.link);
-          setHeadshotURL(userData.headshot);
+        setFirstName(userData.first_name);
+        setLastName(userData.last_name);
+        setCity(userData.city);
+        setBio(userData.bio);
+        setLink(userData.link);
+        setHeadshotURL(userData.headshot);
 
-          setLoading(false);
-        } catch {
-          console.log("sorry didn't work");
-        }
+        setLoading(false);
+      } catch {
+        console.log("sorry didn't work");
       }
     };
 
