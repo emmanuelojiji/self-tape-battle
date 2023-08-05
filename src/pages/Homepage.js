@@ -19,7 +19,7 @@ const Homepage = () => {
         <button>Let's go</button>
       </Link>
 
-      <p className="company">Thinkr Studio</p>
+      <a href="http://twitter.com/thinkrstudio" className="company">Thinkr Studio</a>
     </div>
   );
 };

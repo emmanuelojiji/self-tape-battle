@@ -16,7 +16,9 @@
   .homepage-banner {
     padding-top: 25px;
     padding-bottom: 25px;
-    width: 100%;
+    margin-top: 25px;
+    border-radius: 10px;
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,6 +29,18 @@
     font-size: 14px;
     padding-left: 5%;
     padding-right: 5%;
+    transform: translateY(-100%);
+    animation: banner-slide 1s linear forwards;
+  }
+
+  @keyframes banner-slide {
+    0% {
+      transform: translateY(-100%);
+    }
+
+    100% {
+      transform: translateY(0%);
+    }
   }
 
   .logo {
@@ -46,7 +60,8 @@
 
   .company {
     position: absolute;
-    bottom: 0;
+    bottom: 25px;
+    color: white;
   }
 
   button {

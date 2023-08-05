@@ -63,7 +63,6 @@ const VideoModal = ({
         selectedVideo
       );
 
-
       try {
         const entryDocs = await getDoc(docSnapshot);
         setName(entryDocs.data().name);
@@ -94,7 +93,7 @@ const VideoModal = ({
       try {
         const userRef = doc(db, "users", selectedVideo);
         const userHeadshot = await getDoc(userRef);
-        setHeadshot(userHeadshot.data().headshot)
+        setHeadshot(userHeadshot.data().headshot);
         console.log(userHeadshot.data().headshot);
       } catch (error) {
         console.log("couldn't get headshot");
