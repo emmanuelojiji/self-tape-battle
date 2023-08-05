@@ -29,13 +29,13 @@
     font-size: 14px;
     padding-left: 5%;
     padding-right: 5%;
-    transform: translateY(-100%);
+    transform: translateY(-120%);
     animation: banner-slide 1s linear forwards;
   }
 
   @keyframes banner-slide {
     0% {
-      transform: translateY(-100%);
+      transform: translateY(-120%);
     }
 
     100% {
