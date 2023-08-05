@@ -42,7 +42,9 @@ function App() {
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/login" element={<LogIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/admin" element={<Admin />}></Route>
+          {storedUserId === "8rKN8dr2sfY1WbEMxBtsJYF5yc23" && (
+            <Route path="/admin" element={<Admin />}></Route>
+          )}
 
           <Route
             path="/home"
@@ -67,11 +69,11 @@ function App() {
             <Route path="/home" element={<Battles />}></Route>
           </Route>
 
-          <Route path="*" element={<SignUp />} />
           <Route
             path="/"
             element={storedUserId ? <Navigate to="/home/battles" /> : <LogIn />}
           ></Route>
+          <Route path="*" element={<SignUp />} />
         </Routes>
       </div>
     </BrowserRouter>

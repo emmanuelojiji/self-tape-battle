@@ -20,7 +20,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [codeInput, setCodeInput] = useState("");
 
-  const [code, setCode] = useState("1234");
+  const [code, setCode] = useState("stb-WnKww7jhAS-stb");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -43,8 +43,8 @@ const SignUp = () => {
         //await signInWithEmailAndPassword(auth, email, password);
 
         navigate("/home");
-      } catch(error) {
-        console.log(error.message)
+      } catch (error) {
+        console.log(error.message);
       }
     } else {
       setError("Invalid referral code");
