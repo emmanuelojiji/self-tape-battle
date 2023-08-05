@@ -1,35 +1,40 @@
-.log-in{
-    height: 100vh;
-    display: flex;
+.log-in {
+  height: 100vh;
+  display: flex;
 
-    .logo{
-        width: 100px;
-        margin-bottom: 50px;
-    }
+  .logo {
+    width: 100px;
+    margin-bottom: 50px;
+  }
 
-.left, .right{
+  .left,
+  .right {
     width: 100%;
-   
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-padding-left: 5%;
+    padding-left: 5%;
     padding-right: 5%;
-}  
+  }
 
-.right{
-background: rgb(226, 226, 226);
-}
+  .right {
+    background: rgb(226, 226, 226);
+  }
 
-.form-container{
+  .form-container {
     width: 100%;
-max-width: 400px;
-}
+    max-width: 400px;
+  }
 
-h2{
+  h2 {
     margin-bottom: 50px;
-}
+  }
 
-
+  button {
+    button {
+      margin-bottom: 20px;
+    }
+  }
 }
