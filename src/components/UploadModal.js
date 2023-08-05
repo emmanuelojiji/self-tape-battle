@@ -5,6 +5,7 @@ import { auth, db, storage } from "../firebaseConfig";
 import { collection, doc, setDoc, getDoc, Timestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import PraiseModal from "./PraiseModal";
+import { useAuth } from "../AuthContext";
 
 const UploadModal = ({
   setUploadModalVisible,
@@ -15,7 +16,7 @@ const UploadModal = ({
   const parts = currentURL.split("/");
   const id = parts.pop();
 
-  const user = localStorage.getItem("currentUser");
+  const { storedUserId } = useAuth();
 
   const [loading, setLoading] = useState(false);
 
@@ -28,9 +29,9 @@ const UploadModal = ({
 
       const name = battlesDoc.data().name;
 
-      await setDoc(doc(entriesCollection, user), {
+      await setDoc(doc(entriesCollection, storedUserId), {
         name: auth.currentUser.displayName,
-        uid: user,
+        uid: storedUserId,
         battleName: name,
         battleId: id,
         time: Timestamp.now(),
@@ -50,7 +51,7 @@ const UploadModal = ({
   const fileInputRef = useRef(null);
 
   const uploadToStorage = () => {
-    const fileName = `${user}-${file.name}`;
+    const fileName = `${storedUserId}-${file.name}`;
     const entryFileRef = ref(storage, `${id}/${fileName}`);
 
     uploadBytes(entryFileRef, file).then((snapshot) => {

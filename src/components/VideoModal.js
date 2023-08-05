@@ -22,15 +22,16 @@ const VideoModal = ({
   setModalVisible,
   setPraiseModalVisible,
   setPraiseModalType,
-  battleId
+  battleId,
 }) => {
-  const user = useAuth()
-
-  
+  const user = useAuth();
 
   const [votes, setVotes] = useState();
   const [name, setName] = useState();
+  const [headshot, setHeadshot] = useState();
   const [url, setUrl] = useState();
+
+  const { storedUserId } = useAuth();
 
   useEffect(() => {
     const votesCollection = collection(
@@ -42,7 +43,7 @@ const VideoModal = ({
       "votes"
     );
 
-    console.log("selected:", selectedVideo)
+    console.log("selected:", selectedVideo);
 
     const getVotes = async () => {
       try {
@@ -53,20 +54,34 @@ const VideoModal = ({
       }
     };
 
-    const getUser = async () => {
-      const docSnapshot = doc(db, "battles", battleId, "entries", selectedVideo);
+    const getName = async () => {
+      const docSnapshot = doc(
+        db,
+        "battles",
+        battleId,
+        "entries",
+        selectedVideo
+      );
+
 
       try {
         const entryDocs = await getDoc(docSnapshot);
         setName(entryDocs.data().name);
+        setHeadshot(entryDocs.data().headshot);
       } catch {
-        console.log("Couldn't get name");
+        console.log("Couldn't get name ");
       }
     };
 
     const getVideo = async () => {
       try {
-        const videoLocation = doc(db, "battles", battleId, "entries", selectedVideo);
+        const videoLocation = doc(
+          db,
+          "battles",
+          battleId,
+          "entries",
+          selectedVideo
+        );
         const videoDoc = await getDoc(videoLocation);
 
         setUrl(videoDoc.data().url);
@@ -75,8 +90,20 @@ const VideoModal = ({
       }
     };
 
+    const getHeadshot = async () => {
+      try {
+        const userRef = doc(db, "users", selectedVideo);
+        const userHeadshot = await getDoc(userRef);
+        setHeadshot(userHeadshot.data().headshot)
+        console.log(userHeadshot.data().headshot);
+      } catch (error) {
+        console.log("couldn't get headshot");
+      }
+    };
+
     getVotes();
-    getUser();
+    getName();
+    getHeadshot();
     getVideo();
     voteCheck();
   }, [battleId, selectedVideo]); // Add battleId and selectedVideo as dependencies to avoid infinite loop.
@@ -91,9 +118,9 @@ const VideoModal = ({
         selectedVideo,
         "votes"
       );
-      await setDoc(doc(votesCollection, user.uid), {
+      await setDoc(doc(votesCollection, storedUserId), {
         name: "Sasha",
-        uid: user.uid,
+        uid: storedUserId,
         time: Timestamp.now(),
       });
 
@@ -118,7 +145,7 @@ const VideoModal = ({
       selectedVideo,
       "votes"
     );
-    const votesQuery = query(votesCollection, where("uid", "==", user.uid));
+    const votesQuery = query(votesCollection, where("uid", "==", storedUserId));
 
     try {
       onSnapshot(votesQuery, (snapshot) => {
@@ -142,12 +169,12 @@ const VideoModal = ({
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <div className="left">
-            <Avatar size="35" />
-            <h3>{selectedVideo === user.uid ? "You" : name}</h3>
+            <Avatar size="35" image={headshot} />
+            <h3>{selectedVideo === storedUserId ? "You" : name}</h3>
           </div>
           <div className="right">
             <div className="num-of-votes">{votes}</div>
-            {selectedVideo != user.uid && (
+            {selectedVideo != storedUserId && (
               <Button
                 text={alreadyVoted ? "Voted!" : "Vote"}
                 disabled={alreadyVoted && true}

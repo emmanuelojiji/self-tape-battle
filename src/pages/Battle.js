@@ -18,6 +18,7 @@ import VideoCard from "../components/VideoCard";
 import VideoModal from "../components/VideoModal";
 import PraiseModal from "../components/PraiseModal";
 import UploadModal from "../components/UploadModal";
+import { useAuth } from "../AuthContext";
 
 const Battle = () => {
   const { id } = useParams();
@@ -39,6 +40,8 @@ const Battle = () => {
 
   const [currentUserEntry, setCurrentUserEntry] = useState();
 
+  const {storedUserId} = useAuth()
+ 
   useEffect(() => {
     getBattle();
     getEntries();
@@ -85,7 +88,7 @@ const Battle = () => {
         "battles",
         id,
         "entries",
-        localStorage.getItem("currentUser")
+        storedUserId,
       );
       const docSnapshot = await getDoc(currentUserEntry);
 
