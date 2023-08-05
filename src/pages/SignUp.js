@@ -32,8 +32,8 @@ const SignUp = () => {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
 
-        await setDoc(doc(db, "users", storedUserId), {
-          uid: storedUserId,
+        await setDoc(doc(db, "users", auth.currentUser.uid), {
+          uid: auth.currentUser.uid,
           email: email,
           role: role,
           coins: 0,
@@ -42,9 +42,9 @@ const SignUp = () => {
 
         //await signInWithEmailAndPassword(auth, email, password);
 
-        navigate("/onboarding");
-      } catch {
-        console.log("Couldn't create user, sorry.");
+        navigate("/home");
+      } catch(error) {
+        console.log(error.message)
       }
     } else {
       setError("Invalid referral code");

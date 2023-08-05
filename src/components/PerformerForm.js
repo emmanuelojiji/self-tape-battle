@@ -4,16 +4,12 @@ import InputText from "./InputText";
 import "./PerformerForm.scss";
 import "./OnboardingForm.scss";
 import { auth, db, storage } from "../firebaseConfig";
-import {
-  createUserWithEmailAndPassword,
-  updateCurrentUser,
-  updateProfile,
-} from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 import { collection, doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useAuth } from "../AuthContext";
 
-const PerformerForm = () => {
+const PerformerForm = ({ setOnboardingComplete }) => {
   const { user, storedUserId } = useAuth();
 
   const [step, setStep] = useState(1);
@@ -67,11 +63,10 @@ const PerformerForm = () => {
             headshot: url,
           });
         } catch {}
+        window.location.reload();
       };
 
       uploadToStorage();
-
-      navigate("/home/battles");
     } catch {
       console.log("Couldn't add details, sorry!");
     }

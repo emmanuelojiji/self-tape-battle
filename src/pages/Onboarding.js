@@ -5,15 +5,12 @@ import PerformerForm from "../components/PerformerForm";
 import ProfessionalForm from "../components/ProfessionalForm";
 import { useEffect } from "react";
 
-const Onboarding = ({ onboardingComplete }) => {
+const Onboarding = ({ setOnboardingComplete }) => {
   const type = "performer";
-
-  
- 
 
   return (
     <main className="onboarding">
-      {type === "performer" && <PerformerForm />}
+      {type === "performer" && <PerformerForm setOnboardingComplete />}
       {type === "professional" && <ProfessionalForm />}
     </main>
   );

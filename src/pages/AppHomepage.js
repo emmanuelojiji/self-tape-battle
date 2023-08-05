@@ -39,7 +39,9 @@ const AppHomepage = () => {
     <div className="app-homepage">
       {loading && <h1>LOADING</h1>}
 
-      {!onboardingComplete && !loading && <Onboarding />}
+      {!onboardingComplete && !loading && (
+        <Onboarding setOnboardingComplete={setOnboardingComplete} />
+      )}
 
       {onboardingComplete && !loading && (
         <>
