@@ -11,31 +11,26 @@ import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import Onboarding from "./pages/Onboarding";
 import AppHomepage from "./pages/AppHomepage";
-import RedirectToLogin from "./components/RedirectToLogin";
 import Leaderboard from "./pages/Leaderboard";
 import Battles from "./pages/Battles";
 import Battle from "./pages/Battle";
-import { auth, db } from "./firebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
-import { getDoc, doc, collection } from "firebase/firestore";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
-import UploadModal from "./components/UploadModal";
 import Directory from "./pages/Directory";
 import Wallet from "./pages/Wallet";
 import Homepage from "./pages/Homepage";
 import { useAuth } from "./AuthContext";
+import { db } from "./firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 
 function App() {
-  //const user = localStorage.getItem("currentUser");
-
-  const user = useAuth();
-
-  if (user) {
-    console.log("New User is:" + user.uid);
-  }
+  const { user, storedUserId } = useAuth();
 
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
+
+  const [onboardingComplete, setOnboardingComplete] = useState();
+
+  console.log(onboardingComplete);
 
   return (
     <BrowserRouter>
@@ -49,9 +44,10 @@ function App() {
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
 
-          <Route path="/onboarding" element={<Onboarding />}></Route>
-
-          <Route path="/home" element={<AppHomepage />}>
+          <Route
+            path="/home"
+            element={storedUserId ? <AppHomepage /> : <Navigate to="/login" />}
+          >
             <Route path="/home/profile/:id" element={<Profile />}></Route>
             <Route path="leaderboard" element={<Leaderboard />}></Route>
             <Route path="battles" element={<Battles />}></Route>
@@ -74,7 +70,7 @@ function App() {
           <Route path="*" element={<SignUp />} />
           <Route
             path="/"
-            element={user ? <Navigate to="/home/battles" /> : <LogIn />}
+            element={storedUserId ? <Navigate to="/home/battles" /> : <LogIn />}
           ></Route>
         </Routes>
       </div>

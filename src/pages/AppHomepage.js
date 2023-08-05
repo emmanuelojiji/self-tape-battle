@@ -8,22 +8,53 @@ import Leaderboard from "./Leaderboard";
 import Aside from "../components/Aside";
 import Header from "../components/Header";
 import UploadModal from "../components/UploadModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MobileNav from "../components/MobileNav";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import { useAuth } from "../AuthContext";
+import Onboarding from "./Onboarding";
 
 const AppHomepage = () => {
+  const { user, storedUserId } = useAuth();
+  const [onboardingComplete, setOnboardingComplete] = useState();
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkIfOnboarded = async () => {
+      const userDocRef = doc(db, "users", storedUserId);
+      const userDoc = await getDoc(userDocRef);
+
+      setOnboardingComplete(userDoc.data().onboarding_complete);
+
+      setLoading(false);
+      console.log("Onboarding complete?:" + onboardingComplete);
+    };
+
+    checkIfOnboarded();
+  }, [user, storedUserId]);
+
   return (
     <div className="app-homepage">
-      <Aside />
+      {loading && <h1>LOADING</h1>}
 
-      <main>
-        <Header />
+      {!onboardingComplete && !loading && <Onboarding />}
 
-        <div className="app-homepage-content">
-          <Outlet />
-        </div>
-      </main>
-      <MobileNav />
+      {onboardingComplete && !loading && (
+        <>
+          <Aside />
+
+          <main>
+            <Header />
+
+            <div className="app-homepage-content">
+              <Outlet />
+            </div>
+          </main>
+          <MobileNav />
+        </>
+      )}
     </div>
   );
 };

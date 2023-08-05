@@ -51,7 +51,7 @@ const Profile = () => {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const docSnapshot = await getDoc(doc(db, "users", storedUserId));
+        const docSnapshot = await getDoc(doc(db, "users", id));
         const userData = docSnapshot.data();
 
         setFirstName(userData.first_name);
@@ -85,7 +85,7 @@ const Profile = () => {
 
     getUserInfo();
     getUserEntries();
-  }, []);
+  }, [id]);
 
   return (
     <>

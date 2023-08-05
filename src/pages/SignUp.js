@@ -11,6 +11,7 @@ import { auth, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 import logo from "../media/logo.svg";
+import { useAuth } from "../AuthContext";
 
 const SignUp = () => {
   const [role, setRole] = useState("performer");
@@ -24,14 +25,15 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
+  const { user, storedUserId } = useAuth();
+
   const performerSignUp = async () => {
     if (code === codeInput) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
 
-        console.log(auth.currentUser);
-        await setDoc(doc(db, "users", auth.currentUser.uid), {
-          uid: auth.currentUser.uid,
+        await setDoc(doc(db, "users", storedUserId), {
+          uid: storedUserId,
           email: email,
           role: role,
           coins: 0,

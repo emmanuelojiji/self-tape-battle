@@ -11,9 +11,10 @@ import {
 } from "firebase/auth";
 import { collection, doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useAuth } from "../AuthContext";
 
 const PerformerForm = () => {
-  const user = localStorage.getItem("currentUser");
+  const { user, storedUserId } = useAuth();
 
   const [step, setStep] = useState(1);
 
@@ -33,7 +34,7 @@ const PerformerForm = () => {
 
   const handleInfo = async () => {
     try {
-      await updateDoc(doc(db, "users", auth.currentUser.uid), {
+      await updateDoc(doc(db, "users", storedUserId), {
         first_name: firstName,
         last_name: lastName,
         city: city,
@@ -47,7 +48,7 @@ const PerformerForm = () => {
       });
 
       const uploadToStorage = () => {
-        const fileName = user;
+        const fileName = storedUserId;
         const headshotFileRef = ref(storage, `headshots/${fileName}`);
 
         uploadBytes(headshotFileRef, userFile).then((snapshot) => {
@@ -60,7 +61,7 @@ const PerformerForm = () => {
       };
 
       const uploadToFirestore = async (url) => {
-        const usersCollection = doc(db, "users", user);
+        const usersCollection = doc(db, "users", storedUserId);
         try {
           await updateDoc(usersCollection, {
             headshot: url,
