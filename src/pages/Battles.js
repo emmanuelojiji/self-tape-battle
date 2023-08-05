@@ -1,14 +1,13 @@
 import BattleCard from "../components/BattleCard";
-import { battlesObject } from "../battlesObject";
 import "./Battles.scss";
-import { authContext } from "../context";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useState } from "react";
 
 const Battles = () => {
   const [battles, setBattles] = useState([]);
+
   useEffect(() => {
     const getActiveBattle = async () => {
       try {

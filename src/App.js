@@ -24,44 +24,16 @@ import UploadModal from "./components/UploadModal";
 import Directory from "./pages/Directory";
 import Wallet from "./pages/Wallet";
 import Homepage from "./pages/Homepage";
+import { useAuth } from "./AuthContext";
 
 function App() {
-  const user = localStorage.getItem("currentUser");
-  /*const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem("user");
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
+  //const user = localStorage.getItem("currentUser");
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // If the user is authenticated, store the user object in localStorage
-        localStorage.setItem("user", JSON.stringify(user));
-        setUser(user);
-      } else {
-        // If the user is not authenticated, remove the user object from localStorage
-        localStorage.removeItem("user");
-        setUser(null);
-      }
-    });
+  const user = useAuth();
 
-    return () => unsubscribe();
-  }, []);*/
-
-  /*const [onboardingComplete, setOnboardingComplete] = useState();
-
-  const onboardingCheck = async () => {
-    try {
-      const docSnapshot = await getDoc(doc(db, "users", user.uid));
-
-      if (docSnapshot.data().onboarding_complete) {
-        setOnboardingComplete(true);
-      }
-    } catch {
-      console.log("couldn't get document");
-    }
-  };
-  onboardingCheck();*/
+  if (user) {
+    console.log("New User is:" + user.uid);
+  }
 
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
 
@@ -77,21 +49,16 @@ function App() {
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
 
-          <Route
-            path="/onboarding"
-            element={user ? <Onboarding /> : <Navigate to="/login" />}
-          ></Route>
+          <Route path="/onboarding" element={<Onboarding />}></Route>
 
-          <Route
-            path="/home"
-            element={user ? <AppHomepage /> : <Navigate to="/login" />}
-          >
+          <Route path="/home" element={<AppHomepage />}>
+            <Route path="/home/profile/:id" element={<Profile />}></Route>
             <Route path="leaderboard" element={<Leaderboard />}></Route>
             <Route path="battles" element={<Battles />}></Route>
             <Route path="profile" element={<Profile />}></Route>
             <Route path="directory" element={<Directory />}></Route>
             <Route path="wallet" element={<Wallet />}></Route>
-            <Route path="/home/profile/:id" element={<Profile />}></Route>
+
             <Route
               path="battle/:id"
               element={

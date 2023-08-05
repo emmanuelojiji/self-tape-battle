@@ -5,25 +5,28 @@ import Avatar from "./Avatar";
 import { auth, db } from "../firebaseConfig";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
+import { useAuth } from "../AuthContext";
 
 const Header = () => {
-  const currentUser = localStorage.getItem("currentUser");
-  const userDocRef = doc(db, "users", currentUser);
+  const user = useAuth();
 
   const [headshotURL, setHeadshotURL] = useState();
 
   useEffect(() => {
-    const getUserHeadshot = async () => {
-      try {
-        const userDoc = await getDoc(userDocRef);
-        setHeadshotURL(userDoc.data().headshot);
-      } catch {
-        console.log("Couldn't get user doc!");
-      }
-    };
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+      const getUserHeadshot = async () => {
+        try {
+          const userDoc = await getDoc(userDocRef);
+          setHeadshotURL(userDoc.data().headshot);
+        } catch {
+          console.log("Couldn't get user doc!");
+        }
+      };
 
-    getUserHeadshot();
-  });
+      getUserHeadshot();
+    }
+  }, [user]);
 
   const navigate = useNavigate();
   return (

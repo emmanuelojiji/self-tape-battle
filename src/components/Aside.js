@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Logo from "../media/logo.svg";
 import { useEffect, useState } from "react";
 import { auth } from "../firebaseConfig";
+import { useAuth } from "../AuthContext";
 
 const Aside = () => {
   const [currentPage, setCurrentPage] = useState("");
@@ -13,14 +14,14 @@ const Aside = () => {
     setCurrentPage(page);
   };
 
-  const user = localStorage.getItem("currentUser");
+  const user = useAuth();
 
   return (
     <aside>
       <img src={Logo} className="logo" />
       <nav>
         <Link
-          to={`/home/profile/${user}`}
+          to={`/home/profile/${user && user.uid}`}
           className={currentPage === "profile" ? "active" : null}
           onClick={() => setCurrentPage("profile")}
         >
@@ -43,9 +44,15 @@ const Aside = () => {
         <Link className="disabled">Casting Calls</Link>
       </nav>
       <p
-        onClick={() => {
-          auth.signOut();
-          localStorage.removeItem("user");
+        onClick={async () => {
+          //auth.signOut();
+          try {
+            auth.signOut();
+          } catch {
+            console.log("couldn't sign out");
+          }
+          localStorage.removeItem("currentUser");
+
           navigate("/login");
         }}
         className="sign-out"

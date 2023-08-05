@@ -14,6 +14,7 @@ import {
   where,
   onSnapshot,
 } from "firebase/firestore";
+import { useAuth } from "../AuthContext";
 
 const VideoModal = ({
   voteCount,
@@ -23,7 +24,7 @@ const VideoModal = ({
   setPraiseModalType,
   battleId
 }) => {
-  const user = localStorage.getItem("currentUser");
+  const user = useAuth()
 
   
 
@@ -90,9 +91,9 @@ const VideoModal = ({
         selectedVideo,
         "votes"
       );
-      await setDoc(doc(votesCollection, user), {
+      await setDoc(doc(votesCollection, user.uid), {
         name: "Sasha",
-        uid: user,
+        uid: user.uid,
         time: Timestamp.now(),
       });
 
@@ -117,7 +118,7 @@ const VideoModal = ({
       selectedVideo,
       "votes"
     );
-    const votesQuery = query(votesCollection, where("uid", "==", user));
+    const votesQuery = query(votesCollection, where("uid", "==", user.uid));
 
     try {
       onSnapshot(votesQuery, (snapshot) => {
@@ -142,11 +143,11 @@ const VideoModal = ({
         <div className="modal-header">
           <div className="left">
             <Avatar size="35" />
-            <h3>{selectedVideo === user ? "You" : name}</h3>
+            <h3>{selectedVideo === user.uid ? "You" : name}</h3>
           </div>
           <div className="right">
             <div className="num-of-votes">{votes}</div>
-            {selectedVideo != user && (
+            {selectedVideo != user.uid && (
               <Button
                 text={alreadyVoted ? "Voted!" : "Vote"}
                 disabled={alreadyVoted && true}

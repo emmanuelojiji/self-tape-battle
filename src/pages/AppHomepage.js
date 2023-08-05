@@ -23,7 +23,7 @@ const AppHomepage = () => {
           <Outlet />
         </div>
       </main>
-      <MobileNav/>
+      <MobileNav />
     </div>
   );
 };

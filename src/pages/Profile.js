@@ -17,12 +17,12 @@ import ProfileInfoSkeleton from "../components/ProfileInfoSkeleton";
 import VideoModal from "../components/VideoModal";
 import { useParams } from "react-router-dom";
 import Avatar from "../components/Avatar";
+import { useAuth } from "../AuthContext";
 
 const Profile = () => {
-  const user = localStorage.getItem("currentUser");
-  console.log("Logged in is:" + user);
-
   const [loading, setLoading] = useState(true);
+
+  const user = useAuth();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -50,20 +50,22 @@ const Profile = () => {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      try {
-        const docSnapshot = await getDoc(doc(db, "users", id));
-        const userData = docSnapshot.data();
+      if (user) {
+        try {
+          const docSnapshot = await getDoc(doc(db, "users", user.uid));
+          const userData = docSnapshot.data();
 
-        setFirstName(userData.first_name);
-        setLastName(userData.last_name);
-        setCity(userData.city);
-        setBio(userData.bio);
-        setLink(userData.link);
-        setHeadshotURL(userData.headshot);
+          setFirstName(userData.first_name);
+          setLastName(userData.last_name);
+          setCity(userData.city);
+          setBio(userData.bio);
+          setLink(userData.link);
+          setHeadshotURL(userData.headshot);
 
-        setLoading(false);
-      } catch {
-        console.log("sorry didn't work");
+          setLoading(false);
+        } catch {
+          console.log("sorry didn't work");
+        }
       }
     };
 
@@ -109,9 +111,7 @@ const Profile = () => {
               <h2 className="profile-name">
                 {firstName} {lastName}
               </h2>
-              <p className="bio">
-               {bio}
-              </p>
+              <p className="bio">{bio}</p>
               <div className="city-bio-wrap">
                 <p className="city">{city}</p>
               </div>
