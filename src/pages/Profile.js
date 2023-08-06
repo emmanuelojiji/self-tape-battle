@@ -100,7 +100,7 @@ const Profile = () => {
         <div className="profile-container">
           <div className="profile-picture-wrap">
             <Avatar image={headshotURL} size="200" />
-            <div className="badge">Guest Star</div>
+          
           </div>
           {loading ? (
             <ProfileInfoSkeleton />

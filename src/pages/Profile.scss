@@ -10,12 +10,11 @@
   }
 
   .avatar {
-    border: solid 7px rgb(242, 171, 17);
    
 
     @media only screen and (max-width: 900px) {
       width: 150px !important;
-    height: 150px !important;
+      height: 150px !important;
     }
   }
 
@@ -68,11 +67,11 @@
 
 .link {
   font-weight: 500;
-  background: rgb(215, 238, 247);
+  background: #e0101e29;
   padding: 10px 20px;
   border-radius: 2em;
   font-size: 13px;
-  color: rgb(6, 145, 200);
+  color: #ee303c;
   width: fit-content;
   display: block;
 }

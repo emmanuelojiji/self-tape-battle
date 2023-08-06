@@ -23,7 +23,7 @@ aside {
     padding: 15px 15px;
     font-weight: bold;
     font-size: 14px;
-    color: #191919;
+    color: #131313;
     margin-bottom: 10px;
     border-radius: 10px;
     transition: 0.3s ease-in-out;
@@ -33,23 +33,22 @@ aside {
     }
 
     &.active {
-      background: rgb(215, 238, 247);
-      color: rgb(6, 145, 200);
+      background: #e0101e29;
+      color: #ee303c;
     }
   }
 
-.logo {
-  width: 75px;
-  margin-left: 15px;
-}
-
+  .logo {
+    width: 80px;
+    margin-left: 15px;
+  }
 }
 
 .disabled {
   opacity: 0.3;
 }
 
-.sign-out{
+.sign-out {
   padding-left: 15px;
   cursor: pointer;
 }

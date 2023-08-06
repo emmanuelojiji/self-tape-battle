@@ -20,6 +20,7 @@ const UploadModal = ({
 
   const [loading, setLoading] = useState(false);
 
+
   const uploadToFirestore = async (url) => {
     try {
       const entriesCollection = collection(db, "battles", id, "entries");

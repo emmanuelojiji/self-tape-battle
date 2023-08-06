@@ -1,6 +1,6 @@
 import "./Aside.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Logo from "../media/logo.svg";
+import Logo from "../media/logo-orange.svg";
 import { useEffect, useState } from "react";
 import { auth } from "../firebaseConfig";
 import { useAuth } from "../AuthContext";
@@ -20,19 +20,20 @@ const Aside = () => {
     <aside>
       <img src={Logo} className="logo" />
       <nav>
-        <Link
-          to={`/home/profile/${storedUserId}`}
-          className={currentPage === "profile" ? "active" : null}
-          onClick={() => setCurrentPage("profile")}
-        >
-          Profile
-        </Link>
+       
         <Link
           to="/home/battles"
           className={currentPage === "arena" ? "active" : null}
           onClick={() => setCurrentPage("arena")}
         >
           Arena
+        </Link>
+        <Link
+          to={`/home/profile/${storedUserId}`}
+          className={currentPage === "profile" ? "active" : null}
+          onClick={() => setCurrentPage("profile")}
+        >
+          Profile
         </Link>
 
         <Link to="/home/directory">Directory</Link>

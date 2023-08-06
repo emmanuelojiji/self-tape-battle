@@ -27,7 +27,7 @@ const Battle = () => {
 
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
 
-  const [praiseModalVisible, setPraiseModalVisible] = useState(false);
+  const [praiseModalVisible, setPraiseModalVisible] = useState(true);
   const [praiseModalType, setPraiseModalType] = useState("");
 
   const [battle, setBattle] = useState("");
@@ -40,8 +40,8 @@ const Battle = () => {
 
   const [currentUserEntry, setCurrentUserEntry] = useState();
 
-  const {storedUserId} = useAuth()
- 
+  const { storedUserId } = useAuth();
+
   useEffect(() => {
     getBattle();
     getEntries();
@@ -83,13 +83,7 @@ const Battle = () => {
 
   const getCurrentUserEntry = async () => {
     try {
-      const currentUserEntry = doc(
-        db,
-        "battles",
-        id,
-        "entries",
-        storedUserId,
-      );
+      const currentUserEntry = doc(db, "battles", id, "entries", storedUserId);
       const docSnapshot = await getDoc(currentUserEntry);
 
       onSnapshot(currentUserEntry, async (snapshot) => {
@@ -117,11 +111,7 @@ const Battle = () => {
       {praiseModalVisible && (
         <PraiseModal
           setPraiseModalVisible={setPraiseModalVisible}
-          title={
-            praiseModalType === "vote"
-              ? "Thanks for voting!"
-              : "You've uploaded your video!"
-          }
+          type="upload"
         />
       )}
       {modalVisible && (
@@ -138,6 +128,7 @@ const Battle = () => {
 
         {battle.active && !currentUserEntry && (
           <Button
+            type="filled"
             text="Upload tape"
             onClick={() => {
               setUploadModalVisible(true);
@@ -173,7 +164,6 @@ const Battle = () => {
                 console.log(selectedVideo);
               }}
               battleId={battleId}
-            
             />
           );
         })}
