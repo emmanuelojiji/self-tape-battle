@@ -20,7 +20,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [codeInput, setCodeInput] = useState("");
 
-  const [code, setCode] = useState("stb-WnKww7jhAS-stb");
+  const [code, setCode] = useState("kenneth");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const SignUp = () => {
           uid: auth.currentUser.uid,
           email: email,
           role: role,
-          coins: 0,
+          coins: 5,
           ranking: "Cameo Star",
         });
 
