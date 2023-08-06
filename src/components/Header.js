@@ -8,8 +8,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../AuthContext";
 
 const Header = () => {
-  const {user, storedUserId} = useAuth();
-  
+  const { user, storedUserId } = useAuth();
 
   const [headshotURL, setHeadshotURL] = useState();
 
@@ -38,7 +37,10 @@ const Header = () => {
         placeholder="Search for user"
       ></input>
       <div className="header-right">
-        <Coins />
+        <div className="stats-container">
+          <Coins />
+        </div>
+
         <Link to={`/home/profile/${storedUserId}`}>
           {" "}
           <Avatar size="35" image={headshotURL} />

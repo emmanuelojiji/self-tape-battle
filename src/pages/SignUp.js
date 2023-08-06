@@ -60,22 +60,24 @@ const SignUp = () => {
 
           {role != "professional" && (
             <>
-              <p>{error}</p>
-              <InputText
-                type="text"
-                placeholder="Referral code"
-                onChange={(e) => setCodeInput(e.target.value)}
-              />
-              <InputText
-                type="email"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <InputText
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <form>
+                <p>{error}</p>
+                <InputText
+                  type="text"
+                  placeholder="Referral code"
+                  onChange={(e) => setCodeInput(e.target.value)}
+                />
+                <InputText
+                  type="email"
+                  placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <InputText
+                  type="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </form>
             </>
           )}
 

@@ -20,6 +20,13 @@ header {
   display: flex;
   align-items: center;
   gap: 25px;
+
+  .stats-container{
+    background: transparent;
+    border: solid 1px rgb(217, 217, 217);
+    border-radius: 2em;
+    padding: 5px 30px;
+  }
 }
 
 .search{

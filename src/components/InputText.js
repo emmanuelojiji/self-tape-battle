@@ -7,6 +7,7 @@ const InputText = ({ type, placeholder, onChange }) => {
       className="input-text"
       placeholder={placeholder}
       onChange={onChange}
+      required
     />
   );
 };

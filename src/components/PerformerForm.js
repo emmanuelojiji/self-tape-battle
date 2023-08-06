@@ -43,6 +43,16 @@ const PerformerForm = ({ setOnboardingComplete }) => {
         displayName: `${firstName} ${lastName}`,
       });
 
+      const uploadToFirestore = async (url) => {
+        const usersCollection = doc(db, "users", storedUserId);
+        try {
+          await updateDoc(usersCollection, {
+            headshot: url,
+          });
+        } catch {}
+        window.location.reload();
+      };
+
       const uploadToStorage = () => {
         const fileName = storedUserId;
         const headshotFileRef = ref(storage, `headshots/${fileName}`);
@@ -56,19 +66,9 @@ const PerformerForm = ({ setOnboardingComplete }) => {
         });
       };
 
-      const uploadToFirestore = async (url) => {
-        const usersCollection = doc(db, "users", storedUserId);
-        try {
-          await updateDoc(usersCollection, {
-            headshot: url,
-          });
-        } catch {}
-        window.location.reload();
-      };
-
       uploadToStorage();
-    } catch {
-      console.log("Couldn't add details, sorry!");
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
