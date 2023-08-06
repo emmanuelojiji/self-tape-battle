@@ -27,7 +27,7 @@ const Battle = () => {
 
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
 
-  const [praiseModalVisible, setPraiseModalVisible] = useState(true);
+  const [praiseModalVisible, setPraiseModalVisible] = useState(false);
   const [praiseModalType, setPraiseModalType] = useState("");
 
   const [battle, setBattle] = useState("");

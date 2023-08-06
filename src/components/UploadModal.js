@@ -41,7 +41,7 @@ const UploadModal = ({
 
       setUploadModalVisible(false);
       setFile(null);
-      setPraiseModalType("upload");
+
       setPraiseModalVisible(true);
     } catch (error) {
       console.log(error);
@@ -66,6 +66,7 @@ const UploadModal = ({
   };
 
   return (
+    <>
     <div className="upload-modal" onClick={() => setUploadModalVisible(false)}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h2>Upload Tape</h2>
@@ -102,6 +103,7 @@ const UploadModal = ({
         />
       </div>
     </div>
+    </>
   );
 };
 
