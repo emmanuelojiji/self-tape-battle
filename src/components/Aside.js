@@ -20,7 +20,6 @@ const Aside = () => {
     <aside>
       <img src={Logo} className="logo" />
       <nav>
-       
         <Link
           to="/home/battles"
           className={currentPage === "arena" ? "active" : null}
@@ -36,7 +35,9 @@ const Aside = () => {
           Profile
         </Link>
 
-        <Link to="/home/directory">Directory</Link>
+        <Link to="/home/directory" className={currentPage === "directory" ? "active" : null} onClick={() => setCurrentPage("directory")}>
+          Directory
+        </Link>
         <Link className="disabled">Wallet</Link>
         <Link className="disabled">Leaderboard</Link>
 

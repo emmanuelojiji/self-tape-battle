@@ -2,6 +2,7 @@ import "./Coins.scss";
 import { auth, db } from "../firebaseConfig";
 import { useEffect, useState } from "react";
 import { getDoc, doc } from "firebase/firestore";
+import CountUp from "react-countup";
 
 const Coins = () => {
   const [user, setUser] = useState();
@@ -32,7 +33,7 @@ const Coins = () => {
   return (
     <div className="coins-container">
       <div className="coin"></div>
-      {coins}
+      <CountUp end={coins} duration={5} />
     </div>
   );
 };

@@ -1,13 +1,15 @@
+
 import "./InputText.scss";
 
-const InputText = ({ type, placeholder, onChange }) => {
+const InputText = ({ type, placeholder, onChange, border }) => {
+
   return (
     <input
       type={type}
       className="input-text"
       placeholder={placeholder}
       onChange={onChange}
-      required
+      style={{border: border}}
     />
   );
 };

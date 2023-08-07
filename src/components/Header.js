@@ -6,11 +6,16 @@ import { auth, db } from "../firebaseConfig";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../AuthContext";
+import CountUp from 'react-countup';
+
+
 
 const Header = () => {
   const { user, storedUserId } = useAuth();
 
   const [headshotURL, setHeadshotURL] = useState();
+
+
 
   useEffect(() => {
     if (user) {
@@ -31,6 +36,8 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <header>
+   
+
       <input
         type="text"
         className="search"

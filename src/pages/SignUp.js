@@ -17,18 +17,45 @@ const SignUp = () => {
   const [role, setRole] = useState("performer");
 
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(null);
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(null);
   const [codeInput, setCodeInput] = useState("");
 
-  const [code, setCode] = useState("kenneth");
-  const [error, setError] = useState("");
+  const [code, setCode] = useState("1234");
+  const [codeError, setCodeError] = useState("");
+
+  let formHasError;
 
   const navigate = useNavigate();
 
   const { user, storedUserId } = useAuth();
 
   const performerSignUp = async () => {
-    if (code === codeInput) {
+    setEmailError("");
+    setPasswordError("");
+    setCodeError("");
+
+    if (email.length === 0) {
+      setEmailError("Email cannot be empty");
+      formHasError = true;
+    }
+
+    if (email.length > 0 && !email.includes("@") && !email.includes(".")) {
+      setEmailError("Please enter a valid email");
+      formHasError = true;
+    }
+
+    if (codeInput != code) {
+      setCodeError("We can't let you into the arena, that code is invalid!");
+      formHasError = true;
+    }
+
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 letters");
+    }
+
+    if (!formHasError) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
 
@@ -46,9 +73,8 @@ const SignUp = () => {
       } catch (error) {
         console.log(error.message);
       }
-    } else {
-      setError("Invalid referral code");
     }
+    return null;
   };
 
   return (
@@ -61,21 +87,26 @@ const SignUp = () => {
           {role != "professional" && (
             <>
               <form>
-                <p>{error}</p>
+                <p>{codeError}</p>
                 <InputText
                   type="text"
                   placeholder="Referral code"
                   onChange={(e) => setCodeInput(e.target.value)}
+                  border={codeError && "solid 1px red"}
                 />
+                <p>{emailError}</p>
                 <InputText
                   type="email"
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
+                  border={emailError && "solid 1px red"}
                 />
+                <p>{passwordError}</p>
                 <InputText
                   type="password"
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
+                  border={passwordError && "solid 1px red"}
                 />
               </form>
             </>
