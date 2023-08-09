@@ -27,8 +27,8 @@ const Battles = () => {
   const [activeBattle, setActiveBattle] = useState();
   return (
     <div className="battles">
-      <h2 className="greeting">Hi {auth.currentUser.displayName}</h2>
-    <h3>Battles</h3>
+     
+    <h2>Battles</h2>
 
       <div className="card-container">
         {battles.map((battle) => (

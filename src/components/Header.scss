@@ -5,7 +5,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 2%;
+  
   padding-right: 5%;
   width: 100%;
   //background: rgb(243, 243, 243);
@@ -13,7 +13,6 @@ header {
   @media only screen and (max-width: 900px) {
     display: none;
   }
-  
 }
 
 .header-right {
@@ -21,7 +20,7 @@ header {
   align-items: center;
   gap: 25px;
 
-  .stats-container{
+  .stats-container {
     background: transparent;
     border: solid 1px rgb(217, 217, 217);
     border-radius: 2em;
@@ -29,12 +28,12 @@ header {
   }
 }
 
-.search{
-    max-width: 500px;
-    width: 100%;
-    border-radius: 10px;
-    background: rgb(243, 243, 243);
-    height: 50px;
-    border: 0;
-    padding-left: 20px;
+.search {
+  max-width: 500px;
+  width: 100%;
+  border-radius: 10px;
+  background: #1a1f34;
+  height: 50px;
+  border: 0;
+  padding-left: 20px;
 }

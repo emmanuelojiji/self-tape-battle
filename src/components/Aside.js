@@ -4,6 +4,9 @@ import Logo from "../media/logo-orange.svg";
 import { useEffect, useState } from "react";
 import { auth } from "../firebaseConfig";
 import { useAuth } from "../AuthContext";
+import arena from "../media/icon-arena.svg";
+import profile from "../media/icon-profile.svg";
+import directory from "../media/icon-search.svg";
 
 const Aside = () => {
   const [currentPage, setCurrentPage] = useState("arena");
@@ -34,17 +37,21 @@ const Aside = () => {
             setSlidePosition(0);
           }}
         >
-          Arena
+          <div
+            className={`nav-icon ${currentPage === "arena" ? "active" : null}`}
+          >
+            <img src={arena} />
+          </div>
         </Link>
         <Link
           to={`/home/profile/${storedUserId}`}
           className={currentPage === "profile" ? "active" : null}
           onClick={() => {
             setCurrentPage("profile");
-            setSlidePosition(60);
+            setSlidePosition(80);
           }}
         >
-          Profile
+          <img src={profile} />
         </Link>
 
         <Link
@@ -52,16 +59,11 @@ const Aside = () => {
           className={currentPage === "directory" ? "active" : null}
           onClick={() => {
             setCurrentPage("directory");
-            setSlidePosition(60 * 2);
+            setSlidePosition(80 * 2);
           }}
         >
-          Directory
+          <img src={directory} />
         </Link>
-        <Link className="disabled">Wallet</Link>
-        <Link className="disabled">Leaderboard</Link>
-        <Link className="disabled">Shop</Link>
-        <Link className="disabled">Green Room</Link>
-        <Link className="disabled">Casting Calls</Link>
       </nav>
       <p
         onClick={async () => {
