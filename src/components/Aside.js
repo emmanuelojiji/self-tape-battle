@@ -1,6 +1,6 @@
 import "./Aside.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Logo from "../media/logo-orange.svg";
+import Logo from "../media/logo-white.svg";
 import { useEffect, useState } from "react";
 import { auth } from "../firebaseConfig";
 import { useAuth } from "../AuthContext";

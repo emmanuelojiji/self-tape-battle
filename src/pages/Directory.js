@@ -38,7 +38,7 @@ const Directory = () => {
   const displayedUsers = userInput ? handleUserSearch() : users;
   return (
     <div className="directory">
-      <h1 className="page-title">Directory</h1>
+      <h2 className="page-title">Directory</h2>
       <input
         type="text"
         className="search directory-search"
