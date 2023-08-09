@@ -99,8 +99,7 @@ const Profile = () => {
       <div>
         <div className="profile-container">
           <div className="profile-picture-wrap">
-            <Avatar image={headshotURL} size="300" />
-          
+            <Avatar image={headshotURL} size="300" borderRadius="25px" />
           </div>
           {loading ? (
             <ProfileInfoSkeleton />

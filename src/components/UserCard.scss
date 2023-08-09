@@ -1,20 +1,27 @@
 .user-card {
- 
+
   display: flex;
+  align-items: center;
   gap: 10px;
   transition: 0.2s ease-in-out;
   padding:25px 25px;
   border-radius: 10px;
 
-  &:hover {
-    background: rgb(247, 247, 247);
+  &:hover{
+    background: #1a1f34;
   }
+
+
+  /*&:hover {
+    background: rgb(247, 247, 247);
+  }*/
   color: black;
+
+  p{
+    color: white;
+  }
+ 
+  
 }
 
-.avatar {
-  height: 30px;
-  width: 30px;
-  background: grey;
-  border-radius: 100%;
-}
+

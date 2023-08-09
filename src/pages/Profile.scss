@@ -10,7 +10,6 @@
   }
 
   .avatar {
-  
     @media only screen and (max-width: 900px) {
       width: 150px !important;
       height: 150px !important;
@@ -50,11 +49,12 @@
 }
 
 .city {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  color: white;
 }
 
 .bio {
-  color: #131313;
+  color: white;
   margin-bottom: 5px;
 }
 

@@ -1,6 +1,6 @@
 import "./Avatar.scss";
 
-const Avatar = ({ size, image }) => {
+const Avatar = ({ size, image, borderRadius }) => {
   return (
     <div
       className="avatar"
@@ -8,6 +8,7 @@ const Avatar = ({ size, image }) => {
         width: `${size}px`,
         height: `${size}px`,
         backgroundImage: `url(${image})`,
+        borderRadius: borderRadius,
       }}
     ></div>
   );

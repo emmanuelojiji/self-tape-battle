@@ -29,15 +29,15 @@ const Directory = () => {
   const handleUserSearch = () => {
     const filteredUsers = users.filter(
       (user) =>
-        user.first_name.toLowerCase().includes(userInput.toLowerCase()) ||
-        user.last_name.toLowerCase().includes(userInput.toLowerCase())
+        user.first_name?.toLowerCase().includes(userInput?.toLowerCase()) ||
+        user.last_name?.toLowerCase().includes(userInput?.toLowerCase())
     );
     return filteredUsers;
   };
 
   const displayedUsers = userInput ? handleUserSearch() : users;
   return (
-    <div>
+    <div className="directory">
       <h1 className="page-title">Directory</h1>
       <input
         type="text"
@@ -49,15 +49,17 @@ const Directory = () => {
         }}
       ></input>
 
-      {displayedUsers.map((user) => (
-        <UserCard
-          firstName={user.first_name}
-          lastName={user.last_name}
-          role={user.role}
-          userId={user.uid}
-          image={user.headshot}
-        />
-      ))}
+      <div className="card-container">
+        {displayedUsers.map((user) => (
+          <UserCard
+            firstName={user.first_name}
+            lastName={user.last_name}
+            role={user.role}
+            userId={user.uid}
+            image={user.headshot}
+          />
+        ))}
+      </div>
     </div>
   );
 };

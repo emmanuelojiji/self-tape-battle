@@ -6,16 +6,16 @@ import { auth, db } from "../firebaseConfig";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../AuthContext";
-import CountUp from 'react-countup';
-
-
+import CountUp from "react-countup";
 
 const Header = () => {
   const { user, storedUserId } = useAuth();
 
   const [headshotURL, setHeadshotURL] = useState();
 
+  const [name, setName] = useState("");
 
+  const [rank, setRank] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -24,6 +24,8 @@ const Header = () => {
         try {
           const userDoc = await getDoc(userDocRef);
           setHeadshotURL(userDoc.data().headshot);
+          setName(userDoc.data().first_name);
+          setRank(userDoc.data().ranking);
         } catch {
           console.log("Couldn't get user doc!");
         }
@@ -36,8 +38,6 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <header>
-   
-
       <input
         type="text"
         className="search"
@@ -48,9 +48,13 @@ const Header = () => {
           <Coins />
         </div>
 
-        <Link to={`/home/profile/${storedUserId}`}>
+        <Link to={`/home/profile/${storedUserId}`} className="avatar-name-rank-wrap">
           {" "}
-          <Avatar size="50" image={headshotURL} />
+          <Avatar size="50" image={headshotURL} borderRadius="100%" />
+          <div className="name-rank-wrap">
+            <h4>{name}</h4>
+            <p>{rank}</p>
+          </div>
         </Link>
       </div>
     </header>

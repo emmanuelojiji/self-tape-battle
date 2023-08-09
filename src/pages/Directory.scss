@@ -1,3 +1,14 @@
 .directory-search{
     margin-bottom: 25px;
 }
+
+.directory{
+    .card-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      
+}
