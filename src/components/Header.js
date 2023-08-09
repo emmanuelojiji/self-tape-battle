@@ -50,7 +50,7 @@ const Header = () => {
 
         <Link to={`/home/profile/${storedUserId}`}>
           {" "}
-          <Avatar size="35" image={headshotURL} />
+          <Avatar size="50" image={headshotURL} />
         </Link>
       </div>
     </header>

@@ -26,11 +26,20 @@ h1,h2,h3,h4,h5,h6{
 }
 
 h2{
+  font-size: 28px !important;
+}
+
+h2{
   font-size: 30px ;
 
   @media only screen and (max-width: 900px) {
     font-size: 20px;
   }
+}
+
+h3{
+  font-size: 22px;
+  margin-bottom: 25px;
 }
 
 .page-title{

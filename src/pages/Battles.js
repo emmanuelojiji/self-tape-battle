@@ -2,7 +2,7 @@ import BattleCard from "../components/BattleCard";
 import "./Battles.scss";
 import { useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import { useState } from "react";
 
 const Battles = () => {
@@ -27,7 +27,8 @@ const Battles = () => {
   const [activeBattle, setActiveBattle] = useState();
   return (
     <div className="battles">
-      <h2 className="greeting">Battles</h2>
+      <h2 className="greeting">Hi {auth.currentUser.displayName}</h2>
+    <h3>Battles</h3>
 
       <div className="card-container">
         {battles.map((battle) => (

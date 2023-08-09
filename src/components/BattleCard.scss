@@ -1,9 +1,8 @@
 .battle-card {
   width: 100%;
   height: 300px;
-  max-width: 300px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  //background: #EE073E;
+  max-width: 400px;
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);  //background: #EE073E;
   background: white;
   background: #f11f50;
   background: #1fb9f1;
@@ -22,7 +21,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  background: #ee303c !important;
+  background: #ee3092 !important;
 
   &:hover{
     transform:translateY(-10px)

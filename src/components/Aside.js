@@ -6,7 +6,7 @@ import { auth } from "../firebaseConfig";
 import { useAuth } from "../AuthContext";
 
 const Aside = () => {
-  const [currentPage, setCurrentPage] = useState("");
+  const [currentPage, setCurrentPage] = useState("arena");
 
   const navigate = useNavigate();
 
