@@ -40,9 +40,9 @@ const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
     <header>
      
       <div className="header-right">
-        <div className="stats-container">
+  
           <Coins />
-        </div>
+ 
 
         <Link
           to={`/home/profile/${storedUserId}`}
