@@ -64,7 +64,7 @@ const SignUp = () => {
           email: email,
           role: role,
           coins: 5,
-          ranking: "Cameo Star",
+          ranking: "cameo_star",
         });
 
         //await signInWithEmailAndPassword(auth, email, password);

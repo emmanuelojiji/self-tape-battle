@@ -111,7 +111,7 @@ const Battle = () => {
       {praiseModalVisible && (
         <PraiseModal
           setPraiseModalVisible={setPraiseModalVisible}
-          type="upload"
+          type={praiseModalType}
         />
       )}
       {modalVisible && (

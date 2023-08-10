@@ -5,7 +5,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 3;
+  z-index: 6000000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,6 +54,10 @@
     width: 100%;
     background: black;
     border-radius: 10px;
+  }
+
+  h3{
+    color: black;
   }
 }
 

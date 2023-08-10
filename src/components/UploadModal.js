@@ -43,6 +43,7 @@ const UploadModal = ({
       setFile(null);
 
       setPraiseModalVisible(true);
+      setPraiseModalType("upload")
     } catch (error) {
       console.log(error);
     }

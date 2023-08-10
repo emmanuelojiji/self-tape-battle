@@ -17,6 +17,8 @@ const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
 
   const [rank, setRank] = useState("");
 
+  const rankDisplay = rank.replace("_", " ");
+
   useEffect(() => {
     if (user) {
       const userDocRef = doc(db, "users", storedUserId);
@@ -38,11 +40,8 @@ const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
   const navigate = useNavigate();
   return (
     <header>
-     
       <div className="header-right">
-  
-          <Coins />
- 
+        <Coins />
 
         <Link
           to={`/home/profile/${storedUserId}`}
@@ -56,7 +55,7 @@ const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
           <Avatar size="50" image={headshotURL} borderRadius="100%" />
           <div className="name-rank-wrap">
             <h4>{name}</h4>
-            <p>{rank}</p>
+            <p>{rankDisplay}</p>
           </div>
         </Link>
       </div>

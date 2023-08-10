@@ -126,9 +126,8 @@ const VideoModal = ({
       setVotes(votesCollection.length);
 
       setModalVisible(false);
-      setPraiseModalVisible(true);
       setPraiseModalType("vote");
-
+      setPraiseModalVisible(true);
       console.log(votes);
     } catch {
       console.log("error");
@@ -168,7 +167,7 @@ const VideoModal = ({
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <div className="left">
-            <Avatar size="35" image={headshot} />
+            <Avatar size="50" borderRadius="100%" image={headshot} />
             <h3>{selectedVideo === storedUserId ? "You" : name}</h3>
           </div>
           <div className="right">

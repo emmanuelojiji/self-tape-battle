@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 60000;
 }
 
 .praise-modal {
@@ -21,4 +22,8 @@
   justify-content: center;
   text-align: center;
   flex-direction: column;
+
+  h2{
+    color: black;
+  }
 }
