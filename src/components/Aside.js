@@ -8,8 +8,8 @@ import arena from "../media/icon-arena.svg";
 import profile from "../media/icon-profile.svg";
 import directory from "../media/icon-search.svg";
 
-const Aside = () => {
-  const [currentPage, setCurrentPage] = useState("arena");
+const Aside = ({currentPage, setCurrentPage, slidePosition, setSlidePosition}) => {
+ 
 
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const Aside = () => {
 
   const { user, storedUserId } = useAuth();
 
-  const [slidePosition, setSlidePosition] = useState(0);
+
 
   return (
     <aside>

@@ -8,7 +8,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../AuthContext";
 import CountUp from "react-countup";
 
-const Header = () => {
+const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
   const { user, storedUserId } = useAuth();
 
   const [headshotURL, setHeadshotURL] = useState();
@@ -48,7 +48,14 @@ const Header = () => {
           <Coins />
         </div>
 
-        <Link to={`/home/profile/${storedUserId}`} className="avatar-name-rank-wrap">
+        <Link
+          to={`/home/profile/${storedUserId}`}
+          className="avatar-name-rank-wrap"
+          onClick={() => {
+            setCurrentPage("profile");
+            setSlidePosition(80);
+          }}
+        >
           {" "}
           <Avatar size="50" image={headshotURL} borderRadius="100%" />
           <div className="name-rank-wrap">

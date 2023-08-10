@@ -21,6 +21,9 @@ const AppHomepage = () => {
 
   const [loading, setLoading] = useState(true);
 
+  const [currentPage, setCurrentPage] = useState("arena");
+  const [slidePosition, setSlidePosition] = useState(0);
+
   useEffect(() => {
     const checkIfOnboarded = async () => {
       const userDocRef = doc(db, "users", storedUserId);
@@ -45,10 +48,19 @@ const AppHomepage = () => {
 
       {onboardingComplete && !loading && (
         <>
-          <Aside />
+          <Aside
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            slidePosition={slidePosition}
+            setSlidePosition={setSlidePosition}
+          />
 
           <main>
-            <Header />
+            <Header
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              setSlidePosition={setSlidePosition}
+            />
 
             <div className="app-homepage-content">
               <Outlet />
