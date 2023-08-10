@@ -32,6 +32,7 @@ header {
   display: flex;
   align-items: center;
   transition: 0.2s ease-in-out;
+  text-transform: capitalize;
   &:hover {
     opacity: 0.5;
   }
@@ -42,7 +43,7 @@ header {
 
     p {
       color: aqua;
-      text-transform: capitalize;
+     
     }
   }
 }

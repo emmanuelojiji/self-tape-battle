@@ -123,7 +123,7 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
             </div>
           )}
         </div>
-        <h3 className="profile-heading">Entries</h3>
+        <h3 className="profile-heading">Battles</h3>
         <div className="video-card-container">
           {entries.map((entry) => (
             <VideoCard
