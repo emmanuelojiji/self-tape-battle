@@ -30,6 +30,9 @@ function App() {
 
   const [onboardingComplete, setOnboardingComplete] = useState();
 
+  const [currentPage, setCurrentPage] = useState("arena");
+  const [slidePosition, setSlidePosition] = useState(0);
+
   console.log(onboardingComplete);
 
   return (
@@ -48,14 +51,60 @@ function App() {
 
           <Route
             path="/home"
-            element={storedUserId ? <AppHomepage /> : <Navigate to="/login" />}
+            element={
+              storedUserId ? (
+                <AppHomepage
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  slidePosition={slidePosition}
+                  setSlidePosition={setSlidePosition}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           >
-            <Route path="/home/profile/:id" element={<Profile />}></Route>
-            <Route path="leaderboard" element={<Leaderboard />}></Route>
-            <Route path="battles" element={<Battles />}></Route>
-            <Route path="profile" element={<Profile />}></Route>
-            <Route path="directory" element={<Directory />}></Route>
-            <Route path="wallet" element={<Wallet />}></Route>
+            <Route
+              path="/home/profile/:id"
+              element={
+                <Profile
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  setSlidePosition={setSlidePosition}
+                />
+              }
+            ></Route>
+
+            <Route
+              path="battles"
+              element={
+                <Battles
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  setSlidePosition={setSlidePosition}
+                />
+              }
+            ></Route>
+            <Route
+              path="profile"
+              element={
+                <Profile
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  setSlidePosition={setSlidePosition}
+                />
+              }
+            ></Route>
+            <Route
+              path="directory"
+              element={
+                <Directory
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  setSlidePosition={setSlidePosition}
+                />
+              }
+            ></Route>
 
             <Route
               path="battle/:id"

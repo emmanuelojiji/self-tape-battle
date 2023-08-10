@@ -15,14 +15,16 @@ import { db } from "../firebaseConfig";
 import { useAuth } from "../AuthContext";
 import Onboarding from "./Onboarding";
 
-const AppHomepage = () => {
+const AppHomepage = ({
+  currentPage,
+  setCurrentPage,
+  slidePosition,
+  setSlidePosition,
+}) => {
   const { user, storedUserId } = useAuth();
   const [onboardingComplete, setOnboardingComplete] = useState();
 
   const [loading, setLoading] = useState(true);
-
-  const [currentPage, setCurrentPage] = useState("arena");
-  const [slidePosition, setSlidePosition] = useState(0);
 
   useEffect(() => {
     const checkIfOnboarded = async () => {

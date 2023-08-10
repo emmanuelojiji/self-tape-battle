@@ -19,7 +19,7 @@ import { useParams } from "react-router-dom";
 import Avatar from "../components/Avatar";
 import { useAuth } from "../AuthContext";
 
-const Profile = () => {
+const Profile = ({ setCurrentPage, setSlidePosition }) => {
   const [loading, setLoading] = useState(true);
 
   const { auth, storedUserId } = useAuth();
@@ -49,6 +49,9 @@ const Profile = () => {
   const [headshotURL, setHeadshotURL] = useState();
 
   useEffect(() => {
+    setCurrentPage("profile");
+    setSlidePosition(80);
+
     const getUserInfo = async () => {
       try {
         const docSnapshot = await getDoc(doc(db, "users", id));
