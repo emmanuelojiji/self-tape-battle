@@ -76,6 +76,11 @@ function App() {
             ></Route>
 
             <Route
+              path="/home/profile/"
+              element={<Navigate to={`/home/profile/${storedUserId}`} />}
+            ></Route>
+
+            <Route
               path="battles"
               element={
                 <Battles
