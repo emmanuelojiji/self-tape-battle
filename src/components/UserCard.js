@@ -7,9 +7,9 @@ const UserCard = ({ firstName, lastName, role, userId, image}) => {
   return (
     <Link to={`/home/profile/${userId}`}>
       <div className="user-card">
-        <Avatar image={image} size="50" borderRadius="10px"/>
+        <Avatar image={image} size="100" borderRadius="10px"/>
         <div>
-          <h4>{`${firstName + " " + lastName}`}</h4>
+          <h3>{`${firstName + " " + lastName}`}</h3>
           <p>{role}</p>
         </div>
       </div>

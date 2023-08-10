@@ -3,7 +3,7 @@ header {
   padding-top: 20px;
   padding-bottom: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content:end;
   align-items: center;
 
   padding-right: 5%;
@@ -35,14 +35,14 @@ header {
   &:hover {
     opacity: 0.5;
   }
-}
 
-.name-rank-wrap {
-  margin-left: 10px;
-  color: white;
+  .name-rank-wrap {
+    margin-left: 10px;
+    color: white;
 
-  p{
-    color: aqua;
+    p {
+      color: aqua;
+    }
   }
 }
 

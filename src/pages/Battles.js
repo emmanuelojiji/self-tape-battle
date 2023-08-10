@@ -36,7 +36,7 @@ const Battles = () => {
             key={battle.id}
             title={battle.name}
             id={battle.id}
-            background="#E23E19"
+            //background="#E23E19"
             opacity={!battle.active && "0.5"}
           />
         ))}

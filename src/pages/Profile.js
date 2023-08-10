@@ -4,20 +4,19 @@ import { auth, db } from "../firebaseConfig";
 import {
   getDoc,
   doc,
-  collection,
   getDocs,
   query,
   collectionGroup,
   where,
 } from "firebase/firestore";
 import { useState } from "react";
-import Headshot from "../media/headshot.jpeg";
 import VideoCard from "../components/VideoCard";
 import ProfileInfoSkeleton from "../components/ProfileInfoSkeleton";
 import VideoModal from "../components/VideoModal";
 import { useParams } from "react-router-dom";
 import Avatar from "../components/Avatar";
 import { useAuth } from "../AuthContext";
+import RankPill from "../components/RankPill";
 
 const Profile = ({ setCurrentPage, setSlidePosition }) => {
   const [loading, setLoading] = useState(true);
@@ -29,10 +28,7 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
   const [city, setCity] = useState("");
   const [bio, setBio] = useState("");
   const [link, setLink] = useState();
-
-  /*const currentURL = window.location.href;
-  const parts = currentURL.split("/");
-  const id = parts.pop();*/
+  const [rank, setRank] = useState();
 
   const { id } = useParams();
 
@@ -49,8 +45,10 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
   const [headshotURL, setHeadshotURL] = useState();
 
   useEffect(() => {
-    setCurrentPage("profile");
-    setSlidePosition(80);
+    if (id === storedUserId) {
+      setCurrentPage("profile");
+      setSlidePosition(80);
+    }
 
     const getUserInfo = async () => {
       try {
@@ -61,6 +59,7 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
         setLastName(userData.last_name);
         setCity(userData.city);
         setBio(userData.bio);
+        setRank(userData.ranking);
         setLink(userData.link);
         setHeadshotURL(userData.headshot);
 
@@ -91,7 +90,7 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
   }, [id]);
 
   return (
-    <>
+    <div className="profile">
       {modalVisible && (
         <VideoModal
           selectedVideo={selectedVideo}
@@ -108,9 +107,12 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
             <ProfileInfoSkeleton />
           ) : (
             <div className="profile-info">
-              <h2 className="profile-name">
-                {firstName} {lastName}
-              </h2>
+              <div className="name-rank-wrap">
+                <h2 className="profile-name">
+                  {firstName} {lastName}
+                </h2>
+                <RankPill rank={rank} />
+              </div>
               <p className="bio">{bio}</p>
               <div className="city-bio-wrap">
                 <p className="city">{city}</p>
@@ -138,7 +140,7 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
           {entries.length === 0 && <p>No entries</p>}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

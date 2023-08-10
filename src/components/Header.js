@@ -38,11 +38,7 @@ const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
   const navigate = useNavigate();
   return (
     <header>
-      <input
-        type="text"
-        className="search"
-        placeholder="Search for user"
-      ></input>
+     
       <div className="header-right">
         <div className="stats-container">
           <Coins />

@@ -1,3 +1,5 @@
+.profile{
+
 .profile-picture-wrap {
   margin-right: 50px;
   display: flex;
@@ -77,4 +79,10 @@
 
 .profile-heading {
   margin-bottom: 25px;
+}
+
+.name-rank-wrap{
+  display: flex;
+  gap: 15px;
+}
 }
