@@ -1,19 +1,37 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+admin.initializeApp();
+const firestore = admin.firestore();
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+// The Cloud Functions for Firebase SDK to set up triggers and logging.
+const { onSchedule } = require("firebase-functions/v2/scheduler");
+const { logger } = require("firebase-functions");
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+exports.deleteUser = functions.auth.user().onDelete((user) => {
+  const uid = user.uid;
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+  const userDocRef = admin.firestore().doc(`users/${uid}`);
+
+  return userDocRef.delete();
+});
+
+/*exports.closeBattle = onSchedule("* * * * *", async () => {
+  const now = new Date();
+  const battlesRef = firestore.collection("battles");
+
+  const snapshot = await battlesRef
+    .where("active", "==", true)
+    .where("deadline", "<=", now)
+    .get();
+
+  const batch = firestore.batch();
+
+  snapshot.forEach((doc) => {
+    const battleRef = battlesRef.doc(doc.id);
+    batch.update(battleRef, { active: false });
+  });
+
+  
+
+  return batch.commit();
+});*/

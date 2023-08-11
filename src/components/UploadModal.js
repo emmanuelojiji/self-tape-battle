@@ -37,6 +37,7 @@ const UploadModal = ({
         battleId: id,
         time: Timestamp.now(),
         url: url,
+        votes: 0
       });
 
       setUploadModalVisible(false);

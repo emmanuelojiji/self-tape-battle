@@ -13,6 +13,7 @@ import {
   query,
   where,
   onSnapshot,
+  updateDoc,
 } from "firebase/firestore";
 import { useAuth } from "../AuthContext";
 
@@ -125,12 +126,26 @@ const VideoModal = ({
 
       setVotes(votesCollection.length);
 
+      const battleEntryRef = doc(
+        db,
+        "battles",
+        battleId,
+        "entries",
+        selectedVideo
+      );
+
+      const battleEntryDoc = await getDoc(battleEntryRef);
+
+      await updateDoc(battleEntryRef, {
+        votes: battleEntryDoc.data().votes + 1,
+      });
+
       setModalVisible(false);
       setPraiseModalType("vote");
       setPraiseModalVisible(true);
       console.log(votes);
-    } catch {
-      console.log("error");
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
