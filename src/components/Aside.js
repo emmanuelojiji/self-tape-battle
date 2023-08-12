@@ -42,8 +42,8 @@ const Aside = ({currentPage, setCurrentPage, slidePosition, setSlidePosition}) =
           >
             <svg
               className="test-svg"
-              width="25"
-              height="25"
+              width="30"
+              height="30"
               viewBox="0 0 31 31"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -65,8 +65,8 @@ const Aside = ({currentPage, setCurrentPage, slidePosition, setSlidePosition}) =
           }}
         >
           <svg
-            width="25"
-            height="25"
+            width="30"
+            height="30"
             viewBox="0 0 31 31"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -95,8 +95,8 @@ const Aside = ({currentPage, setCurrentPage, slidePosition, setSlidePosition}) =
           }}
         >
           <svg
-            width="25"
-            height="25"
+            width="30"
+            height="30"
             viewBox="0 0 31 31"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
