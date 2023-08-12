@@ -31,6 +31,7 @@ const VideoModal = ({
   const [name, setName] = useState();
   const [headshot, setHeadshot] = useState();
   const [url, setUrl] = useState();
+  const [isActive, setIsActive] = useState(null);
 
   const { storedUserId } = useAuth();
 
@@ -101,11 +102,20 @@ const VideoModal = ({
       }
     };
 
+    const checkBattleStatus = async () => {
+      const battleDocumentRef = doc(db, "battles", battleId);
+
+      const snapshot = await getDoc(battleDocumentRef);
+
+      setIsActive(snapshot.data().active);
+    };
+
     getVotes();
     getName();
     getHeadshot();
     getVideo();
     voteCheck();
+    checkBattleStatus();
   }, [battleId, selectedVideo]); // Add battleId and selectedVideo as dependencies to avoid infinite loop.
 
   const handleVote = async () => {
@@ -187,7 +197,7 @@ const VideoModal = ({
           </div>
           <div className="right">
             <div className="num-of-votes">{votes}</div>
-            {selectedVideo != storedUserId && (
+            {selectedVideo != storedUserId && isActive === true && (
               <Button
                 text={alreadyVoted ? "Voted!" : "Vote"}
                 disabled={alreadyVoted && true}
