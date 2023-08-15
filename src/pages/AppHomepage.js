@@ -14,12 +14,15 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useAuth } from "../AuthContext";
 import Onboarding from "./Onboarding";
+import PraiseModal from "../components/PraiseModal";
 
 const AppHomepage = ({
   currentPage,
   setCurrentPage,
   slidePosition,
   setSlidePosition,
+  isFirstLogIn,
+  setIsFirstLogIn,
 }) => {
   const { user, storedUserId } = useAuth();
   const [onboardingComplete, setOnboardingComplete] = useState();
@@ -42,10 +45,14 @@ const AppHomepage = ({
 
   return (
     <div className="app-homepage">
+      {isFirstLogIn && <PraiseModal />}
       {loading && <h1>LOADING</h1>}
 
       {!onboardingComplete && !loading && (
-        <Onboarding setOnboardingComplete={setOnboardingComplete} />
+        <Onboarding
+          setOnboardingComplete={setOnboardingComplete}
+          setIsFirstLogIn={setIsFirstLogIn}
+        />
       )}
 
       {onboardingComplete && !loading && (

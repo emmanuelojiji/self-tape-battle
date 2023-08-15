@@ -2,7 +2,7 @@ import "./Leaderboard.scss";
 
 const Leaderboard = () => {
   return (
-    <div className="leaderboard">
+    <div className="leaderboard app-homepage-page">
       <h1>Leaderboard</h1>
     </div>
   );

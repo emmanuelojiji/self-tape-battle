@@ -47,7 +47,7 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
   useEffect(() => {
     if (id === storedUserId) {
       setCurrentPage("profile");
-      setSlidePosition(80);
+      setSlidePosition(160);
     }
 
     const getUserInfo = async () => {
@@ -90,7 +90,7 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
   }, [id]);
 
   return (
-    <div className="profile">
+    <div className="profile app-homepage-page">
       {modalVisible && (
         <VideoModal
           selectedVideo={selectedVideo}

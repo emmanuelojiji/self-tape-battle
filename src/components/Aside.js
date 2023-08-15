@@ -8,18 +8,21 @@ import arena from "../media/icon-arena.svg";
 import profile from "../media/icon-profile.svg";
 import directory from "../media/icon-search.svg";
 
-const Aside = ({currentPage, setCurrentPage, slidePosition, setSlidePosition}) => {
- 
-
+const Aside = ({
+  currentPage,
+  setCurrentPage,
+  slidePosition,
+  setSlidePosition,
+}) => {
   const navigate = useNavigate();
-
-  const changePage = (page) => {
-    setCurrentPage(page);
-  };
 
   const { user, storedUserId } = useAuth();
 
-
+  const handleSetSlidePosition = (number) => {
+    console.log("Setting slide position:", number);
+    setSlidePosition(number);
+    console.log("Slide position after set:", slidePosition);
+  };
 
   return (
     <aside>
@@ -34,7 +37,7 @@ const Aside = ({currentPage, setCurrentPage, slidePosition, setSlidePosition}) =
           className={currentPage === "arena" ? "active" : null}
           onClick={() => {
             setCurrentPage("arena");
-            setSlidePosition(0);
+            handleSetSlidePosition(0);
           }}
         >
           <div
@@ -56,12 +59,43 @@ const Aside = ({currentPage, setCurrentPage, slidePosition, setSlidePosition}) =
             </svg>
           </div>
         </Link>
+
+        <Link
+          to="/home/leaderboard"
+          className={currentPage === "leaderboard" ? "active" : null}
+          onClick={() => {
+            setCurrentPage("leaderboard");
+            handleSetSlidePosition(80);
+          }}
+        >
+          <div
+            className={`nav-icon ${
+              currentPage === "leaderboard" ? "active" : null
+            }`}
+          >
+            <svg
+              width="20"
+              height="21"
+              viewBox="0 0 20 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.8325 19.6445H6.83252M12.8325 19.6445V11.2445C12.8325 11.0854 12.7693 10.9328 12.6568 10.8203C12.5443 10.7078 12.3916 10.6445 12.2325 10.6445H7.43252C7.27339 10.6445 7.12078 10.7078 7.00826 10.8203C6.89573 10.9328 6.83252 11.0854 6.83252 11.2445V19.6445M12.8325 19.6445H18.2325C18.3916 19.6445 18.5443 19.5813 18.6568 19.4688C18.7693 19.3563 18.8325 19.2037 18.8325 19.0445V16.7445C18.8325 16.5854 18.7693 16.4328 18.6568 16.3203C18.5443 16.2078 18.3916 16.1445 18.2325 16.1445H13.4325C13.2734 16.1445 13.1208 16.2078 13.0083 16.3203C12.8957 16.4328 12.8325 16.5854 12.8325 16.7445V19.6445ZM6.83252 19.6445V14.7445C6.83252 14.5854 6.76931 14.4328 6.65678 14.3203C6.54426 14.2078 6.39165 14.1445 6.23252 14.1445H1.43252C1.27339 14.1445 1.12078 14.2078 1.00826 14.3203C0.895734 14.4328 0.83252 14.5854 0.83252 14.7445V19.0445C0.83252 19.2037 0.895734 19.3563 1.00826 19.4688C1.12078 19.5813 1.27339 19.6445 1.43252 19.6445H6.83252ZM8.63852 3.75755L9.54752 1.83055C9.57206 1.77546 9.61204 1.72866 9.66262 1.69583C9.7132 1.66299 9.77221 1.64551 9.83252 1.64551C9.89283 1.64551 9.95184 1.66299 10.0024 1.69583C10.053 1.72866 10.093 1.77546 10.1175 1.83055L11.0275 3.75755L13.0595 4.06855C13.3205 4.10855 13.4245 4.44455 13.2355 4.63655L11.7655 6.13655L12.1125 8.25455C12.1565 8.52655 11.8845 8.73455 11.6505 8.60555L9.83252 7.60555L8.01452 8.60555C7.78152 8.73355 7.50852 8.52655 7.55252 8.25455L7.89952 6.13655L6.42952 4.63655C6.23952 4.44455 6.34452 4.10855 6.60452 4.06855L8.63852 3.75755Z"
+                stroke="#626262"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+        </Link>
         <Link
           to={`/home/profile/${storedUserId}`}
           className={currentPage === "profile" ? "active" : null}
           onClick={() => {
             setCurrentPage("profile");
-            setSlidePosition(80);
+            handleSetSlidePosition(160);
           }}
         >
           <svg
@@ -85,13 +119,14 @@ const Aside = ({currentPage, setCurrentPage, slidePosition, setSlidePosition}) =
             />
           </svg>
         </Link>
+       
 
         <Link
           to="/home/directory"
           className={currentPage === "directory" ? "active" : null}
           onClick={() => {
             setCurrentPage("directory");
-            setSlidePosition(80 * 2);
+            handleSetSlidePosition(240);
           }}
         >
           <svg

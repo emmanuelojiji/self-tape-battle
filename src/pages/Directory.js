@@ -22,7 +22,7 @@ const Directory = ({setCurrentPage, setSlidePosition}) => {
 
   useEffect(() => {
     setCurrentPage("directory")
-    setSlidePosition(80 * 2)
+    setSlidePosition(80 * 3)
     getUsers();
   }, []);
 

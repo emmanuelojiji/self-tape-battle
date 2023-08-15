@@ -13,7 +13,7 @@ import { doc, setDoc } from "firebase/firestore";
 import logo from "../media/logo.svg";
 import { useAuth } from "../AuthContext";
 
-const SignUp = () => {
+const SignUp = ({ setIsFirstLogIn }) => {
   const [role, setRole] = useState("performer");
 
   const [email, setEmail] = useState("");
@@ -70,6 +70,7 @@ const SignUp = () => {
         //await signInWithEmailAndPassword(auth, email, password);
 
         navigate("/home");
+
       } catch (error) {
         console.log(error.message);
       }

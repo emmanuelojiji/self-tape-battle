@@ -22,6 +22,7 @@ import Homepage from "./pages/Homepage";
 import { useAuth } from "./AuthContext";
 import { db } from "./firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
+import PraiseModal from "./components/PraiseModal";
 
 function App() {
   const { user, storedUserId } = useAuth();
@@ -32,6 +33,8 @@ function App() {
 
   const [currentPage, setCurrentPage] = useState("arena");
   const [slidePosition, setSlidePosition] = useState(0);
+
+  const [isFirstLogIn, setIsFirstLogIn] = useState(false);
 
   console.log(onboardingComplete);
 
@@ -44,7 +47,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/login" element={<LogIn />}></Route>
-          <Route path="/signup" element={<SignUp />}></Route>
+          <Route
+            path="/signup"
+            element={
+              <SignUp
+                isFirstLogIn={isFirstLogIn}
+                setIsFirstLogIn={setIsFirstLogIn}
+              />
+            }
+          ></Route>
           {storedUserId === "yO8dJM33Qqayb0VZjZAdSOJdOM42" && (
             <Route path="/admin" element={<Admin />}></Route>
           )}
@@ -58,6 +69,8 @@ function App() {
                   setCurrentPage={setCurrentPage}
                   slidePosition={slidePosition}
                   setSlidePosition={setSlidePosition}
+                  isFirstLogIn={isFirstLogIn}
+                  setIsFirstLogIn={setIsFirstLogIn}
                 />
               ) : (
                 <Navigate to="/login" />
@@ -90,6 +103,8 @@ function App() {
                 />
               }
             ></Route>
+
+            <Route path="leaderboard" element={<Leaderboard />}></Route>
             <Route
               path="profile"
               element={

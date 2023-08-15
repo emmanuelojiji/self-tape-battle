@@ -26,7 +26,7 @@ const Battles = () => {
 
   const [activeBattle, setActiveBattle] = useState();
   return (
-    <div className="battles">
+    <div className="battles app-homepage-page">
      
     <h2>Battles</h2>
 

@@ -9,7 +9,7 @@ import { collection, doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useAuth } from "../AuthContext";
 
-const PerformerForm = ({ setOnboardingComplete }) => {
+const PerformerForm = ({ setOnboardingComplete, setIsFirstLogIn }) => {
   const { user, storedUserId } = useAuth();
 
   const [step, setStep] = useState(1);
@@ -50,7 +50,8 @@ const PerformerForm = ({ setOnboardingComplete }) => {
             headshot: url,
           });
         } catch {}
-        window.location.reload();
+        setOnboardingComplete(true);
+        setIsFirstLogIn(true);
       };
 
       const uploadToStorage = () => {
