@@ -2,7 +2,14 @@ import React, { useEffect, useReducer, useRef, useState } from "react";
 import Button from "./Button";
 import "./UploadModal.scss";
 import { auth, db, storage } from "../firebaseConfig";
-import { collection, doc, setDoc, getDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import PraiseModal from "./PraiseModal";
 import { useAuth } from "../AuthContext";
@@ -20,7 +27,6 @@ const UploadModal = ({
 
   const [loading, setLoading] = useState(false);
 
-
   const uploadToFirestore = async (url) => {
     try {
       const entriesCollection = collection(db, "battles", id, "entries");
@@ -37,14 +43,22 @@ const UploadModal = ({
         battleId: id,
         time: Timestamp.now(),
         url: url,
-        votes: 0
+        votes: 0,
+      });
+
+      const userDocRef = doc(db, "users", storedUserId);
+
+      const userDoc = await getDoc(userDocRef);
+
+      await updateDoc(userDocRef, {
+        coins: userDoc.data().coins + 1,
       });
 
       setUploadModalVisible(false);
       setFile(null);
 
       setPraiseModalVisible(true);
-      setPraiseModalType("upload")
+      setPraiseModalType("upload");
     } catch (error) {
       console.log(error);
     }
@@ -69,42 +83,45 @@ const UploadModal = ({
 
   return (
     <>
-    <div className="upload-modal" onClick={() => setUploadModalVisible(false)}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <h3>Upload Tape</h3>
-        <input
-          type="file"
-          style={{ display: "none" }}
-          ref={fileInputRef}
-          onChange={(e) => {
-            setFile(e.target.files[0]);
-            console.log(file);
-          }}
-        ></input>
-        {loading ? (
-          <h3>Uploading..</h3>
-        ) : (
-          <div className="upload-area">
-            {file ? (
-              <p>{file.name}</p>
-            ) : (
-              <p onClick={() => fileInputRef.current.click()}>
-                Click to upload
-              </p>
-            )}
-          </div>
-        )}
+      <div
+        className="upload-modal"
+        onClick={() => setUploadModalVisible(false)}
+      >
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
+          <h3>Upload Tape</h3>
+          <input
+            type="file"
+            style={{ display: "none" }}
+            ref={fileInputRef}
+            onChange={(e) => {
+              setFile(e.target.files[0]);
+              console.log(file);
+            }}
+          ></input>
+          {loading ? (
+            <h3>Uploading..</h3>
+          ) : (
+            <div className="upload-area">
+              {file ? (
+                <p>{file.name}</p>
+              ) : (
+                <p onClick={() => fileInputRef.current.click()}>
+                  Click to upload
+                </p>
+              )}
+            </div>
+          )}
 
-        <Button
-          text="Upload"
-          onClick={() => {
-            setLoading(true);
-            uploadToStorage();
-          }}
-          disabled={!file}
-        />
+          <Button
+            text="Upload"
+            onClick={() => {
+              setLoading(true);
+              uploadToStorage();
+            }}
+            disabled={!file}
+          />
+        </div>
       </div>
-    </div>
     </>
   );
 };
