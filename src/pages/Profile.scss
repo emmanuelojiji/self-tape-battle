@@ -48,8 +48,8 @@
 }
 
 .profile-name {
-  margin-bottom: 15px;
   text-transform: capitalize;
+  margin-bottom: 0;
 }
 
 .city {
@@ -87,5 +87,8 @@
 .name-rank-wrap{
   display: flex;
   gap: 15px;
+  align-items: center;
+  margin-bottom: 15px;
+  
 }
 }

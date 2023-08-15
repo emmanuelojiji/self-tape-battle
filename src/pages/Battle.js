@@ -42,14 +42,16 @@ const Battle = () => {
 
   const [currentUserEntry, setCurrentUserEntry] = useState();
 
+  const [isBattleActive, setIsBattleActive] = useState(true);
+
   const { storedUserId } = useAuth();
 
   useEffect(() => {
     getBattle();
     getEntries();
     getCurrentUserEntry();
+    checkBattleStatus();
     getWinner();
-    console.log(winners);
   }, []);
 
   const getBattle = async () => {
@@ -112,27 +114,41 @@ const Battle = () => {
 
     const newWinners = [];
 
-    if (votesDocs.docs[0].data().votes > 0) {
-      newWinners.push(votesDocs.docs[0].data().uid);
+    if (votesDocs.docs.length > 2) {
+      if (votesDocs.docs[0].data().votes > 0) {
+        newWinners.push(votesDocs.docs[0].data().uid);
+      }
+
+      if (votesDocs.docs[1].data().votes > 0) {
+        newWinners.push(votesDocs.docs[1].data().uid);
+      }
+
+      if (votesDocs.docs[2].data().votes > 0) {
+        newWinners.push(votesDocs.docs[2].data().uid);
+      }
+
+      const usersCollectionRef = collection(db, "users");
+
+      const winnersSnapshot = await getDocs(
+        query(usersCollectionRef, where("uid", "in", newWinners))
+      );
+
+      const winnersData = winnersSnapshot.docs.map((doc) => doc.data());
+
+      setWinners(winnersData);
     }
+  };
 
-    if (votesDocs.docs[1].data().votes > 0) {
-      newWinners.push(votesDocs.docs[1].data().uid);
+  const checkBattleStatus = async () => {
+    const battleRef = doc(db, "battles", id);
+
+    const battleDoc = await getDoc(battleRef);
+
+    if (battleDoc.data().active === true) {
+      setIsBattleActive(true);
+    } else {
+      setIsBattleActive(false);
     }
-
-    if (votesDocs.docs[2].data().votes > 0) {
-      newWinners.push(votesDocs.docs[2].data().uid);
-    }
-
-    const usersCollectionRef = collection(db, "users");
-
-    const winnersSnapshot = await getDocs(
-      query(usersCollectionRef, where("uid", "in", newWinners))
-    );
-
-    const winnersData = winnersSnapshot.docs.map((doc) => doc.data());
-
-    setWinners(winnersData);
   };
 
   return (
@@ -173,17 +189,21 @@ const Battle = () => {
         )}
       </div>
 
-      <h2>Winners:</h2>
-      <div className="winners-container">
-        {winners.map((winner) => (
-          <UserCard
-            firstName={winner.first_name}
-            lastName={winner.last_name}
-            userId={winner.uid}
-            image={winner.headshot}
-          />
-        ))}
-      </div>
+      {!isBattleActive && (
+        <div>
+          <h3>Winners</h3>
+          <div className="winners-container">
+            {winners.map((winner) => (
+              <UserCard
+                firstName={winner.first_name}
+                lastName={winner.last_name}
+                userId={winner.uid}
+                image={winner.headshot}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="entry-card-container">
         {currentUserEntry && (

@@ -52,6 +52,8 @@ aside {
   .logo {
     width: 80px;
   }
+
+ 
 }
 
 .disabled {
@@ -66,7 +68,7 @@ aside {
   color: white;
 }
 
-nav-icon {
+.nav-icon {
   height: 60px;
   width: 60px;
   display: flex;
@@ -74,6 +76,12 @@ nav-icon {
   justify-content: center;
   position: relative;
   z-index: 1000;
+  border-radius: 15px;
+  transition: 0.2s ease-in-out;
+
+  &:hover{
+    opacity: 0.5;
+  }
 }
 
 .nav-slider {

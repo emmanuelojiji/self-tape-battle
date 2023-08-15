@@ -45,7 +45,7 @@ function App() {
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/login" element={<LogIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
-          {storedUserId === "8rKN8dr2sfY1WbEMxBtsJYF5yc23" && (
+          {storedUserId === "yO8dJM33Qqayb0VZjZAdSOJdOM42" && (
             <Route path="/admin" element={<Admin />}></Route>
           )}
 

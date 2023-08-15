@@ -71,7 +71,7 @@ const UploadModal = ({
     <>
     <div className="upload-modal" onClick={() => setUploadModalVisible(false)}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <h2>Upload Tape</h2>
+        <h3>Upload Tape</h3>
         <input
           type="file"
           style={{ display: "none" }}
