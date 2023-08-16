@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import Avatar from "./Avatar";
 import "./UserCard.scss";
 
-const UserCard = ({ firstName, lastName, role, userId, image}) => {
+const UserCard = ({ firstName, lastName, role, userId, image, imageSize}) => {
   return (
     <Link to={`/home/profile/${userId}`}>
       <div className="user-card">
-        <Avatar image={image} size="100" borderRadius="10px"/>
+        <Avatar image={image} size={imageSize} borderRadius="10px"/>
         <div>
           <h3>{`${firstName + " " + lastName}`}</h3>
           <p>{role}</p>

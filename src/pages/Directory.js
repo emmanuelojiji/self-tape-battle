@@ -4,7 +4,7 @@ import UserCard from "../components/UserCard";
 import { db } from "../firebaseConfig";
 import "./Directory.scss";
 
-const Directory = ({setCurrentPage, setSlidePosition}) => {
+const Directory = ({ setCurrentPage, setSlidePosition }) => {
   const usersRef = collection(db, "users");
   const [users, setUsers] = useState([]);
   const getUsers = async () => {
@@ -19,10 +19,9 @@ const Directory = ({setCurrentPage, setSlidePosition}) => {
     }
   };
 
-
   useEffect(() => {
-    setCurrentPage("directory")
-    setSlidePosition(80 * 3)
+    setCurrentPage("directory");
+    setSlidePosition(80 * 3);
     getUsers();
   }, []);
 
@@ -60,6 +59,7 @@ const Directory = ({setCurrentPage, setSlidePosition}) => {
             role={user.role}
             userId={user.uid}
             image={user.headshot}
+            imageSize="100"
           />
         ))}
       </div>

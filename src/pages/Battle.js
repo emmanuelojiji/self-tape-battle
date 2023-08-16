@@ -176,7 +176,9 @@ const Battle = () => {
         />
       )}
       <div className="battle-header">
-        <div>{<h1>{battle.name}</h1>}</div>
+        <div>
+          <h1>{battle.name}</h1> <h3>Prize</h3>
+        </div>
 
         {battle.active && !currentUserEntry && (
           <Button
