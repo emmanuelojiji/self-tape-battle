@@ -32,14 +32,18 @@ const AppHomepage = ({
   useEffect(() => {
     const checkIfOnboarded = async () => {
       const userDocRef = doc(db, "users", storedUserId);
-      const userDoc = await getDoc(userDocRef);
 
-      setOnboardingComplete(userDoc.data().onboarding_complete);
+      try {
+        const userDoc = await getDoc(userDocRef);
 
-      setLoading(false);
-      console.log("Onboarding complete?:" + onboardingComplete);
+        setOnboardingComplete(userDoc.data().onboarding_complete);
+
+        console.log("Onboarding complete?:" + onboardingComplete);
+        setLoading(false);
+      } catch {
+        console.log("error");
+      }
     };
-
     checkIfOnboarded();
   }, [user, storedUserId]);
 

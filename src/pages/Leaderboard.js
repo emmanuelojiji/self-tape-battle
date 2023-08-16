@@ -50,7 +50,7 @@ const Leaderboard = () => {
   });
 
   return (
-    <div className="leaderboard app-homepage-page">
+    <div className="leaderboard fade-in">
       <h1>Leaderboard</h1>
       <div className="board-container">
         <Board

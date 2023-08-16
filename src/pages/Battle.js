@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Battle.scss";
 
@@ -59,7 +59,9 @@ const Battle = () => {
       const battlesCollectionRef = collection(db, "battles");
       const battleDoc = await getDoc(doc(battlesCollectionRef, id));
 
-      setBattle(battleDoc.data());
+      setTimeout(() => {
+        setBattle(battleDoc.data());
+      }, 300);
     } catch (error) {
       console.log(error);
     }
@@ -151,97 +153,116 @@ const Battle = () => {
     }
   };
 
+  const BattleSkeleton = () => (
+    <div className="battle-header-left-skeleton">
+      <div className="skeleton"></div>
+      <div className="skeleton"></div>
+      <div className="skeleton"></div>
+    </div>
+  );
+
   return (
-    <div>
-      {uploadModalVisible && (
-        <UploadModal
-          setUploadModalVisible={setUploadModalVisible}
-          setPraiseModalVisible={setPraiseModalVisible}
-          setPraiseModalType={setPraiseModalType}
-        />
-      )}
-      {praiseModalVisible && (
-        <PraiseModal
-          setPraiseModalVisible={setPraiseModalVisible}
-          type={praiseModalType}
-        />
-      )}
-      {modalVisible && (
-        <VideoModal
-          selectedVideo={selectedVideo}
-          setModalVisible={setModalVisible}
-          setPraiseModalVisible={setPraiseModalVisible}
-          setPraiseModalType={setPraiseModalType}
-          battleId={battleId}
-        />
-      )}
-      <div className="battle-header">
-        <div className="battle-header-left">
-          <h1>{battle.name}</h1>
-
-          {typeof battle.prize === "number" ? <h3>Coins:</h3> : <h3>Prize:</h3>}
-          <h3>{battle.prize}</h3>
-        </div>
-
-        {battle.active && !currentUserEntry && (
-          <Button
-            type="filled"
-            text="Upload tape"
-            onClick={() => {
-              setUploadModalVisible(true);
-            }}
+    <>
+      <div className="app-homepage-page">
+        {uploadModalVisible && (
+          <UploadModal
+            setUploadModalVisible={setUploadModalVisible}
+            setPraiseModalVisible={setPraiseModalVisible}
+            setPraiseModalType={setPraiseModalType}
           />
         )}
-      </div>
+        {praiseModalVisible && (
+          <PraiseModal
+            setPraiseModalVisible={setPraiseModalVisible}
+            type={praiseModalType}
+          />
+        )}
+        {modalVisible && (
+          <VideoModal
+            selectedVideo={selectedVideo}
+            setModalVisible={setModalVisible}
+            setPraiseModalVisible={setPraiseModalVisible}
+            setPraiseModalType={setPraiseModalType}
+            battleId={battleId}
+          />
+        )}
 
-      {!isBattleActive && (
-        <div>
-          <h3>Winners</h3>
-          <div className="winners-container">
-            {winners.map((winner) => (
-              <UserCard
-                firstName={winner.first_name}
-                lastName={winner.last_name}
-                userId={winner.uid}
-                image={winner.headshot}
+        {!battle ? (
+          <BattleSkeleton />
+        ) : (
+          <div className="battle-header fade-in">
+            <div className="battle-header-left">
+              <h1>{battle.name}</h1>
+
+              {typeof battle.prize === "number" ? (
+                <h3>Coins:</h3>
+              ) : (
+                <h3>Prize:</h3>
+              )}
+              <h3>{battle.prize}</h3>
+            </div>
+
+            {battle.active && !currentUserEntry && (
+              <Button
+                type="filled"
+                text="Upload tape"
+                onClick={() => {
+                  setUploadModalVisible(true);
+                }}
               />
-            ))}
+            )}
           </div>
-        </div>
-      )}
-
-      <div className="entry-card-container">
-        {currentUserEntry && (
-          <VideoCard
-            title={currentUserEntry.name}
-            uid={currentUserEntry.uid}
-            onClick={() => {
-              setSelectedVideo(currentUserEntry.uid);
-              setBattleId(currentUserEntry.battleId);
-              setModalVisible(true);
-              console.log(selectedVideo);
-            }}
-          />
         )}
-        {entries.map((entry) => {
-          return (
+
+        {!isBattleActive && (
+          <div>
+            <h3>Winners</h3>
+            <div className="winners-container">
+              {winners.map((winner) => (
+                <UserCard
+                  firstName={winner.first_name}
+                  lastName={winner.last_name}
+                  userId={winner.uid}
+                  image={winner.headshot}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="entry-card-container">
+          {currentUserEntry && (
             <VideoCard
-              key={entry.name}
-              title={entry.name}
-              selectedVideo={selectedVideo}
-              uid={entry.uid}
+              title={currentUserEntry.name}
+              uid={currentUserEntry.uid}
               onClick={() => {
-                setSelectedVideo(entry.uid);
-                setBattleId(entry.battleId);
+                setSelectedVideo(currentUserEntry.uid);
+                setBattleId(currentUserEntry.battleId);
                 setModalVisible(true);
                 console.log(selectedVideo);
               }}
-              battleId={battleId}
             />
-          );
-        })}
+          )}
+          {entries.map((entry) => {
+            return (
+              <VideoCard
+                key={entry.name}
+                title={entry.name}
+                selectedVideo={selectedVideo}
+                uid={entry.uid}
+                onClick={() => {
+                  setSelectedVideo(entry.uid);
+                  setBattleId(entry.battleId);
+                  setModalVisible(true);
+                  console.log(selectedVideo);
+                }}
+                battleId={battleId}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

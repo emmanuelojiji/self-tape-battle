@@ -39,7 +39,7 @@ const Directory = ({ setCurrentPage, setSlidePosition }) => {
 
   const displayedUsers = userInput ? handleUserSearch() : users;
   return (
-    <div className="directory">
+    <div className="directory fade-in">
       <h2 className="page-title">Directory</h2>
       <input
         type="text"

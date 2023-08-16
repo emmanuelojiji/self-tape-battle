@@ -90,7 +90,7 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
   }, [id]);
 
   return (
-    <div className="profile app-homepage-page">
+    <div className="profile fade-in">
       {modalVisible && (
         <VideoModal
           selectedVideo={selectedVideo}

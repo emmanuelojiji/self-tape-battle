@@ -49,7 +49,7 @@ const VideoCard = ({ onClick, title, uid, image }) => {
     <div
       className="video-card"
       onClick={onClick}
-      style={{ background: `url(${headshot})` }}
+      style={{ backgroundImage: `url(${headshot})` }}
     >
       <h1>{title}</h1>
       <div className="num-of-votes">{votes}</div>

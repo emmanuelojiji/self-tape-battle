@@ -26,9 +26,8 @@ const Battles = () => {
 
   const [activeBattle, setActiveBattle] = useState();
   return (
-    <div className="battles app-homepage-page">
-     
-    <h2>Battles</h2>
+    <div className="battles fade-in">
+      <h2>Battles</h2>
 
       <div className="card-container">
         {battles.map((battle) => (

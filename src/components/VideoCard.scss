@@ -12,8 +12,6 @@
   height: 300px;
   max-width: 300px;
   border-radius: 1rem;
-  background: rgb(237, 237, 237);
-  background: rgb(35, 35, 35);
   transition: 0.2s ease-in-out;
   color: white;
   padding: 30px;
@@ -22,6 +20,7 @@
   justify-content: end;
   background-size: cover !important;
   background-position: center !important;
+  background: rgb(96, 104, 112);
 
   @media only screen and (max-width: 900px) {
     max-width: 100%;

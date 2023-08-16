@@ -2,27 +2,52 @@
   height: 100%;
   overflow: hidden;
 
-  h2{
+  h2 {
     margin-bottom: 50px;
-  
-}
+  }
 }
 
 .battle-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
   text-transform: capitalize;
+  transition: 0.3s ease-in-out;
+  
 }
 
 .entry-card-container {
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
+  margin-top: 50px;
 }
 
-.winners-container{
+.winners-container {
   display: flex;
   margin-bottom: 50px;
+}
+
+.battle-header-left-skeleton {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  .skeleton {
+    height: 25px;
+    background: rgb(96, 104, 112);
+    border-radius: 500px;
+    &:nth-child(1) {
+      width: 200px;
+    }
+
+    &:nth-child(2) {
+      width: 150px;
+    }
+
+    &:nth-child(3) {
+      width: 150px;
+    }
+  }
 }
