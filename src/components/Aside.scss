@@ -7,7 +7,7 @@ aside {
   align-items: center;
   margin-right: 0px;
 
-  padding-top: 20px;
+ 
   gap: 20px;
 
   img {
@@ -22,7 +22,7 @@ aside {
   nav {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: 20px;
     position: relative;
     gap: 20px;
   }
@@ -49,9 +49,6 @@ aside {
     }
   }
 
-  .logo {
-    width: 80px;
-  }
 
  
 }

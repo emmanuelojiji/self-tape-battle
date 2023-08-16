@@ -7,6 +7,7 @@ import { Navigate, useNavigate, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../AuthContext";
 import CountUp from "react-countup";
+import Logo from "../media/logo-white.svg"
 
 const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
   const { user, storedUserId } = useAuth();
@@ -43,6 +44,7 @@ const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
   const navigate = useNavigate();
   return (
     <header>
+      <img src={Logo} className="logo" />
       <div className="header-right">
         {isPeformer && <Coins />}
 

@@ -26,7 +26,7 @@ const Aside = ({
 
   return (
     <aside>
-      <img src={Logo} className="logo" />
+      
       <nav>
         <div
           className="nav-slider"
