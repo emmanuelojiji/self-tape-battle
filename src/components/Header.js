@@ -19,6 +19,8 @@ const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
 
   const rankDisplay = rank.replace("_", " ");
 
+  const [isPeformer, setIsPerformer] = useState(false);
+
   useEffect(() => {
     if (user) {
       const userDocRef = doc(db, "users", storedUserId);
@@ -28,6 +30,7 @@ const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
           setHeadshotURL(userDoc.data().headshot);
           setName(userDoc.data().first_name);
           setRank(userDoc.data().ranking);
+          setIsPerformer(userDoc.data().role === "performer" && true);
         } catch {
           console.log("Couldn't get user doc!");
         }
@@ -41,7 +44,7 @@ const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
   return (
     <header>
       <div className="header-right">
-        <Coins />
+        {isPeformer && <Coins />}
 
         <Link
           to={`/home/profile/${storedUserId}`}

@@ -6,17 +6,19 @@
 .board {
   width: 100%;
   max-width: 400px;
-  height: 600px;
+  height: fit-content;
   background: #0d1a28;
   border-radius: 10px;
   margin-top: 50px;
   padding: 50px;
-  overflow: scroll;
-  position: relative;
+  
+
+
+  background: #0D1A28;
 
   &:nth-child(2) {
     animation: card-spread 0.3s forwards ease-in-out;
-    z-index: -1;
+
   }
 
   h3 {
@@ -27,6 +29,8 @@
 .board-row {
   display: flex;
   align-items: center;
+  position: relative;
+  z-index: 300000;
 }
 
 @keyframes card-spread {
