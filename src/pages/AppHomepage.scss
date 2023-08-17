@@ -17,6 +17,7 @@
 }
 
 .app-homepage-content {
+  height: 100%;
   flex: 1;
   overflow: scroll;
   padding-top: 30px;
@@ -26,5 +27,6 @@
   //background: rgb(245, 245, 245);
   @media only screen and (max-width: 900px) {
     padding-top: 25px;
+    padding-bottom: 70px;
   }
 }
