@@ -6,6 +6,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
@@ -59,18 +60,21 @@ const SignUp = ({ setIsFirstLogIn }) => {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
 
+        await sendEmailVerification(auth.currentUser);
+
         await setDoc(doc(db, "users", auth.currentUser.uid), {
           uid: auth.currentUser.uid,
           email: email,
           role: role,
           coins: 5,
           ranking: "cameo_star",
+          onboarding_complete: false,
+          email_verified: false,
         });
 
         //await signInWithEmailAndPassword(auth, email, password);
 
         navigate("/home");
-
       } catch (error) {
         console.log(error.message);
       }
