@@ -67,7 +67,7 @@ const SignUp = ({ setIsFirstLogIn }) => {
           email: email,
           role: role,
           coins: 5,
-          ranking: "cameo_star",
+          rank: "cameo_star",
           onboarding_complete: false,
           email_verified: false,
         });

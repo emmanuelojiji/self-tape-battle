@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import UserCard from "../components/UserCard";
 import { db } from "../firebaseConfig";
@@ -6,10 +6,11 @@ import "./Directory.scss";
 
 const Directory = ({ setCurrentPage, setSlidePosition }) => {
   const usersRef = collection(db, "users");
+  const alphabeticalOrderQuery = query(usersRef, orderBy("first_name", "asc"));
   const [users, setUsers] = useState([]);
   const getUsers = async () => {
     try {
-      const usersDocs = await getDocs(usersRef);
+      const usersDocs = await getDocs(alphabeticalOrderQuery);
       const user = usersDocs.docs.map((doc) => doc.data());
       console.log(user);
       setUsers(user);
