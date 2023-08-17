@@ -11,11 +11,6 @@ body {
   font-family: "Inter";
   outline: none;
 
-  &:hover {
-    @media only screen and (max-width: 900px) {
-      pointer-events: none;
-    }
-  }
 }
 
 span {
