@@ -28,7 +28,8 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
   const [city, setCity] = useState("");
   const [bio, setBio] = useState("");
   const [link, setLink] = useState();
-  const [rank, setRank] = useState();
+  const [rank, setRank] = useState("");
+  const [role, setRole] = useState("");
 
   const { id } = useParams();
 
@@ -59,9 +60,11 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
         setLastName(userData.last_name);
         setCity(userData.city);
         setBio(userData.bio);
-        setRank(userData.ranking);
+
+        setRank(userData.rank);
         setLink(userData.link);
         setHeadshotURL(userData.headshot);
+        setRole(userData.role);
 
         setLoading(false);
       } catch {
@@ -87,7 +90,10 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
 
     getUserInfo();
     getUserEntries();
+    console.log("RANK:" + rank);
   }, [id]);
+
+  console.log("Profile Component Rendered");
 
   return (
     <div className="profile fade-in">
@@ -111,7 +117,7 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
                 <h2 className="profile-name">
                   {firstName} {lastName}
                 </h2>
-                <RankPill rank={rank} />
+                {rank && <RankPill rank={rank} />}
               </div>
               <p className="bio">{bio}</p>
               <div className="city-bio-wrap">

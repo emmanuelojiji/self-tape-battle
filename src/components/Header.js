@@ -7,7 +7,7 @@ import { Navigate, useNavigate, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../AuthContext";
 import CountUp from "react-countup";
-import Logo from "../media/logo-white.svg"
+import Logo from "../media/logo-white.svg";
 
 const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
   const { user, storedUserId } = useAuth();
@@ -18,7 +18,7 @@ const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
 
   const [rank, setRank] = useState("");
 
-  const rankDisplay = rank.replace("_", " ");
+  const rankDisplay = rank && rank.replace("_", " ");
 
   const [isPeformer, setIsPerformer] = useState(false);
 
@@ -30,7 +30,7 @@ const Header = ({ currentPage, setCurrentPage, setSlidePosition }) => {
           const userDoc = await getDoc(userDocRef);
           setHeadshotURL(userDoc.data().headshot);
           setName(userDoc.data().first_name);
-          setRank(userDoc.data().ranking);
+          setRank(userDoc.data().rank);
           setIsPerformer(userDoc.data().role === "performer" && true);
         } catch {
           console.log("Couldn't get user doc!");
