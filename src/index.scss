@@ -8,29 +8,40 @@ body {
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: 'Inter';
+  font-family: "Inter";
   outline: none;
+
+  &:hover {
+    @media only screen and (max-width: 900px) {
+      pointer-events: none;
+    }
+  }
 }
 
-span{
+span {
   display: block;
 }
 
-.form-container{
+.form-container {
   width: 100%;
   max-width: 400px;
 }
 
-h1,h2,h3,h4,h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   letter-spacing: -0.5px;
   color: white;
 }
 
-h2{
+h2 {
   font-size: 28px !important;
 }
 
-h2{
+h2 {
   font-size: 40px !important;
 
   @media only screen and (max-width: 900px) {
@@ -38,27 +49,24 @@ h2{
   }
 }
 
-h3{
+h3 {
   font-size: 22px;
-
 }
 
-.page-title{
+.page-title {
   margin-bottom: 50px;
 }
 
-.fade-in{
+.fade-in {
   animation: 0.5s fade-in forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
   }
-  
-  @keyframes fade-in{
-      0%{
-          opacity: 0;
-      }
-  
-      100%{
-          opacity: 1;
-      }
+
+  100% {
+    opacity: 1;
   }
-  
-  
+}

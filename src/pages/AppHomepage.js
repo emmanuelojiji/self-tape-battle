@@ -15,6 +15,7 @@ import { auth, db } from "../firebaseConfig";
 import { useAuth } from "../AuthContext";
 import Onboarding from "./Onboarding";
 import PraiseModal from "../components/PraiseModal";
+import Loading from "../components/Loading";
 
 const AppHomepage = ({
   currentPage,
@@ -54,7 +55,7 @@ const AppHomepage = ({
   return (
     <div className="app-homepage">
       {isFirstLogIn && <PraiseModal />}
-      {loading && <h1>LOADING</h1>}
+      {loading && <Loading/>}
 
       {!emailVerified && !loading && <h1>You need to verify your email</h1>}
 
