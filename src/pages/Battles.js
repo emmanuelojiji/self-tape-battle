@@ -27,7 +27,7 @@ const Battles = () => {
   const [activeBattle, setActiveBattle] = useState();
   return (
     <div className="battles fade-in">
-      <h2>Battles</h2>
+      <h1>Battles</h1>
 
       <div className="card-container">
         {battles.map((battle) => (

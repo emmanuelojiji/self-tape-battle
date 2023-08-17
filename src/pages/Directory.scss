@@ -5,13 +5,15 @@
 .directory {
   .card-container {
     display: flex;
-    flex-direction: column;
     width: 100%;
     flex-wrap: wrap;
-    gap: 15px;
+
+    .user-card {
+    }
   }
 
-  input{
+  input {
     background: rgba(255, 255, 255, 0.1058823529);
+    height: 60px !important;
   }
 }
