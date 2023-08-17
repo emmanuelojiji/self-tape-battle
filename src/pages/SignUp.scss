@@ -1,12 +1,12 @@
 .sign-up {
   height: 100vh;
   display: flex;
+  background: #020f1c;
 
-  .logo{
+  .logo {
     width: 100px;
     margin-bottom: 50px;
-}
-
+  }
 
   .left,
   .right {
@@ -25,10 +25,19 @@
 
   h2 {
     margin-bottom: 50px;
-    color: black;
+    color: white;
   }
 
-  button{
+  button {
     margin-bottom: 20px;
+    width: 100%;
+    border-radius: 5px;
+    height: 50px;
+    background: #ee303c;
+    color: white;
+  }
+
+  span{
+    color: white;
   }
 }

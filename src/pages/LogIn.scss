@@ -1,6 +1,7 @@
 .log-in {
   height: 100vh;
   display: flex;
+  background: #020f1c;
 
   .logo {
     width: 100px;
@@ -30,12 +31,21 @@
 
   h2 {
     margin-bottom: 50px;
-    color: black;
+    color: white;
   }
 
 
     button {
       margin-bottom: 20px;
+      width: 100%;
+      border-radius: 5px;
+      height: 50px;
+      background: #EE303C;
+      color: white;
+    }
+
+    span{
+      color: white;
     }
   
 }

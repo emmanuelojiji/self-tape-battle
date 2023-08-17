@@ -5,11 +5,14 @@ import { db } from "../firebaseConfig";
 import "./Directory.scss";
 
 const Directory = ({ setCurrentPage, setSlidePosition }) => {
-  const usersRef = collection(db, "users");
-  const alphabeticalOrderQuery = query(usersRef, orderBy("first_name", "asc"));
   const [users, setUsers] = useState([]);
   const getUsers = async () => {
     try {
+      const usersRef = collection(db, "users");
+      const alphabeticalOrderQuery = query(
+        usersRef,
+        orderBy("first_name", "asc")
+      );
       const usersDocs = await getDocs(alphabeticalOrderQuery);
       const user = usersDocs.docs.map((doc) => doc.data());
       console.log(user);

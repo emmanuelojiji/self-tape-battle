@@ -11,7 +11,7 @@ import {
 import { auth, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
-import logo from "../media/logo.svg";
+import logo from "../media/logo-white.svg";
 import { useAuth } from "../AuthContext";
 
 const SignUp = ({ setIsFirstLogIn }) => {

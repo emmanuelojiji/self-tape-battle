@@ -4,7 +4,7 @@ import "./LogIn.scss";
 import { auth, db } from "../firebaseConfig";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import logo from "../media/logo.svg";
+import logo from "../media/logo-white.svg";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
