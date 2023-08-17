@@ -1,0 +1,12 @@
+.board-container{
+    @media only screen and (max-width: 900px) {
+        flex-direction: column;
+      }
+
+      .board{
+        @media only screen and (max-width: 900px) {
+           max-width: 100%;
+          }
+      }
+}
+
