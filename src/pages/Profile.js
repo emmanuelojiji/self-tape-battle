@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 import Avatar from "../components/Avatar";
 import { useAuth } from "../AuthContext";
 import RankPill from "../components/RankPill";
+import Tick from "../media/icon-tick.svg";
 
 const Profile = ({ setCurrentPage, setSlidePosition }) => {
   const [loading, setLoading] = useState(true);
@@ -117,6 +118,7 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
                 <h2 className="profile-name">
                   {firstName} {lastName}
                 </h2>
+                {role === "professional" && <img src={Tick} />}
                 {rank && <RankPill rank={rank} />}
               </div>
               <p className="bio">{bio}</p>
@@ -129,22 +131,27 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
             </div>
           )}
         </div>
-        <h3 className="profile-heading">Battles</h3>
-        <div className="video-card-container">
-          {entries.map((entry) => (
-            <VideoCard
-              title={entry.battleName}
-              uid={entry.uid}
-              onClick={() => {
-                setModalVisible(true);
-                setSelectedVideo(entry.uid);
-                setBattleId(entry.battleId);
-              }}
-            />
-          ))}
 
-          {entries.length === 0 && <p>No entries</p>}
-        </div>
+        {role === "performer" && (
+          <>
+            <h3 className="profile-heading">Battles</h3>
+            <div className="video-card-container">
+              {entries.map((entry) => (
+                <VideoCard
+                  title={entry.battleName}
+                  uid={entry.uid}
+                  onClick={() => {
+                    setModalVisible(true);
+                    setSelectedVideo(entry.uid);
+                    setBattleId(entry.battleId);
+                  }}
+                />
+              ))}
+
+              {entries.length === 0 && <p>No entries</p>}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

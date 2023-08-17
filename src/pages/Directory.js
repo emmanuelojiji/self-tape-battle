@@ -40,16 +40,18 @@ const Directory = ({ setCurrentPage, setSlidePosition }) => {
   const displayedUsers = userInput ? handleUserSearch() : users;
   return (
     <div className="directory fade-in">
-      <h1 className="page-title">Find a warrior</h1>
-      <input
-        type="text"
-        className="search directory-search"
-        placeholder="Search for user"
-        onChange={(e) => {
-          setUserInput(e.target.value);
-          handleUserSearch();
-        }}
-      ></input>
+      <div className="directory-header">
+        <h1 className="page-title">Find a warrior</h1>
+        <input
+          type="text"
+          className="search directory-search"
+          placeholder="Search for user"
+          onChange={(e) => {
+            setUserInput(e.target.value);
+            handleUserSearch();
+          }}
+        ></input>
+      </div>
 
       <div className="card-container">
         {displayedUsers.map((user) => (

@@ -46,13 +46,24 @@ const Battle = () => {
 
   const { storedUserId } = useAuth();
 
+  const [role, setRole] = useState("");
+
   useEffect(() => {
     getBattle();
     getEntries();
     getCurrentUserEntry();
     checkBattleStatus();
     getWinner();
+    getUser();
   }, []);
+
+  const getUser = async () => {
+    const userRef = doc(db, "users", storedUserId);
+
+    const userDoc = await getDoc(userRef);
+
+    setRole(userDoc.data().role);
+  };
 
   const getBattle = async () => {
     try {
@@ -202,7 +213,7 @@ const Battle = () => {
               <h3>{battle.prize}</h3>
             </div>
 
-            {battle.active && !currentUserEntry && (
+            {battle.active && !currentUserEntry && role === "performer" && (
               <Button
                 type="filled"
                 text="Upload tape"

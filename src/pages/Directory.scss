@@ -1,5 +1,12 @@
-.directory-search {
-  margin-bottom: 25px;
+.directory-header {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 50px;
+
+  h1 {
+    margin-bottom: 0;
+  }
 }
 
 .directory {
