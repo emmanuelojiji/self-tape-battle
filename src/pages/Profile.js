@@ -91,8 +91,10 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
 
     getUserInfo();
     getUserEntries();
-    console.log("RANK:" + rank);
+    console.log("ROLE:" + role);
   }, [id]);
+
+  console.log("ROLE:" + role);
 
   console.log("Profile Component Rendered");
 
@@ -118,7 +120,9 @@ const Profile = ({ setCurrentPage, setSlidePosition }) => {
                 <h2 className="profile-name">
                   {firstName} {lastName}
                 </h2>
-                {role === "professional" && <img src={Tick} />}
+                {role === "admin" || role === "professional" ? (
+                  <img src={Tick} />
+                ) : null}
                 {rank && <RankPill rank={rank} />}
               </div>
               <p className="bio">{bio}</p>
