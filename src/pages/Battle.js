@@ -22,14 +22,13 @@ import UploadModal from "../components/UploadModal";
 import { useAuth } from "../AuthContext";
 import UserCard from "../components/UserCard";
 
-const Battle = ({praiseModalVisible, setPraiseModalVisible}) => {
+const Battle = ({ praiseModalVisible, setPraiseModalVisible }) => {
   const { id } = useParams();
 
   const [modalVisible, setModalVisible] = useState(false);
 
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
 
-  
   const [praiseModalType, setPraiseModalType] = useState("");
 
   const [battle, setBattle] = useState("");
@@ -242,18 +241,6 @@ const Battle = ({praiseModalVisible, setPraiseModalVisible}) => {
         )}
 
         <div className="entry-card-container">
-          {currentUserEntry && (
-            <VideoCard
-              title={currentUserEntry.name}
-              uid={currentUserEntry.uid}
-              onClick={() => {
-                setSelectedVideo(currentUserEntry.uid);
-                setBattleId(currentUserEntry.battleId);
-                setModalVisible(true);
-                console.log(selectedVideo);
-              }}
-            />
-          )}
           {entries.map((entry) => {
             return (
               <VideoCard

@@ -55,9 +55,9 @@ function App() {
               />
             }
           ></Route>
-          {storedUserId === "yO8dJM33Qqayb0VZjZAdSOJdOM42" && (
+      
             <Route path="/admin" element={<Admin />}></Route>
-          )}
+       
 
           <Route
             path="/home"

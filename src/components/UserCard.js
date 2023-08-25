@@ -18,8 +18,10 @@ const UserCard = ({
       <div className="user-card">
         <Avatar image={image} size={imageSize} borderRadius="10px" />
         <div>
-          <h3>{`${firstName + " " + lastName}`}</h3>
-          {role === "admin" && <img src={Tick} />}
+          <div className="name-tick-wrap">
+            <h3>{`${firstName + " " + lastName}`}</h3>
+            {role === "admin" && <img src={Tick} />}
+          </div>
           <p>{role}</p>
           <p>{description}</p>
         </div>
