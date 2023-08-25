@@ -5,7 +5,7 @@ import PerformerForm from "../components/PerformerForm";
 import ProfessionalForm from "../components/ProfessionalForm";
 import { useEffect } from "react";
 
-const Onboarding = ({ setOnboardingComplete, setIsFirstLogIn }) => {
+const Onboarding = ({ setOnboardingComplete, setWelcomeModalVisible }) => {
   const type = "performer";
 
   return (
@@ -13,7 +13,7 @@ const Onboarding = ({ setOnboardingComplete, setIsFirstLogIn }) => {
       {type === "performer" && (
         <PerformerForm
           setOnboardingComplete={setOnboardingComplete}
-          setIsFirstLogIn={setIsFirstLogIn}
+          setWelcomeModalVisible={setWelcomeModalVisible}
         />
       )}
       {type === "professional" && <ProfessionalForm />}

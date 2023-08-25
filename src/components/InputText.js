@@ -1,7 +1,7 @@
 
 import "./InputText.scss";
 
-const InputText = ({ type, placeholder, onChange, border }) => {
+const InputText = ({ type, placeholder, onChange, border, required }) => {
 
   return (
     <input
@@ -10,6 +10,7 @@ const InputText = ({ type, placeholder, onChange, border }) => {
       placeholder={placeholder}
       onChange={onChange}
       style={{border: border}}
+      required={required}
     />
   );
 };

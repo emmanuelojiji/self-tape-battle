@@ -36,16 +36,15 @@ function App() {
 
   const [isFirstLogIn, setIsFirstLogIn] = useState(false);
 
+  const [praiseModalVisible, setPraiseModalVisible] = useState(false);
+
   console.log(onboardingComplete);
 
   return (
     <BrowserRouter>
       <div className="App">
-        <div className="notice">
-    
-        </div>
+        <div className="notice"></div>
         <Routes>
-      
           <Route path="/login" element={<LogIn />}></Route>
           <Route
             path="/signup"
@@ -71,6 +70,8 @@ function App() {
                   setSlidePosition={setSlidePosition}
                   isFirstLogIn={isFirstLogIn}
                   setIsFirstLogIn={setIsFirstLogIn}
+                  praiseModalVisible={praiseModalVisible}
+                  setPraiseModalVisible={setPraiseModalVisible}
                 />
               ) : (
                 <Navigate to="/login" />
@@ -132,6 +133,8 @@ function App() {
                 <Battle
                   uploadModalVisible={uploadModalVisible}
                   setUploadModalVisible={setUploadModalVisible}
+                  praiseModalVisible={praiseModalVisible}
+                  setPraiseModalVisible={setPraiseModalVisible}
                 />
               }
             ></Route>

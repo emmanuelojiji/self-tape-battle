@@ -9,7 +9,11 @@ import { collection, doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useAuth } from "../AuthContext";
 
-const PerformerForm = ({ setOnboardingComplete, setIsFirstLogIn }) => {
+const PerformerForm = ({
+  setOnboardingComplete,
+  setIsFirstLogIn,
+  setWelcomeModalVisible,
+}) => {
   const { user, storedUserId } = useAuth();
 
   const [step, setStep] = useState(1);
@@ -28,49 +32,54 @@ const PerformerForm = ({ setOnboardingComplete, setIsFirstLogIn }) => {
   const [userFile, setUserFile] = useState();
   const imagePreview = userFile && URL.createObjectURL(userFile);
 
+  const [error, setError] = useState("")
+
   const handleInfo = async () => {
-    try {
-      await updateDoc(doc(db, "users", storedUserId), {
-        first_name: firstName,
-        last_name: lastName,
-        city: city,
-        bio: bio,
-        link: link,
-        onboarding_complete: true,
-      });
-
-      await updateProfile(auth.currentUser, {
-        displayName: `${firstName} ${lastName}`,
-      });
-
-      const uploadToFirestore = async (url) => {
-        const usersCollection = doc(db, "users", storedUserId);
-        try {
-          await updateDoc(usersCollection, {
-            headshot: url,
-          });
-        } catch {}
-        setOnboardingComplete(true);
-        setIsFirstLogIn(true);
-      };
-
-      const uploadToStorage = () => {
-        const fileName = storedUserId;
-        const headshotFileRef = ref(storage, `headshots/${fileName}`);
-
-        uploadBytes(headshotFileRef, userFile).then((snapshot) => {
-          console.log("uploaded!");
-
-          getDownloadURL(headshotFileRef).then((url) => {
-            uploadToFirestore(url);
-          });
+    if (userFile) {
+      try {
+        await updateDoc(doc(db, "users", storedUserId), {
+          first_name: firstName,
+          last_name: lastName,
+          city: city,
+          bio: bio,
+          link: link,
+          onboarding_complete: true,
         });
-      };
 
-      uploadToStorage();
-    } catch (error) {
-      console.log(error.message);
+        await updateProfile(auth.currentUser, {
+          displayName: `${firstName} ${lastName}`,
+        });
+
+        const uploadToFirestore = async (url) => {
+          const usersCollection = doc(db, "users", storedUserId);
+          try {
+            await updateDoc(usersCollection, {
+              headshot: url,
+            });
+          } catch {}
+          setOnboardingComplete(true);
+          setWelcomeModalVisible(true);
+        };
+
+        const uploadToStorage = () => {
+          const fileName = storedUserId;
+          const headshotFileRef = ref(storage, `headshots/${fileName}`);
+
+          uploadBytes(headshotFileRef, userFile).then((snapshot) => {
+            console.log("uploaded!");
+
+            getDownloadURL(headshotFileRef).then((url) => {
+              uploadToFirestore(url);
+            });
+          });
+        };
+
+        uploadToStorage();
+      } catch (error) {
+        console.log(error.message);
+      }
     }
+    setError("Please upload a headshot.")
   };
 
   useEffect(() => {
@@ -79,8 +88,6 @@ const PerformerForm = ({ setOnboardingComplete, setIsFirstLogIn }) => {
 
   return (
     <div className="performer-form">
-      <h1>Performer</h1>
-
       {step === 1 && (
         <div className="step-1 step">
           <h2>Hey! What's your name?</h2>
@@ -123,17 +130,20 @@ const PerformerForm = ({ setOnboardingComplete, setIsFirstLogIn }) => {
             className="upload-image-circle"
             onClick={() => fileInputRef.current.click()}
             style={{ backgroundImage: `url(${imagePreview})` }}
-          ></div>
+          >
+            <span className="upload-cross">+</span>
+          </div>
+          {error && <p className="error">{error}</p>}
           <input
             type="file"
             ref={fileInputRef}
             style={{ display: "none" }}
             onChange={(e) => {
               setUserFile(e.target.files[0]);
+              setError("")
             }}
           ></input>
           <button onClick={() => handleInfo()}>Complete profile</button>
-          <button onClick={() => handleInfo()}>Skip for now</button>
         </div>
       )}
     </div>

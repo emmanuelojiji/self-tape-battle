@@ -22,14 +22,14 @@ import UploadModal from "../components/UploadModal";
 import { useAuth } from "../AuthContext";
 import UserCard from "../components/UserCard";
 
-const Battle = () => {
+const Battle = ({praiseModalVisible, setPraiseModalVisible}) => {
   const { id } = useParams();
 
   const [modalVisible, setModalVisible] = useState(false);
 
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
 
-  const [praiseModalVisible, setPraiseModalVisible] = useState(false);
+  
   const [praiseModalType, setPraiseModalType] = useState("");
 
   const [battle, setBattle] = useState("");

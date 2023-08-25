@@ -22,6 +22,8 @@ const Leaderboard = () => {
 
     const mostActiveQuery = query(
       usersRef,
+      where("role", "==", "performer"),
+      where("onboarding_complete", "==", true),
       orderBy("coins", "desc"),
       limit(10)
     );
@@ -51,7 +53,7 @@ const Leaderboard = () => {
 
   return (
     <div className="leaderboard fade-in">
-      <h1>Leaderboard</h1>
+      <h1 className="page-title">Leaderboard</h1>
       <div className="board-container">
         <Board
           title="Battles won"
@@ -64,6 +66,7 @@ const Leaderboard = () => {
                 userId={user.uid}
                 image={user.headshot}
                 imageSize="50"
+                description={`${user.battles_won} battles won`}
               />
             </div>
           ))}

@@ -10,12 +10,14 @@ const PraiseModal = ({ title, setPraiseModalVisible, type }) => {
         onClick={() => setPraiseModalVisible(false)}
       >
         <div className="praise-modal" onClick={(e) => e.stopPropagation}>
-        <ConfettiExplosion />
+          <ConfettiExplosion />
           <h2>
             {type === "vote"
               ? "Thanks for voting!"
               : type === "upload"
               ? "You've entered the battle arena!"
+              : type === "welcome"
+              ? "Welcome to self tape battle"
               : "null"}
           </h2>
           <button>Let's go!</button>

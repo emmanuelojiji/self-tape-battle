@@ -16,6 +16,8 @@ import { useAuth } from "../AuthContext";
 import Onboarding from "./Onboarding";
 import PraiseModal from "../components/PraiseModal";
 import Loading from "../components/Loading";
+import { sendEmailVerification } from "firebase/auth";
+import WelcomeModal from "../components/WelcomeModal";
 
 const AppHomepage = ({
   currentPage,
@@ -24,6 +26,7 @@ const AppHomepage = ({
   setSlidePosition,
   isFirstLogIn,
   setIsFirstLogIn,
+  setPraiseModalVisible,
 }) => {
   const { user, storedUserId } = useAuth();
   const [onboardingComplete, setOnboardingComplete] = useState();
@@ -31,6 +34,8 @@ const AppHomepage = ({
   const [emailVerified, setEmailVerified] = useState(null);
 
   const [loading, setLoading] = useState(true);
+
+  const [welcomeModalVisible, setWelcomeModalVisible] = useState(null);
 
   useEffect(() => {
     const userDocRef = doc(db, "users", storedUserId);
@@ -52,44 +57,70 @@ const AppHomepage = ({
     shouldUserHaveAccess();
   }, [user, storedUserId]);
 
+  const developmentMode = false;
+
   return (
-    <div className="app-homepage">
-      {isFirstLogIn && <PraiseModal />}
-      {loading && <Loading/>}
+    <>
+      <div>{developmentMode && <Onboarding />}</div>
+      <div className="app-homepage">
+        {loading && <Loading />}
 
-      {!emailVerified && !loading && <h1>You need to verify your email</h1>}
+        {welcomeModalVisible && <WelcomeModal />}
 
-      {!onboardingComplete && emailVerified && !loading && (
-        <Onboarding
-          setOnboardingComplete={setOnboardingComplete}
-          setIsFirstLogIn={setIsFirstLogIn}
-        />
-      )}
+        {!emailVerified && !loading && (
+          <div className="verify-email">
+            <h1>Please verify your email to access the arena</h1>
+            <button
+              onClick={() => {
+                window.location.reload();
+              }}
+            >
+              I have verified
+            </button>
 
-      {onboardingComplete && emailVerified && !loading && (
-        <>
-          <Aside
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            slidePosition={slidePosition}
-            setSlidePosition={setSlidePosition}
+            <button
+              onClick={async () =>
+                await sendEmailVerification(auth.currentUser)
+              }
+            >
+              Send Email Again
+            </button>
+          </div>
+        )}
+
+        {!onboardingComplete && emailVerified && !loading && (
+          <Onboarding
+            setOnboardingComplete={setOnboardingComplete}
+            setIsFirstLogIn={setIsFirstLogIn}
+            setWelcomeVisible={setPraiseModalVisible}
           />
+        )}
 
-          <main>
-            <Header
+        {onboardingComplete && emailVerified && !loading && (
+          <>
+            <Aside
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
+              slidePosition={slidePosition}
               setSlidePosition={setSlidePosition}
             />
 
-            <div className="app-homepage-content">
-              <Outlet />
-            </div>
-          </main>
-          <MobileNav />
-        </>
-      )}
-    </div>
+            <main>
+              <Header
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                setSlidePosition={setSlidePosition}
+              />
+
+              <div className="app-homepage-content">
+                <Outlet />
+              </div>
+            </main>
+            <MobileNav />
+          </>
+        )}
+      </div>
+    </>
   );
 };
 
