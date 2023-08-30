@@ -70,6 +70,7 @@ const AppHomepage = ({
         {!emailVerified && !loading && (
           <div className="verify-email">
             <h1>Please verify your email to access the arena</h1>
+            <p>Click the button below once done.</p>
             <button
               onClick={() => {
                 window.location.reload();

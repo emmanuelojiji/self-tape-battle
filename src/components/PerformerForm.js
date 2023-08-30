@@ -32,7 +32,7 @@ const PerformerForm = ({
   const [userFile, setUserFile] = useState();
   const imagePreview = userFile && URL.createObjectURL(userFile);
 
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
   const handleInfo = async () => {
     if (userFile) {
@@ -58,7 +58,6 @@ const PerformerForm = ({
             });
           } catch {}
           setOnboardingComplete(true);
-          setWelcomeModalVisible(true);
         };
 
         const uploadToStorage = () => {
@@ -78,8 +77,9 @@ const PerformerForm = ({
       } catch (error) {
         console.log(error.message);
       }
+    } else {
+      setError("Please upload a headshot.");
     }
-    setError("Please upload a headshot.")
   };
 
   useEffect(() => {
@@ -140,7 +140,7 @@ const PerformerForm = ({
             style={{ display: "none" }}
             onChange={(e) => {
               setUserFile(e.target.files[0]);
-              setError("")
+              setError("");
             }}
           ></input>
           <button onClick={() => handleInfo()}>Complete profile</button>
