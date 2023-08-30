@@ -23,7 +23,7 @@ const SignUp = ({ setIsFirstLogIn }) => {
   const [passwordError, setPasswordError] = useState(null);
   const [codeInput, setCodeInput] = useState("");
 
-  const [code, setCode] = useState("1234");
+  const [code, setCode] = useState("alexa-t");
   const [codeError, setCodeError] = useState("");
 
   let formHasError;
