@@ -42,6 +42,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <div className="mobile-cover"><h3>Please use a desktop device.</h3></div>
       <div className="App">
         <div className="notice"></div>
         <Routes>
