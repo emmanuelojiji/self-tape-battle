@@ -42,8 +42,10 @@ function App() {
 
   return (
     <BrowserRouter>
-    <div className="mobile-cover"><h3>Please use a desktop device.</h3></div>
       <div className="App">
+        <div className="mobile-cover">
+          <h3>Please use a desktop device.</h3>
+        </div>
         <div className="notice"></div>
         <Routes>
           <Route path="/login" element={<LogIn />}></Route>
@@ -56,9 +58,8 @@ function App() {
               />
             }
           ></Route>
-      
-            <Route path="/admin" element={<Admin />}></Route>
-       
+
+          <Route path="/admin" element={<Admin />}></Route>
 
           <Route
             path="/home"

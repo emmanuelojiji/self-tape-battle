@@ -10,7 +10,6 @@ body {
   text-decoration: none;
   font-family: "Inter";
   outline: none;
-
 }
 
 span {
@@ -66,14 +65,20 @@ h3 {
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .mobile-cover{
-    height: 100svh;
-    width: 100%;
-    background: black;
+.mobile-cover {
+  height: 100svh;
+  width: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  z-index: 9000000000000000;
+  position: relative;
+
+
+  @media only screen and (max-width: 1000px) {
     display: flex;
-    justify-content: center;
-    align-items: center;
-  
+    
   }
 }
